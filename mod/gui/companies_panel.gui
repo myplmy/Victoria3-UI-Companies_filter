@@ -122,8 +122,6 @@ types companies_panel
 			state = {
 				name = _show
 				on_start = "[GetVariableSystem.Clear('selected_building_filter')]"
-				on_start = "[GetVariableSystem.Clear('show_building_type_filter')]"
-				on_start = "[GetVariableSystem.Clear('hide_current_companies')]"
 				start_sound = {
 					soundeffect = "event:/SFX/UI/SideBar/companies"
 				}
@@ -140,8 +138,6 @@ types companies_panel
 		blockoverride "header_close_button" {
 			onclick = "[InformationPanelBar.ClosePanel]"
 			onclick = "[GetVariableSystem.Clear('hide_current_companies')]"
-			onclick = "[GetVariableSystem.Clear('selected_building_filter')]"
-			onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
 		}
 
 		blockoverride "entire_back_button" {
@@ -249,17 +245,7 @@ types companies_panel
 					}
 				}
 			}
-			### 필터 버튼 추가 (default 탭에만 표시)
-			widget = {
-				visible = "[InformationPanel.IsTabSelected('default')]"
-				size = { @panel_width 60 }
-				
-				building_filter_button = {
-					parentanchor = hcenter
-				}
-			}
 		}
-		
 		
 		blockoverride "scrollarea_content"
 		{
@@ -270,8 +256,6 @@ types companies_panel
 				minimumsize = { @panel_width_plus_14 -1 }
 				maximumsize = { @panel_width_plus_14 -1 }
 				datacontext = "[AccessPlayer]"
-				
-				building_filter_grid = {}
 				
 				#COMPANY
 				country_stats_entry = {
@@ -410,6 +394,24 @@ types companies_panel
 						}
 					}
 				}
+
+                ### 필터 버튼 추가 (default 탭에만 표시)
+                widget = {
+                    visible = "[InformationPanel.IsTabSelected('default')]"
+                    size = { @panel_width 60 }
+                    
+                    building_filter_button = {
+                        blockoverride "onstart" {
+                            on_start = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                        }
+                        blockoverride "onclick" {
+                            onclick = "[GetVariableSystem.Clear('selected_building_filter')]"
+                            onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                        }
+                        parentanchor = hcenter
+                    }
+                }
+				building_filter_grid = {}
 
 				### sort buttons
 				widget = {
