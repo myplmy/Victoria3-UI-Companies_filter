@@ -1,4 +1,4 @@
-ï»¿using companies_panel_filter.gui
+using companies_panel_filter.gui
 
 # COPY-PASTED FOR NOW
 @panel_width_minus_10 = 530			# used to be 450
@@ -121,7 +121,7 @@ types companies_panel
 		blockoverride "animation_state_block" {
 			state = {
 				name = _show
-				on_start = "[GetVariableSystem.Clear('selected_building_filter')]"
+				on_start = "[GetVariableSystem.Clear('hide_current_companies')]"
 				start_sound = {
 					soundeffect = "event:/SFX/UI/SideBar/companies"
 				}
@@ -256,7 +256,7 @@ types companies_panel
 				minimumsize = { @panel_width_plus_14 -1 }
 				maximumsize = { @panel_width_plus_14 -1 }
 				datacontext = "[AccessPlayer]"
-				
+
 				#COMPANY
 				country_stats_entry = {
 					visible = "[Country.HasOwningCompany]"
@@ -395,7 +395,7 @@ types companies_panel
 					}
 				}
 
-                ### í•„í„° ë²„íŠ¼ ì¶”ê°€ (default íƒ­ì—ë§Œ í‘œì‹œ)
+                ### ÇÊÅÍ ¹öÆ° Ãß°¡ (default ÅÇ¿¡¸¸ Ç¥½Ã)
                 widget = {
                     visible = "[InformationPanel.IsTabSelected('default')]"
                     size = { @panel_width 60 }
