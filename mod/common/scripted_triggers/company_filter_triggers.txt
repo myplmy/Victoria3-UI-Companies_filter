@@ -1,0 +1,18 @@
+﻿# 파일 위치: mod/common/scripted_triggers/company_filter_triggers.txt
+# Wheat Farm 필터용 트리거 (필수는 아니지만 추후 확장용)
+
+# Wheat Farm을 소유한 기업인지 확인
+company_owns_wheat_farm = {
+	any_scope_building = {
+		is_building_type = building_wheat_farm
+		levels >= 1
+	}
+}
+
+# Wheat Farm을 건설 가능한 기업 정관인지 확인
+company_type_can_build_wheat_farm = {
+	OR = {
+		has_building_type = building_wheat_farm
+		has_extension_building_type = building_wheat_farm
+	}
+}

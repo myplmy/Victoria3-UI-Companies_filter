@@ -1,0 +1,24 @@
+﻿l_english:
+ # 필터 버튼 및 인터페이스
+ FILTER_BY_BUILDING_TYPE: "Filter by Building Type"
+ TOGGLE_BUILDING_FILTER_TOOLTIP: "Click to show/hide building type filter"
+ SELECT_BUILDING_TYPE_HEADER: "Select Building Type to Filter"
+ CLEAR_FILTER: "Clear Filter"
+ SHOWING_COMPANIES_FOR_BUILDING: "Showing companies that can own: [BuildingType.GetName]"
+ 
+ # 기업 정관 관련
+ COMPANY_CAN_OWN_THIS_BUILDING_TYPE: "This company's charter allows it to own this building type"
+ COMPANY_CANNOT_OWN_THIS_BUILDING_TYPE: "This company's charter does not allow it to own this building type"
+ 
+ # 필터 상태 메시지
+ NO_COMPANIES_FOR_BUILDING_TYPE: "No companies can own this building type"
+ ALL_COMPANIES_SHOWN: "Showing all companies"
+ FILTERED_COMPANIES_COUNT: "Showing [GetDataModelSize(AccessPlayer.GetCompanies)] companies"
+ 
+ # 기업 정관 설명
+ CHARTER_INCLUDES_BUILDING: "Charter includes: [BuildingType.GetName]"
+ CHARTER_EXTENSION_INCLUDES_BUILDING: "Charter extension includes: [BuildingType.GetName]"
+ 
+ # 추가 툴팁
+ CLICK_TO_FILTER_BY_BUILDING: "Click to filter companies by this building type"
+ BUILDING_TYPE_FILTER_ACTIVE: "Filter active: [BuildingType.GetName]"
