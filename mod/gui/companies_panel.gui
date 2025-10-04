@@ -1351,6 +1351,779 @@ types companies_panel
                 }
             }
             ###TESTMODADDED END
+            ###TESTMODADDED
+            ### TEST 3: GetCategory
+            flowcontainer = {
+                direction = vertical
+                parentanchor = hcenter
+                margin = { 10 5 }
+                spacing = 5
+                minimumsize = { @panel_width -1 }
+                
+                background = {
+                    using = dark_area
+                    alpha = 0.25
+                }
+                
+                textbox = {
+                    raw_text = "TEST 3: GetCategory"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    default_format = "#bold"
+                    parentanchor = hcenter
+                }
+                
+                textbox = {
+                    raw_text = "Category: [CompanyType.GetCategory]"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    parentanchor = hcenter
+                }
+            }
+            ### TEST 4: DataModelFirst - 수정 버전 (조건부 표시)
+            flowcontainer = {
+                direction = vertical
+                parentanchor = hcenter
+                margin = { 10 5 }
+                spacing = 5
+                minimumsize = { @panel_width -1 }
+                
+                background = {
+                    using = dark_area
+                    alpha = 0.35
+                }
+                
+                textbox = {
+                    raw_text = "TEST 4A: DataModelFirst 존재 여부 테스트"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    default_format = "#bold"
+                    parentanchor = hcenter
+                }
+                
+                # 리스트가 비어있지 않을 때만 표시
+                container = {
+                    visible = "[Not(IsDataModelEmpty(CompanyType.AccessBuildingTypes(GetPlayer.Self)))]"
+                    minimumsize = { 500 -1 }
+                    
+                    flowcontainer = {
+                        direction = vertical
+                        parentanchor = hcenter
+                        spacing = 5
+                        
+                        textbox = {
+                            raw_text = "리스트 비어있지 않음 - 테스트 진행"
+                            autoresize = yes
+                            align = hcenter|nobaseline
+                        }
+                        
+                        # 직접 텍스트로만 테스트
+                        textbox = {
+                            raw_text = "First exists: [DataModelHasItems(DataModelFirst(CompanyType.AccessBuildingTypes(GetPlayer.Self), '(int32)0'))]"
+                            autoresize = yes
+                            align = hcenter|nobaseline
+                            multiline = yes
+                            max_width = 480
+                        }
+                    }
+                }
+                
+                textbox = {
+                    visible = "[IsDataModelEmpty(CompanyType.AccessBuildingTypes(GetPlayer.Self))]"
+                    raw_text = "리스트가 비어있음"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                }
+            }
+
+            ###TEST 4-B : 인자 없이 시도
+            flowcontainer = {
+                direction = vertical
+                parentanchor = hcenter
+                margin = { 10 5 }
+                spacing = 5
+                minimumsize = { @panel_width -1 }
+                
+                background = {
+                    using = dark_area
+                    alpha = 0.3
+                }
+                
+                textbox = {
+                    raw_text = "TEST 5: 다양한 DataModelFirst 인자 테스트"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    default_format = "#bold"
+                    parentanchor = hcenter
+                    multiline = yes
+                    max_width = 500
+                }
+                
+                # 각기 다른 인자로 시도
+                textbox = {
+                    raw_text = "인자 0: [DataModelHasItems(DataModelFirst(CompanyType.AccessBuildingTypes(GetPlayer.Self), '(int32)0'))]"
+                    autoresize = yes
+                    align = left|nobaseline
+                    multiline = yes
+                    max_width = 500
+                }
+                
+                textbox = {
+                    raw_text = "인자 1: [DataModelHasItems(DataModelFirst(CompanyType.AccessBuildingTypes(GetPlayer.Self), '(int32)1'))]"
+                    autoresize = yes
+                    align = left|nobaseline
+                    multiline = yes
+                    max_width = 500
+                }
+                
+                textbox = {
+                    raw_text = "인자 2: [DataModelHasItems(DataModelFirst(CompanyType.AccessBuildingTypes(GetPlayer.Self), '(int32)2'))]"
+                    autoresize = yes
+                    align = left|nobaseline
+                    multiline = yes
+                    max_width = 500
+                }
+            }
+            ### TEST 4-C: 단순화된 ObjectsEqual 테스트
+            flowcontainer = {
+                direction = vertical
+                parentanchor = hcenter
+                margin = { 10 5 }
+                spacing = 5
+                minimumsize = { @panel_width -1 }
+                
+                background = {
+                    using = dark_area
+                    alpha = 0.4
+                }
+                
+                textbox = {
+                    raw_text = "TEST 6: ObjectsEqual 기본 테스트"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    default_format = "#bold"
+                    parentanchor = hcenter
+                }
+                
+                # GetBuildingType 자체가 작동하는지 확인
+                textbox = {
+                    raw_text = "wheat_farm exists: [GetBuildingType('building_wheat_farm').GetName]"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    multiline = yes
+                    max_width = 500
+                }
+                
+                # ObjectsEqual 기본 테스트
+                textbox = {
+                    raw_text = "Self equals Self: [ObjectsEqual(GetBuildingType('building_wheat_farm'), GetBuildingType('building_wheat_farm'))]"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    multiline = yes
+                    max_width = 500
+                }
+                
+                textbox = {
+                    raw_text = "Wheat != Coal: [ObjectsEqual(GetBuildingType('building_wheat_farm'), GetBuildingType('building_coal_mine'))]"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    multiline = yes
+                    max_width = 500
+                }
+            }
+            ### TEST 4-D: EqualTo_string 기본 테스트
+            flowcontainer = {
+                direction = vertical
+                parentanchor = hcenter
+                margin = { 10 5 }
+                spacing = 5
+                minimumsize = { @panel_width -1 }
+                
+                background = {
+                    using = dark_area
+                    alpha = 0.35
+                }
+                
+                textbox = {
+                    raw_text = "TEST 7: EqualTo_string 테스트"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    default_format = "#bold"
+                    parentanchor = hcenter
+                }
+                
+                textbox = {
+                    raw_text = "wheat_farm key: [GetBuildingType('building_wheat_farm').GetKey]"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                }
+                
+                textbox = {
+                    raw_text = "Key == 'building_wheat_farm': [EqualTo_string(GetBuildingType('building_wheat_farm').GetKey, 'building_wheat_farm')]"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    multiline = yes
+                    max_width = 500
+                }
+                
+                textbox = {
+                    raw_text = "Key == 'wrong': [EqualTo_string(GetBuildingType('building_wheat_farm').GetKey, 'wrong')]"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    multiline = yes
+                    max_width = 500
+                }
+            }
+
+            ### TEST 8: DataModelFirst 직접 사용 (Critical!)
+            flowcontainer = {
+                direction = vertical
+                parentanchor = hcenter
+                margin = { 10 5 }
+                spacing = 5
+                minimumsize = { @panel_width -1 }
+                
+                background = {
+                    using = dark_area
+                    alpha = 0.45
+                }
+                
+                textbox = {
+                    raw_text = "TEST 8: DataModelFirst 직접 datamodel로 사용"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    default_format = "#bold"
+                    parentanchor = hcenter
+                    multiline = yes
+                    max_width = 500
+                }
+                
+                # DataModelFirst를 직접 datamodel로 사용
+                dynamicgridbox = {
+                    visible = "[Not(IsDataModelEmpty(CompanyType.AccessBuildingTypes(GetPlayer.Self)))]"
+                    datamodel_wrap = 5
+                    datamodel = "[DataModelFirst(CompanyType.AccessBuildingTypes(GetPlayer.Self), '(int32)1')]"
+                    
+                    item = {
+                        widget = {
+                            size = { 50 50 }
+                            
+                            button = {
+                                size = { 45 45 }
+                                texture = "[BuildingType.GetIcon]"
+                                parentanchor = center
+                                
+                                tooltipwidget = {
+                                    widget = {
+                                        size = { 250 60 }
+                                        background = { using = default_background }
+                                        
+                                        textbox = {
+                                            parentanchor = center
+                                            raw_text = "Name: [BuildingType.GetName]"
+                                            autoresize = yes
+                                            align = hcenter|nobaseline
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                textbox = {
+                    raw_text = "위에 아이콘이 표시되면 DataModelFirst 작동!"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    fontsize = 12
+                }
+            }
+
+            ### TEST 9: DataModelLast 직접 사용
+            flowcontainer = {
+                direction = vertical
+                parentanchor = hcenter
+                margin = { 10 5 }
+                spacing = 5
+                minimumsize = { @panel_width -1 }
+                
+                background = {
+                    using = dark_area
+                    alpha = 0.4
+                }
+                
+                textbox = {
+                    raw_text = "TEST 9: DataModelLast 직접 datamodel로 사용"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    default_format = "#bold"
+                    parentanchor = hcenter
+                    multiline = yes
+                    max_width = 500
+                }
+                
+                # DataModelLast를 직접 datamodel로 사용
+                dynamicgridbox = {
+                    visible = "[Not(IsDataModelEmpty(CompanyType.AccessBuildingTypes(GetPlayer.Self)))]"
+                    datamodel_wrap = 5
+                    datamodel = "[DataModelLast(CompanyType.AccessBuildingTypes(GetPlayer.Self), '(int32)1')]"
+                    
+                    item = {
+                        widget = {
+                            size = { 50 50 }
+                            
+                            button = {
+                                size = { 45 45 }
+                                texture = "[BuildingType.GetIcon]"
+                                parentanchor = center
+                                
+                                tooltipwidget = {
+                                    widget = {
+                                        size = { 250 60 }
+                                        background = { using = default_background }
+                                        
+                                        textbox = {
+                                            parentanchor = center
+                                            raw_text = "Name: [BuildingType.GetName]"
+                                            autoresize = yes
+                                            align = hcenter|nobaseline
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                textbox = {
+                    raw_text = "위에 아이콘이 표시되면 DataModelLast 작동!"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    fontsize = 12
+                }
+            }
+            ### TEST 10A: DataModelFirst의 반환 타입 확인
+            flowcontainer = {
+                direction = vertical
+                parentanchor = hcenter
+                margin = { 10 5 }
+                spacing = 5
+                minimumsize = { @panel_width -1 }
+                
+                background = {
+                    using = dark_area
+                    alpha = 0.5
+                }
+                
+                textbox = {
+                    raw_text = "TEST 10A: DataModelFirst 반환값 분석"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    default_format = "#bold"
+                    parentanchor = hcenter
+                }
+                
+                # 1. DataModelFirst가 비어있는지
+                textbox = {
+                    raw_text = "Step 1 - IsEmpty: [IsDataModelEmpty(DataModelFirst(CompanyType.AccessBuildingTypes(GetPlayer.Self), '(int32)1'))]"
+                    autoresize = yes
+                    align = left|nobaseline
+                    multiline = yes
+                    max_width = 500
+                }
+                
+                # 2. DataModelFirst가 아이템을 가지고 있는지
+                textbox = {
+                    raw_text = "Step 2 - HasItems: [DataModelHasItems(DataModelFirst(CompanyType.AccessBuildingTypes(GetPlayer.Self), '(int32)1'))]"
+                    autoresize = yes
+                    align = left|nobaseline
+                    multiline = yes
+                    max_width = 500
+                }
+                
+                # 3. DataModelFirst의 Size
+                textbox = {
+                    raw_text = "Step 3 - Size: [GetDataModelSize(DataModelFirst(CompanyType.AccessBuildingTypes(GetPlayer.Self), '(int32)1'))]"
+                    autoresize = yes
+                    align = left|nobaseline
+                    multiline = yes
+                    max_width = 500
+                }
+            }
+            ### TEST 10B: item 컨텍스트에서 접근
+            flowcontainer = {
+                direction = vertical
+                parentanchor = hcenter
+                margin = { 10 5 }
+                spacing = 5
+                minimumsize = { @panel_width -1 }
+                
+                background = {
+                    using = dark_area
+                    alpha = 0.48
+                }
+                
+                textbox = {
+                    raw_text = "TEST 10B: DataModelFirst의 item에서 Key 추출"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    default_format = "#bold"
+                    parentanchor = hcenter
+                }
+                
+                # DataModelFirst를 순회하면서 Key 출력
+                dynamicgridbox = {
+                    datamodel_wrap = 5
+                    datamodel = "[DataModelFirst(CompanyType.AccessBuildingTypes(GetPlayer.Self), '(int32)1')]"
+                    
+                    item = {
+                        flowcontainer = {
+                            direction = vertical
+                            spacing = 3
+                            
+                            button = {
+                                size = { 45 45 }
+                                texture = "[BuildingType.GetIcon]"
+                            }
+                            
+                            textbox = {
+                                raw_text = "Key: [BuildingType.GetKey]"
+                                autoresize = yes
+                                align = hcenter|nobaseline
+                                fontsize = 11
+                                max_width = 100
+                                multiline = yes
+                            }
+                        }
+                    }
+                }
+            }
+
+            ### TEST 10C: 비교를 위한 변수 설정 테스트
+            flowcontainer = {
+                direction = vertical
+                parentanchor = hcenter
+                margin = { 10 5 }
+                spacing = 5
+                minimumsize = { @panel_width -1 }
+                
+                background = {
+                    using = dark_area
+                    alpha = 0.46
+                }
+                
+                textbox = {
+                    raw_text = "TEST 10C: GetVariableSystem으로 Key 저장 후 비교"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    default_format = "#bold"
+                    parentanchor = hcenter
+                    multiline = yes
+                    max_width = 500
+                }
+                
+                # item 내부에서 변수 설정 버튼
+                dynamicgridbox = {
+                    datamodel_wrap = 5
+                    datamodel = "[DataModelFirst(CompanyType.AccessBuildingTypes(GetPlayer.Self), '(int32)1')]"
+                    
+                    item = {
+                        button = {
+                            size = { 80 80 }
+                            onclick = "[GetVariableSystem.Set('test_building_key', BuildingType.GetKey)]"
+                            
+                            flowcontainer = {
+                                direction = vertical
+                                parentanchor = center
+                                spacing = 3
+                                
+                                icon = {
+                                    size = { 50 50 }
+                                    texture = "[BuildingType.GetIcon]"
+                                }
+                                
+                                textbox = {
+                                    raw_text = "클릭!"
+                                    autoresize = yes
+                                    align = hcenter|nobaseline
+                                    fontsize = 10
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                textbox = {
+                    raw_text = "저장된 Key: [GetVariableSystem.Get('test_building_key')]"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    margin_top = 5
+                }
+            }
+
+            ### TEST 10D: 저장된 Key로 비교
+            flowcontainer = {
+                direction = vertical
+                parentanchor = hcenter
+                margin = { 10 5 }
+                spacing = 5
+                minimumsize = { @panel_width -1 }
+                
+                background = {
+                    using = dark_area
+                    alpha = 0.44
+                }
+                
+                textbox = {
+                    raw_text = "TEST 10D: 저장된 Key와 문자열 비교"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    default_format = "#bold"
+                    parentanchor = hcenter
+                }
+                
+                flowcontainer = {
+                    direction = horizontal
+                    spacing = 10
+                    parentanchor = hcenter
+                    
+                    textbox = {
+                        raw_text = "wheat_farm 인가?"
+                        autoresize = yes
+                        align = right|nobaseline
+                    }
+                    
+                    icon = {
+                        visible = "[GetVariableSystem.HasValue('test_building_key', 'building_wheat_farm')]"
+                        size = { 30 30 }
+                        texture = "gfx/interface/buttons/button_icons/check.dds"
+                    }
+                    
+                    icon = {
+                        visible = "[Not(GetVariableSystem.HasValue('test_building_key', 'building_wheat_farm'))]"
+                        size = { 30 30 }
+                        texture = "gfx/interface/buttons/button_icons/close.dds"
+                    }
+                }
+                
+                flowcontainer = {
+                    direction = horizontal
+                    spacing = 10
+                    parentanchor = hcenter
+                    
+                    textbox = {
+                        raw_text = "logging_camp 인가?"
+                        autoresize = yes
+                        align = right|nobaseline
+                    }
+                    
+                    icon = {
+                        visible = "[GetVariableSystem.HasValue('test_building_key', 'building_logging_camp')]"
+                        size = { 30 30 }
+                        texture = "gfx/interface/buttons/button_icons/check.dds"
+                    }
+                    
+                    icon = {
+                        visible = "[Not(GetVariableSystem.HasValue('test_building_key', 'building_logging_camp'))]"
+                        size = { 30 30 }
+                        texture = "gfx/interface/buttons/button_icons/close.dds"
+                    }
+                }
+            }
+            ### TEST 10E: 최종 - visible에서 변수 비교로 필터링
+            flowcontainer = {
+                direction = vertical
+                parentanchor = hcenter
+                margin = { 10 5 }
+                spacing = 10
+                minimumsize = { @panel_width -1 }
+                
+                background = {
+                    using = dark_area
+                    alpha = 0.52
+                }
+                
+                textbox = {
+                    raw_text = "TEST 10E: FINAL - 변수 기반 필터링 시뮬레이션"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    default_format = "#bold"
+                    parentanchor = hcenter
+                    multiline = yes
+                    max_width = 500
+                }
+                
+                textbox = {
+                    raw_text = "만약 위에서 클릭한 BuildingType이 wheat_farm이면 이 회사가 표시됩니다:"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    multiline = yes
+                    max_width = 500
+                    margin_bottom = 5
+                }
+                
+                # 필터링 시뮬레이션
+                container = {
+                    visible = "[GetVariableSystem.HasValue('test_building_key', 'building_wheat_farm')]"
+                    minimumsize = { 500 60 }
+                    
+                    background = {
+                        using = entry_bg_simple
+                    }
+                    
+                    flowcontainer = {
+                        parentanchor = center
+                        direction = vertical
+                        
+                        textbox = {
+                            raw_text = "필터 성공!"
+                            autoresize = yes
+                            align = hcenter|nobaseline
+                            default_format = "#bold"
+                        }
+                        
+                        textbox = {
+                            raw_text = "이 Company는 wheat_farm을 가지고 있습니다"
+                            autoresize = yes
+                            align = hcenter|nobaseline
+                            fontsize = 12
+                        }
+                    }
+                }
+                
+                container = {
+                    visible = "[Not(GetVariableSystem.HasValue('test_building_key', 'building_wheat_farm'))]"
+                    minimumsize = { 500 60 }
+                    
+                    background = {
+                        using = entry_bg_simple
+                        alpha = 0.3
+                    }
+                    
+                    textbox = {
+                        parentanchor = center
+                        raw_text = "필터링됨 (wheat_farm 없음)"
+                        autoresize = yes
+                        align = hcenter|nobaseline
+                    }
+                }
+                
+                textbox = {
+                    raw_text = "이 방식으로 필터링 가능한지 확인!"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    default_format = "#bold"
+                    parentanchor = hcenter
+                    margin_top = 10
+                }
+            }
+#            ### TEST 10: 결정적 테스트 - visible 조건문에서 비교
+#            flowcontainer = {
+#                direction = vertical
+#                parentanchor = hcenter
+#                margin = { 10 5 }
+#                spacing = 10
+#                minimumsize = { @panel_width -1 }
+#                
+#                background = {
+#                    using = dark_area
+#                    alpha = 0.5
+#                }
+#                
+#                textbox = {
+#                    raw_text = "TEST 10: CRITICAL - visible 조건에서 BuildingType 비교"
+#                    autoresize = yes
+#                    align = hcenter|nobaseline
+#                    default_format = "#bold"
+#                    parentanchor = hcenter
+#                    multiline = yes
+#                    max_width = 500
+#                }
+#                
+#                # 만약 첫 번째가 wheat_farm이면 체크 표시
+#                flowcontainer = {
+#                    direction = horizontal
+#                    spacing = 10
+#                    parentanchor = hcenter
+#                    
+#                    textbox = {
+#                        raw_text = "첫번째가 Wheat Farm인가?"
+#                        autoresize = yes
+#                        align = right|nobaseline
+#                    }
+#                    
+#                    icon = {
+#                        visible = "[And(
+#                            DataModelHasItems(DataModelFirst(CompanyType.AccessBuildingTypes(GetPlayer.Self), '(int32)1')),
+#                            ObjectsEqual(
+#                                DataModelFirst(CompanyType.AccessBuildingTypes(GetPlayer.Self), '(int32)1').AccessSelf,
+#                                GetBuildingType('building_wheat_farm').AccessSelf
+#                            )
+#                        )]"
+#                        size = { 30 30 }
+#                        texture = "gfx/interface/buttons/button_icons/check.dds"
+#                    }
+#                    
+#                    icon = {
+#                        visible = "[Not(And(
+#                            DataModelHasItems(DataModelFirst(CompanyType.AccessBuildingTypes(GetPlayer.Self), '(int32)1')),
+#                            ObjectsEqual(
+#                                DataModelFirst(CompanyType.AccessBuildingTypes(GetPlayer.Self), '(int32)1').AccessSelf,
+#                                GetBuildingType('building_wheat_farm').AccessSelf
+#                            )
+#                        ))]"
+#                        size = { 30 30 }
+#                        texture = "gfx/interface/buttons/button_icons/close.dds"
+#                    }
+#                }
+#                
+#                # 만약 첫 번째가 logging_camp이면 체크 표시
+#                flowcontainer = {
+#                    direction = horizontal
+#                    spacing = 10
+#                    parentanchor = hcenter
+#                    
+#                    textbox = {
+#                        raw_text = "첫번째가 Logging Camp인가?"
+#                        autoresize = yes
+#                        align = right|nobaseline
+#                    }
+#                    
+#                    icon = {
+#                        visible = "[And(
+#                            DataModelHasItems(DataModelFirst(CompanyType.AccessBuildingTypes(GetPlayer.Self), '(int32)1')),
+#                            ObjectsEqual(
+#                                DataModelFirst(CompanyType.AccessBuildingTypes(GetPlayer.Self), '(int32)1').AccessSelf,
+#                                GetBuildingType('building_logging_camp').AccessSelf
+#                            )
+#                        )]"
+#                        size = { 30 30 }
+#                        texture = "gfx/interface/buttons/button_icons/check.dds"
+#                    }
+#                    
+#                    icon = {
+#                        visible = "[Not(And(
+#                            DataModelHasItems(DataModelFirst(CompanyType.AccessBuildingTypes(GetPlayer.Self), '(int32)1')),
+#                            ObjectsEqual(
+#                                DataModelFirst(CompanyType.AccessBuildingTypes(GetPlayer.Self), '(int32)1').AccessSelf,
+#                                GetBuildingType('building_logging_camp').AccessSelf
+#                            )
+#                        ))]"
+#                        size = { 30 30 }
+#                        texture = "gfx/interface/buttons/button_icons/close.dds"
+#                    }
+#                }
+#                
+#                textbox = {
+#                    raw_text = "만약 위에서 체크가 정확히 하나만 나오면 필터링 가능!"
+#                    autoresize = yes
+#                    align = hcenter|nobaseline
+#                    default_format = "#bold"
+#                    parentanchor = hcenter
+#                    margin_top = 10
+#                }
+#            }
+            ###TESTMODADDED END
 	}
 
 	type prosperity_widget = flowcontainer {
