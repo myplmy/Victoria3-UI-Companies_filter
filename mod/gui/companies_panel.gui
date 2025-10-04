@@ -2017,6 +2017,166 @@ types companies_panel
                     margin_top = 10
                 }
             }
+            # TEST 11: 자동 변수 설정 - on_start 활용
+
+#            ### TEST 11A: on_start로 자동 변수 설정 테스트
+#            flowcontainer = {
+#                direction = vertical
+#                parentanchor = hcenter
+#                margin = { 10 5 }
+#                spacing = 5
+#                minimumsize = { @panel_width -1 }
+#                
+#                background = {
+#                    using = dark_area
+#                    alpha = 0.55
+#                }
+#                
+#                state = {
+#                    name = _show
+#                    # 이 flowcontainer가 표시될 때 자동 실행
+#                    on_start = "[GetVariableSystem.Set('auto_test_trigger', 'true')]"
+#                }
+#                
+#                textbox = {
+#                    raw_text = "TEST 11A: on_start 자동 실행 테스트"
+#                    autoresize = yes
+#                    align = hcenter|nobaseline
+#                    default_format = "#bold"
+#                    parentanchor = hcenter
+#                }
+#                
+#                textbox = {
+#                    raw_text = "auto_test_trigger 변수: [GetVariableSystem.Get('auto_test_trigger')]"
+#                    autoresize = yes
+#                    align = hcenter|nobaseline
+#                }
+#                
+#                textbox = {
+#                    raw_text = "위에 'true'가 표시되면 on_start 작동!"
+#                    autoresize = yes
+#                    align = hcenter|nobaseline
+#                    fontsize = 12
+#                }
+#            }
+
+            ### TEST 11A-2: widget에서 on_start
+            flowcontainer = {
+                direction = vertical
+                parentanchor = hcenter
+                margin = { 10 5 }
+                spacing = 5
+                minimumsize = { @panel_width -1 }
+                
+                background = {
+                    using = dark_area
+                    alpha = 0.55
+                }
+                
+                textbox = {
+                    raw_text = "TEST 11A-2: widget on_start 테스트"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    default_format = "#bold"
+                    parentanchor = hcenter
+                }
+                
+                widget = {
+                    size = { 400 50 }
+                    
+                    state = {
+                        name = _show
+                        on_start = "[GetVariableSystem.Set('widget_test', 'widget_works')]"
+                    }
+                    
+                    textbox = {
+                        parentanchor = center
+                        raw_text = "widget 변수: [GetVariableSystem.Get('widget_test')]"
+                        autoresize = yes
+                        align = hcenter|nobaseline
+                    }
+                }
+            }
+
+            ### TEST 11A-3: button에서 on_start
+            flowcontainer = {
+                direction = vertical
+                parentanchor = hcenter
+                margin = { 10 5 }
+                spacing = 5
+                minimumsize = { @panel_width -1 }
+                
+                background = {
+                    using = dark_area
+                    alpha = 0.53
+                }
+                
+                textbox = {
+                    raw_text = "TEST 11A-3: button on_start 테스트"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    default_format = "#bold"
+                    parentanchor = hcenter
+                }
+                
+                button = {
+                    size = { 400 50 }
+                    
+                    state = {
+                        name = _show
+                        on_start = "[GetVariableSystem.Set('button_test', 'button_works')]"
+                    }
+                    
+                    textbox = {
+                        parentanchor = center
+                        raw_text = "button 변수: [GetVariableSystem.Get('button_test')]"
+                        autoresize = yes
+                        align = hcenter|nobaseline
+                    }
+                }
+            }
+
+            ### TEST 11A-4: visible 조건 트리거
+            flowcontainer = {
+                direction = vertical
+                parentanchor = hcenter
+                margin = { 10 5 }
+                spacing = 5
+                minimumsize = { @panel_width -1 }
+                
+                background = {
+                    using = dark_area
+                    alpha = 0.51
+                }
+                
+                textbox = {
+                    raw_text = "TEST 11A-4: visible이 true일 때만 표시되는 widget"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    default_format = "#bold"
+                    parentanchor = hcenter
+                    multiline = yes
+                    max_width = 500
+                }
+                
+                widget = {
+                    # 리스트가 비어있지 않을 때만 표시
+                    visible = "[Not(IsDataModelEmpty(CompanyType.AccessBuildingTypes(GetPlayer.Self)))]"
+                    size = { 400 50 }
+                    
+                    state = {
+                        name = _show
+                        on_start = "[GetVariableSystem.Set('visible_test', 'visible_works')]"
+                    }
+                    
+                    textbox = {
+                        parentanchor = center
+                        raw_text = "visible 변수: [GetVariableSystem.Get('visible_test')]"
+                        autoresize = yes
+                        align = hcenter|nobaseline
+                    }
+                }
+            }
 #            ### TEST 10: 결정적 테스트 - visible 조건문에서 비교
 #            flowcontainer = {
 #                direction = vertical
