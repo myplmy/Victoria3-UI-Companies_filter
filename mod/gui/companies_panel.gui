@@ -395,7 +395,7 @@ types companies_panel
 					}
 				}
 
-                ### Uboy.UI.CompanyFilter mod : button + grid
+                ###MODADDED Uboy.UI.CompanyFilter mod : button + grid
                 widget = {
                     visible = "[InformationPanel.IsTabSelected('default')]"
                     size = { @panel_width 60 }
@@ -411,7 +411,299 @@ types companies_panel
                         parentanchor = hcenter
                     }
                 }
-				building_filter_grid = {}
+
+				building_filter_grid = {
+                }
+
+                button = {
+                    size = { 540 50 }
+                    using = default_button
+                    onclick = "[GetVariableSystem.Set('selected_building_filter','wheat_farm')]"
+                    #onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                    textbox = {
+                        parentanchor = vcenter
+                        position = { 60 0 }
+                        raw_text = "[GetVariableSystem.HasValue('selected_building_filter','wheat_farm')]"
+                    }
+                }
+				###MODADDED END
+
+				### Filter buttons MOD
+				section_header_button = {
+					blockoverride "left_text" {
+						text = "COMPANY_FILTERS"
+					}
+					blockoverride "onclick" {
+						onclick = "[GetVariableSystem.Toggle('company_filters')]"
+					}
+
+					blockoverride "onclick_showmore" {
+						visible = "[GetVariableSystem.Exists('company_filters')]"
+					}
+
+					blockoverride "onclick_showless" {
+						visible = "[Not(GetVariableSystem.Exists('company_filters'))]"
+					}
+				}
+
+				container = {
+					visible = "[Not(GetVariableSystem.Exists('company_filters'))]"
+
+					background = {
+						using = dropdown_background
+						margin = { 0 -2 }
+					}
+
+					vbox = {
+						## Flavor Filter buttons MOD
+						building_browser_filter_line = {
+							blockoverride "filter_line_label"
+							{
+								text = "SHOW_FLAVORED_COMPANIES"
+								alpha = 1
+							}
+							blockoverride "line_size"
+							{
+								size = { @panel_width 38 }
+							}
+							blockoverride "filter_line_active_visible"
+							{
+								visible = "[Not(And(Not(GetVariableSystem.Exists('hide_base_toggle')), Not(GetVariableSystem.Exists('hide_flavored_toggle'))))]"
+							}
+							
+							blockoverride "filter_line_buttons"
+							{
+								## All Button
+								building_browser_filter_line_button = {
+									blockoverride "line_button_tooltip"
+									{
+										tooltip = "SHOW_ALL_COMPANIES"
+									}
+
+									blockoverride "line_button_onclick"
+									{
+										onclick = "[GetVariableSystem.Clear('hide_flavored_toggle')]"
+										onclick = "[GetVariableSystem.Clear('hide_base_toggle')]"
+									}
+
+									blockoverride "line_button_icon_texture"
+									{
+										texture = "gfx/interface/icons/building_icons/building_browser_filter_icons/filter_icons_all.dds"
+									}
+
+									blockoverride "line_button_selected"
+									{
+										visible = "[And(Not(GetVariableSystem.Exists('hide_base_toggle')), Not(GetVariableSystem.Exists('hide_flavored_toggle')))]"
+									}
+								}
+								
+								## Base Company Button
+								building_browser_filter_line_button = {
+									blockoverride "line_button_tooltip"
+									{
+										tooltip = "SHOW_BASE_COMPANIES"
+									}
+
+									blockoverride "line_button_onclick"
+									{
+										onclick = "[GetVariableSystem.Clear('hide_base_toggle')]"
+										onclick = "[GetVariableSystem.Set('hide_flavored_toggle', 'false')]"
+									}
+
+									blockoverride "line_button_icon_texture"
+									{
+										texture = "gfx/interface/buttons/button_icons/close.dds"
+									}
+
+									blockoverride "line_button_selected"
+									{
+										visible = "[And( Not(GetVariableSystem.Exists('hide_base_toggle')), GetVariableSystem.Exists('hide_flavored_toggle') )]"
+									}
+
+								}
+
+								## Flavored Company Button
+								building_browser_filter_line_button = {
+									blockoverride "line_button_tooltip"
+									{
+										tooltip = "SHOW_FLAVORED_COMPANIES"
+									}
+
+									blockoverride "line_button_onclick"
+									{
+										onclick = "[GetVariableSystem.Clear('hide_flavored_toggle')]"
+										onclick = "[GetVariableSystem.Set('hide_base_toggle', 'false')]"
+									}
+
+									blockoverride "line_button_icon_texture"
+									{
+										texture = "gfx/interface/outliner/pinned_icon.dds"
+									}
+
+									blockoverride "line_button_selected"
+									{
+										visible = "[And( Not(GetVariableSystem.Exists('hide_flavored_toggle')), GetVariableSystem.Exists('hide_base_toggle') )]"
+									}
+								}
+							}
+						}
+						
+						## Prestige Filter buttons MOD
+						building_browser_filter_line = {
+							blockoverride "filter_line_label"
+							{
+								text = "PRESTIGE_COMPANY_FILTER"
+								alpha = 1
+							}
+							blockoverride "line_size"
+							{
+								size = { @panel_width 38 }
+							}
+							blockoverride "filter_line_active_visible"
+							{
+								visible = "[Not(And(Not(GetVariableSystem.Exists('hide_prestige')), Not(GetVariableSystem.Exists('hide_no_prestige'))))]"
+							}
+							
+							blockoverride "filter_line_buttons"
+							{
+								## All Button
+								building_browser_filter_line_button = {
+									blockoverride "line_button_tooltip"
+									{
+										tooltip = "SHOW_ALL_COMPANIES"
+									}
+
+									blockoverride "line_button_onclick"
+									{
+										onclick = "[GetVariableSystem.Clear('hide_prestige')]"
+										onclick = "[GetVariableSystem.Clear('hide_no_prestige')]"
+									}
+
+									blockoverride "line_button_icon_texture"
+									{
+										texture = "gfx/interface/icons/building_icons/building_browser_filter_icons/filter_icons_all.dds"
+									}
+
+									blockoverride "line_button_selected"
+									{
+										visible = "[And(Not(GetVariableSystem.Exists('hide_prestige')), Not(GetVariableSystem.Exists('hide_no_prestige')))]"
+									}
+								}
+
+								## No Prestige Companies Button
+								building_browser_filter_line_button = {
+									blockoverride "line_button_tooltip"
+									{
+										tooltip = "SHOW_NO_PRESTIGE_COMPANIES"
+									}
+
+									blockoverride "line_button_onclick"
+									{
+										onclick = "[GetVariableSystem.Clear('hide_no_prestige')]"
+										onclick = "[GetVariableSystem.Set('hide_prestige', 'false')]"
+									}
+
+									blockoverride "line_button_icon_texture"
+									{
+										texture = "gfx/interface/buttons/button_icons/close.dds"
+									}
+
+									blockoverride "line_button_selected"
+									{
+										visible = "[And( Not(GetVariableSystem.Exists('hide_no_prestige')), GetVariableSystem.Exists('hide_prestige') )]"
+									}
+
+								}
+
+								## Prestige Companies Button
+								building_browser_filter_line_button = {
+									blockoverride "line_button_tooltip"
+									{
+										tooltip = "SHOW_PRESTIGE_COMPANIES"
+									}
+
+									blockoverride "line_button_onclick"
+									{
+										onclick = "[GetVariableSystem.Clear('hide_prestige')]"
+										onclick = "[GetVariableSystem.Set('hide_no_prestige', 'false')]"
+									}
+
+									blockoverride "line_button_icon_texture"
+									{
+										texture = "gfx/interface/market_view/filter_luxury_goods_selected.dds"
+									}
+
+									blockoverride "line_button_selected"
+									{
+										visible = "[And( Not(GetVariableSystem.Exists('hide_prestige')), GetVariableSystem.Exists('hide_no_prestige') )]"
+									}
+								}
+							}
+						}
+
+						## Highlight Toggle MOD
+						building_browser_filter_line = {
+							blockoverride "filter_line_label"
+							{
+								text = "TOGGLE_FLAVORED_HIGHLIGHT_TEXT"
+							}
+							blockoverride "line_size"
+							{
+								size = { @panel_width 38 }
+							}
+							
+							blockoverride "filter_line_buttons"
+							{
+								## Highlight off
+								building_browser_filter_line_button = {
+									blockoverride "line_button_tooltip"
+									{
+										tooltip = "TOGGLE_FLAVORED_HIGHLIGHT_TEXT"
+									}
+
+									blockoverride "line_button_onclick"
+									{
+										onclick = "[GetVariableSystem.Set('unhighlight_flavored_toggle', 'true')]"
+									}
+
+									blockoverride "line_button_icon_texture"
+									{
+										texture = "gfx/interface/buttons/button_icons/close.dds"
+									}
+
+									blockoverride "line_button_selected"
+									{
+										visible = "[GetVariableSystem.Exists('unhighlight_flavored_toggle')]"
+									}
+
+								}
+
+								## Highlight on
+								building_browser_filter_line_button = {
+									blockoverride "line_button_tooltip"
+									{
+										tooltip = "TOGGLE_NO_FLAVORED_HIGHLIGHT_TEXT"
+									}
+
+									blockoverride "line_button_onclick"
+									{
+										onclick = "[GetVariableSystem.Clear('unhighlight_flavored_toggle')]"
+									}
+
+									blockoverride "line_button_icon_texture"
+									{
+										texture = "gfx/interface/buttons/button_icons/check.dds"
+									}
+
+									blockoverride "line_button_selected"
+									{
+										visible = "[Not(GetVariableSystem.Exists('unhighlight_flavored_toggle'))]"
+									}
+								}
+							}
+						}
+					}
+				}
 
 				### sort buttons
 				widget = {
@@ -1055,8 +1347,7 @@ types companies_panel
 		maximumsize = { @panel_width -1 }
 		margin = { 10 10 }
 		margin_top = 3
-		spacing = 5		
-			
+		spacing = 5
 		background = {
 			using = simple_frame
 		}
@@ -1070,7 +1361,6 @@ types companies_panel
 		container = {
 			minimumsize = { 536 -1 }
 			parentanchor = hcenter
-
 			flowcontainer = {
 				minimumsize = { 536 -1 }
 				parentanchor = vcenter
@@ -1204,7 +1494,140 @@ types companies_panel
 
 				}
 			}
+
 		}
+            ###TESTMODADDED
+            flowcontainer = {
+                direction = vertical
+                parentanchor = hcenter
+                margin = { 10 5 }
+                spacing = 5
+                minimumsize = { @panel_width -1 }
+                
+                background = {
+                    using = dark_area
+                    alpha = 0.3
+                }
+                
+                textbox = {
+                    raw_text = "TEST: Potential Building Types"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    default_format = "#bold"
+                    parentanchor = hcenter
+                }
+                
+                dynamicgridbox = {
+                    datamodel_wrap = 8
+                    datamodel = "[CompanyType.GetPotentialBuildingTypes(GetPlayer.Self)]"
+                    
+                    item = {
+                        widget = {
+                            size = { 50 50 }
+                            
+                            button = {
+                                size = { 45 45 }
+                                texture = "[BuildingType.GetIcon]"
+                                parentanchor = center
+                                
+                                tooltipwidget = {
+                                    widget = {
+                                        size = { 300 60 }
+                                        
+                                        background = {
+                                            using = default_background
+                                        }
+                                        
+                                        textbox = {
+                                            parentanchor = center
+                                            raw_text = "[BuildingType.GetName]"
+                                            autoresize = yes
+                                            align = hcenter|nobaseline
+                                            multiline = yes
+                                            max_width = 280
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                textbox = {
+                    raw_text = "Count: [GetDataModelSize(CompanyType.GetPotentialBuildingTypes(GetPlayer.Self))]"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    fontsize = 12
+                    parentanchor = hcenter
+                }
+            }
+            
+            # TEST 섹션 2: AccessBuildingTypes (비교용)
+            flowcontainer = {
+                direction = vertical
+                parentanchor = hcenter
+                margin = { 10 5 }
+                spacing = 5
+                minimumsize = { @panel_width -1 }
+                
+                background = {
+                    using = dark_area
+                    alpha = 0.2
+                }
+                
+                textbox = {
+                    raw_text = "TEST: Access Building Types (Original)"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    default_format = "#bold"
+                    parentanchor = hcenter
+                }
+                
+                dynamicgridbox = {
+                    datamodel_wrap = 8
+                    datamodel = "[CompanyType.AccessBuildingTypes(GetPlayer.Self)]"
+                    
+                    item = {
+                        widget = {
+                            size = { 50 50 }
+                            
+                            button = {
+                                size = { 45 45 }
+                                texture = "[BuildingType.GetIcon]"
+                                parentanchor = center
+                                
+                                tooltipwidget = {
+                                    widget = {
+                                        size = { 300 60 }
+                                        
+                                        background = {
+                                            using = default_background
+                                        }
+                                        
+                                        textbox = {
+                                            parentanchor = center
+                                            raw_text = "[BuildingType.GetName]"
+                                            autoresize = yes
+                                            align = hcenter|nobaseline
+                                            multiline = yes
+                                            max_width = 280
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                textbox = {
+                    raw_text = "Count: [GetDataModelSize(CompanyType.AccessBuildingTypes(GetPlayer.Self))]"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    fontsize = 12
+                    parentanchor = hcenter
+                }
+            }
+            ###TESTMODADDED END
 	}
 
 	type prosperity_widget = flowcontainer {
