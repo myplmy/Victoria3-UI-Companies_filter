@@ -1,4 +1,4 @@
-using companies_panel_filter.gui
+Ôªøusing companies_panel_filter.gui
 
 # COPY-PASTED FOR NOW
 @panel_width_minus_10 = 530			# used to be 450
@@ -395,7 +395,7 @@ types companies_panel
 					}
 				}
 
-                ### « ≈Õ πˆ∆∞ √ﬂ∞° (default ≈«ø°∏∏ «•Ω√)
+                ### Uboy.UI.CompanyFilter mod : button + grid
                 widget = {
                     visible = "[InformationPanel.IsTabSelected('default')]"
                     size = { @panel_width 60 }
