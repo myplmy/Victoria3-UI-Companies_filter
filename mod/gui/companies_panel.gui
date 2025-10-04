@@ -2177,6 +2177,721 @@ types companies_panel
                     }
                 }
             }
+
+            ### TEST 12: DataModel 재생성으로 on_start 트리거
+            flowcontainer = {
+                direction = vertical
+                parentanchor = hcenter
+                margin = { 10 5 }
+                spacing = 10
+                minimumsize = { @panel_width -1 }
+                
+                background = {
+                    using = dark_area
+                    alpha = 0.6
+                }
+                
+                textbox = {
+                    raw_text = "TEST 12: 버튼으로 DataModel 강제 재생성"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    default_format = "#bold"
+                    parentanchor = hcenter
+                    multiline = yes
+                    max_width = 500
+                }
+                
+                # 리프레시 버튼
+                button = {
+                    using = default_button
+                    size = { 200 40 }
+                    parentanchor = hcenter
+                    onclick = "[GetVariableSystem.Toggle('refresh_trigger')]"
+                    
+                    textbox = {
+                        parentanchor = center
+                        raw_text = "DataModel 재생성 클릭"
+                        autoresize = yes
+                        align = hcenter|nobaseline
+                    }
+                }
+                
+                textbox = {
+                    raw_text = "refresh_trigger: [GetVariableSystem.Get('refresh_trigger')]"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    fontsize = 12
+                }
+                
+                # visible 토글로 재생성되는 datamodel
+                flowcontainer = {
+                    visible = "[Not(GetVariableSystem.Exists('refresh_trigger'))]"
+                    direction = vertical
+                    spacing = 5
+                    parentanchor = hcenter
+                    
+                    textbox = {
+                        raw_text = "DataModel Version A (refresh_trigger 없음)"
+                        autoresize = yes
+                        align = hcenter|nobaseline
+                        fontsize = 12
+                    }
+                    
+                    dynamicgridbox = {
+                        datamodel_wrap = 5
+                        datamodel = "[DataModelFirst(CompanyType.AccessBuildingTypes(GetPlayer.Self), '(int32)1')]"
+                        
+                        item = {
+                            widget = {
+                                size = { 80 80 }
+                                
+                                state = {
+                                    name = _show
+                                    on_start = "[GetVariableSystem.Set('refresh_test_A', BuildingType.GetKey)]"
+                                }
+                                
+                                flowcontainer = {
+                                    direction = vertical
+                                    parentanchor = center
+                                    spacing = 3
+                                    
+                                    icon = {
+                                        size = { 50 50 }
+                                        texture = "[BuildingType.GetIcon]"
+                                    }
+                                    
+                                    textbox = {
+                                        raw_text = "A"
+                                        autoresize = yes
+                                        align = hcenter|nobaseline
+                                        fontsize = 10
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    textbox = {
+                        raw_text = "저장된 Key A: [GetVariableSystem.Get('refresh_test_A')]"
+                        autoresize = yes
+                        align = hcenter|nobaseline
+                        fontsize = 11
+                        margin_top = 5
+                    }
+                }
+                
+                # 같은 datamodel, 다른 visible 조건
+                flowcontainer = {
+                    visible = "[GetVariableSystem.Exists('refresh_trigger')]"
+                    direction = vertical
+                    spacing = 5
+                    parentanchor = hcenter
+                    
+                    textbox = {
+                        raw_text = "DataModel Version B (refresh_trigger 있음)"
+                        autoresize = yes
+                        align = hcenter|nobaseline
+                        fontsize = 12
+                    }
+                    
+                    dynamicgridbox = {
+                        datamodel_wrap = 5
+                        datamodel = "[DataModelFirst(CompanyType.AccessBuildingTypes(GetPlayer.Self), '(int32)1')]"
+                        
+                        item = {
+                            widget = {
+                                size = { 80 80 }
+                                
+                                state = {
+                                    name = _show
+                                    on_start = "[GetVariableSystem.Set('refresh_test_B', BuildingType.GetKey)]"
+                                }
+                                
+                                flowcontainer = {
+                                    direction = vertical
+                                    parentanchor = center
+                                    spacing = 3
+                                    
+                                    icon = {
+                                        size = { 50 50 }
+                                        texture = "[BuildingType.GetIcon]"
+                                    }
+                                    
+                                    textbox = {
+                                        raw_text = "B"
+                                        autoresize = yes
+                                        align = hcenter|nobaseline
+                                        fontsize = 10
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    textbox = {
+                        raw_text = "저장된 Key B: [GetVariableSystem.Get('refresh_test_B')]"
+                        autoresize = yes
+                        align = hcenter|nobaseline
+                        fontsize = 11
+                        margin_top = 5
+                    }
+                }
+                
+                textbox = {
+                    raw_text = "버튼 클릭 시 A↔B 전환, Key 자동 저장되면 성공!"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    default_format = "#bold"
+                    parentanchor = hcenter
+                    margin_top = 10
+                }
+            }
+
+#            ### TEST 13: 실전 필터링 시뮬레이션
+#            flowcontainer = {
+#                direction = vertical
+#                parentanchor = hcenter
+#                margin = { 10 5 }
+#                spacing = 10
+#                minimumsize = { @panel_width -1 }
+#                
+#                background = {
+#                    using = dark_area
+#                    alpha = 0.65
+#                }
+#                
+#                textbox = {
+#                    raw_text = "TEST 13: 필터 버튼으로 자동 필터링 (실전 시뮬레이션)"
+#                    autoresize = yes
+#                    align = hcenter|nobaseline
+#                    default_format = "#bold"
+#                    parentanchor = hcenter
+#                    multiline = yes
+#                    max_width = 500
+#                }
+#                
+#                # 필터 버튼들
+#                flowcontainer = {
+#                    direction = horizontal
+#                    spacing = 10
+#                    parentanchor = hcenter
+#                    
+#                    button = {
+#                        using = default_button
+#                        size = { 120 35 }
+#                        onclick = "[GetVariableSystem.Clear('filter_active')]"
+#                        onclick = "[GetVariableSystem.Clear('filter_wheat')]"
+#                        
+#                        textbox = {
+#                            parentanchor = center
+#                            raw_text = "All"
+#                            autoresize = yes
+#                            align = hcenter|nobaseline
+#                        }
+#                    }
+#                    
+#                    button = {
+#                        using = default_button
+#                        size = { 120 35 }
+#                        onclick = "[GetVariableSystem.Set('filter_active', 'true')]"
+#                        onclick = "[GetVariableSystem.Set('filter_wheat', 'building_wheat_farm')]"
+#                        
+#                        textbox = {
+#                            parentanchor = center
+#                            raw_text = "Wheat Farm"
+#                            autoresize = yes
+#                            align = hcenter|nobaseline
+#                            fontsize = 11
+#                        }
+#                    }
+#                    
+#                    button = {
+#                        using = default_button
+#                        size = { 120 35 }
+#                        onclick = "[GetVariableSystem.Set('filter_active', 'true')]"
+#                        onclick = "[GetVariableSystem.Set('filter_wheat', 'building_logging_camp')]"
+#                        
+#                        textbox = {
+#                            parentanchor = center
+#                            raw_text = "Logging Camp"
+#                            autoresize = yes
+#                            align = hcenter|nobaseline
+#                            fontsize = 11
+#                        }
+#                    }
+#                }
+#                
+#                textbox = {
+#                    raw_text = "활성 필터: [GetVariableSystem.Get('filter_wheat')]"
+#                    autoresize = yes
+#                    align = hcenter|nobaseline
+#                    fontsize = 12
+#                }
+#                
+#                # 필터 없을 때 - 전체 표시
+#                flowcontainer = {
+#                    visible = "[Not(GetVariableSystem.Exists('filter_active'))]"
+#                    direction = vertical
+#                    spacing = 5
+#                    parentanchor = hcenter
+#                    
+#                    textbox = {
+#                        raw_text = "필터 없음 - 전체 기업 표시"
+#                        autoresize = yes
+#                        align = hcenter|nobaseline
+#                        fontsize = 12
+#                    }
+#                    
+#                    dynamicgridbox = {
+#                        datamodel_wrap = 5
+#                        datamodel = "[DataModelFirst(CompanyType.AccessBuildingTypes(GetPlayer.Self), '(int32)1')]"
+#                        
+#                        item = {
+#                            widget = {
+#                                size = { 60 60 }
+#                                
+#                                icon = {
+#                                    parentanchor = center
+#                                    size = { 55 55 }
+#                                    texture = "[BuildingType.GetIcon]"
+#                                }
+#                            }
+#                        }
+#                    }
+#                }
+#                
+#                # 필터 있을 때 - 조건부 표시
+#                flowcontainer = {
+#                    visible = "[GetVariableSystem.Exists('filter_active')]"
+#                    direction = vertical
+#                    spacing = 5
+#                    parentanchor = hcenter
+#                    
+#                    textbox = {
+#                        raw_text = "필터 활성화 - 조건 체크 중..."
+#                        autoresize = yes
+#                        align = hcenter|nobaseline
+#                        fontsize = 12
+#                    }
+#                    
+#                    dynamicgridbox = {
+#                        datamodel_wrap = 5
+#                        datamodel = "[DataModelFirst(CompanyType.AccessBuildingTypes(GetPlayer.Self), '(int32)1')]"
+#                        
+#                        item = {
+#                            widget = {
+#                                size = { 60 60 }
+#                                
+#                                # item 생성 시 자동으로 Key 저장
+#                                state = {
+#                                    name = _show
+#                                    on_start = "[GetVariableSystem.Set('current_building', BuildingType.GetKey)]"
+#                                }
+#                                
+#                                icon = {
+#                                    parentanchor = center
+#                                    size = { 55 55 }
+#                                    texture = "[BuildingType.GetIcon]"
+#                                }
+#                            }
+#                        }
+#                    }
+#                    
+#                    textbox = {
+#                        raw_text = "현재 Building Key: [GetVariableSystem.Get('current_building')]"
+#                        autoresize = yes
+#                        align = hcenter|nobaseline
+#                        fontsize = 11
+#                    }
+#                    
+#                    # 필터 결과
+#                    container = {
+#                        visible = "[GetVariableSystem.HasValue('current_building', GetVariableSystem.Get('filter_wheat'))]"
+#                        minimumsize = { 500 50 }
+#                        
+#                        background = {
+#                            using = entry_bg_simple
+#                        }
+#                        
+#                        textbox = {
+#                            parentanchor = center
+#                            raw_text = "O 필터 통과 - 이 기업 표시"
+#                            autoresize = yes
+#                            align = hcenter|nobaseline
+#                            default_format = "#bold"
+#                        }
+#                    }
+#                    
+#                    container = {
+#                        visible = "[Not(GetVariableSystem.HasValue('current_building', GetVariableSystem.Get('filter_wheat')))]"
+#                        minimumsize = { 500 50 }
+#                        
+#                        background = {
+#                            using = entry_bg_simple
+#                            alpha = 0.3
+#                        }
+#                        
+#                        textbox = {
+#                            parentanchor = center
+#                            raw_text = "X 필터링됨 - 이 기업 숨김"
+#                            autoresize = yes
+#                            align = hcenter|nobaseline
+#                        }
+#                    }
+#                }
+#                
+#                textbox = {
+#                    raw_text = "필터 버튼 클릭 시 자동 체크되면 성공!"
+#                    autoresize = yes
+#                    align = hcenter|nobaseline
+#                    default_format = "#bold"
+#                    parentanchor = hcenter
+#                    margin_top = 10
+#                }
+#            }
+
+            ### TEST 14A: 가장 단순한 on_start
+            flowcontainer = {
+                direction = vertical
+                parentanchor = hcenter
+                margin = { 10 5 }
+                spacing = 5
+                minimumsize = { @panel_width -1 }
+                
+                background = {
+                    using = dark_area
+                    alpha = 0.6
+                }
+                
+                textbox = {
+                    raw_text = "TEST 14A: datamodel item 내부 on_start"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    default_format = "#bold"
+                    parentanchor = hcenter
+                }
+                
+                # 단순 datamodel (CompanyType 자체)
+                dynamicgridbox = {
+                    datamodel_wrap = 3
+                    datamodel = "[DataModelRepeatedItem('(int32)3')]"
+                    
+                    item = {
+                        widget = {
+                            size = { 100 60 }
+                            
+                            background = {
+                                using = entry_bg_simple
+                            }
+                            
+                            state = {
+                                name = _show
+                                on_start = "[GetVariableSystem.Set('simple_test', 'executed')]"
+                            }
+                            
+                            textbox = {
+                                parentanchor = center
+                                raw_text = "Item [PdxGuiWidget.GetIndexInDataModel]"
+                                autoresize = yes
+                                align = hcenter|nobaseline
+                            }
+                        }
+                    }
+                }
+                
+                textbox = {
+                    raw_text = "simple_test 변수: [GetVariableSystem.Get('simple_test')]"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    margin_top = 5
+                }
+                
+                textbox = {
+                    raw_text = "'executed'가 표시되면 item on_start 작동!"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    fontsize = 11
+                }
+            }
+
+
+            ### TEST 14B: state 없이 BuildingType만 표시
+            flowcontainer = {
+                direction = vertical
+                parentanchor = hcenter
+                margin = { 10 5 }
+                spacing = 5
+                minimumsize = { @panel_width -1 }
+                
+                background = {
+                    using = dark_area
+                    alpha = 0.58
+                }
+                
+                textbox = {
+                    raw_text = "TEST 14B: BuildingType 접근 테스트 (on_start 없음)"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    default_format = "#bold"
+                    parentanchor = hcenter
+                }
+                
+                dynamicgridbox = {
+                    datamodel_wrap = 5
+                    datamodel = "[DataModelFirst(CompanyType.AccessBuildingTypes(GetPlayer.Self), '(int32)1')]"
+                    
+                    item = {
+                        widget = {
+                            size = { 80 80 }
+                            
+                            flowcontainer = {
+                                direction = vertical
+                                parentanchor = center
+                                spacing = 3
+                                
+                                icon = {
+                                    size = { 50 50 }
+                                    texture = "[BuildingType.GetIcon]"
+                                }
+                                
+                                textbox = {
+                                    raw_text = "[BuildingType.GetKey]"
+                                    autoresize = yes
+                                    align = hcenter|nobaseline
+                                    fontsize = 9
+                                    multiline = yes
+                                    max_width = 75
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                textbox = {
+                    raw_text = "아이콘과 Key가 표시되면 BuildingType 접근 가능"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    fontsize = 11
+                }
+            }
+
+            ### TEST 14C: onclick으로 변수 설정 (대조군)
+            flowcontainer = {
+                direction = vertical
+                parentanchor = hcenter
+                margin = { 10 5 }
+                spacing = 5
+                minimumsize = { @panel_width -1 }
+                
+                background = {
+                    using = dark_area
+                    alpha = 0.56
+                }
+                
+                textbox = {
+                    raw_text = "TEST 14C: onclick은 작동하는가? (대조군)"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    default_format = "#bold"
+                    parentanchor = hcenter
+                }
+                
+                dynamicgridbox = {
+                    datamodel_wrap = 5
+                    datamodel = "[DataModelFirst(CompanyType.AccessBuildingTypes(GetPlayer.Self), '(int32)1')]"
+                    
+                    item = {
+                        button = {
+                            size = { 80 80 }
+                            onclick = "[GetVariableSystem.Set('onclick_test', BuildingType.GetKey)]"
+                            
+                            flowcontainer = {
+                                direction = vertical
+                                parentanchor = center
+                                spacing = 3
+                                
+                                icon = {
+                                    size = { 50 50 }
+                                    texture = "[BuildingType.GetIcon]"
+                                }
+                                
+                                textbox = {
+                                    raw_text = "Click"
+                                    autoresize = yes
+                                    align = hcenter|nobaseline
+                                    fontsize = 10
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                textbox = {
+                    raw_text = "onclick_test: [GetVariableSystem.Get('onclick_test')]"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    margin_top = 5
+                }
+                
+                textbox = {
+                    raw_text = "클릭 시 Key 저장되면 BuildingType 컨텍스트 정상"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    fontsize = 11
+                }
+            }
+
+
+            ### TEST 14D: timer로 지연 실행
+            flowcontainer = {
+                direction = vertical
+                parentanchor = hcenter
+                margin = { 10 5 }
+                spacing = 5
+                minimumsize = { @panel_width -1 }
+                
+                background = {
+                    using = dark_area
+                    alpha = 0.54
+                }
+                
+                textbox = {
+                    raw_text = "TEST 14D: state with delay (timer)"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    default_format = "#bold"
+                    parentanchor = hcenter
+                }
+                
+                widget = {
+                    size = { 400 80 }
+                    
+                    state = {
+                        name = test_state
+                        
+                        start_sound = {
+                            soundeffect = "event:/SFX/UI/Unit/naval_01"
+                        }
+                        
+                        on_start = "[GetVariableSystem.Set('timer_test', 'delayed')]"
+                        
+                        animation = {
+                            size = { 400 80 }
+                            duration = 1
+                        }
+                    }
+                    
+                    background = {
+                        using = entry_bg_simple
+                    }
+                    
+                    textbox = {
+                        parentanchor = center
+                        raw_text = "State with animation and sound"
+                        autoresize = yes
+                        align = hcenter|nobaseline
+                    }
+                }
+                
+                textbox = {
+                    raw_text = "timer_test: [GetVariableSystem.Get('timer_test')]"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    margin_top = 5
+                }
+                
+                textbox = {
+                    raw_text = "사운드 재생 + 'delayed' 표시되면 state 실행됨"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    fontsize = 11
+                }
+            }
+
+
+            ### TEST 14E: 패널 레벨 vs item 레벨 비교
+            flowcontainer = {
+                direction = vertical
+                parentanchor = hcenter
+                margin = { 10 5 }
+                spacing = 10
+                minimumsize = { @panel_width -1 }
+                
+                background = {
+                    using = dark_area
+                    alpha = 0.62
+                }
+                
+                state = {
+                    name = _show
+                    on_start = "[GetVariableSystem.Set('flowcontainer_level', 'flow_works')]"
+                }
+                
+                textbox = {
+                    raw_text = "TEST 14E: flowcontainer level on_start"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    default_format = "#bold"
+                    parentanchor = hcenter
+                }
+                
+                textbox = {
+                    raw_text = "flowcontainer_level: [GetVariableSystem.Get('flowcontainer_level')]"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                }
+                
+                textbox = {
+                    raw_text = "vs"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    default_format = "#bold"
+                }
+                
+                dynamicgridbox = {
+                    datamodel_wrap = 3
+                    datamodel = "[DataModelRepeatedItem('(int32)1')]"
+                    
+                    item = {
+                        widget = {
+                            size = { 100 60 }
+                            
+                            state = {
+                                name = _show
+                                on_start = "[GetVariableSystem.Set('item_level', 'item_works')]"
+                            }
+                            
+                            background = {
+                                using = entry_bg_simple
+                            }
+                            
+                            textbox = {
+                                parentanchor = center
+                                raw_text = "Item"
+                                autoresize = yes
+                                align = hcenter|nobaseline
+                            }
+                        }
+                    }
+                }
+                
+                textbox = {
+                    raw_text = "item_level: [GetVariableSystem.Get('item_level')]"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                }
+                
+                textbox = {
+                    raw_text = "flowcontainer만 작동하고 item은 안되면 item level on_start 불가능"
+                    autoresize = yes
+                    align = hcenter|nobaseline
+                    fontsize = 11
+                    multiline = yes
+                    max_width = 500
+                    margin_top = 5
+                }
+            }
+
 #            ### TEST 10: 결정적 테스트 - visible 조건문에서 비교
 #            flowcontainer = {
 #                direction = vertical
