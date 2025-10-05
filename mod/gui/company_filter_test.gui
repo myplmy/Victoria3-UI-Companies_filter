@@ -508,7 +508,7 @@ types company_filter_test
             }
             
             textbox = {
-                raw_text = "NOTE: extension_building_types는 Company 설립 후에만 확인 가능"
+                raw_text = "Using AccessBuildingTypes"
                 autoresize = yes
                 align = hcenter|nobaseline
                 fontsize = 12
@@ -818,7 +818,7 @@ types company_filter_test
             }
             
             textbox = {
-                raw_text = "기본 산업 + 확장 산업 모두 포함"
+                raw_text = "NOTE: GetPotentialBuildingTypes는 확장 산업만 반환하는 것으로 보임"
                 autoresize = yes
                 align = hcenter|nobaseline
                 fontsize = 12
@@ -947,8 +947,166 @@ types company_filter_test
         }
         
         divider_clean = {}
-
-
-
+        
+        ### ========== STEP 8 ========== ###
+        flowcontainer = {
+            direction = vertical
+            spacing = 10
+            
+            textbox = {
+                raw_text = "========== STEP 8: Combined Filter (logging_camp) =========="
+                autoresize = yes
+                default_format = "#bold"
+                fontsize = 18
+                align = hcenter|nobaseline
+            }
+            
+            textbox = {
+                raw_text = "Filter: BASE + EXTENSION (중복 제거 없음)"
+                autoresize = yes
+                align = hcenter|nobaseline
+                default_format = "#italic"
+            }
+            
+            textbox = {
+                raw_text = "기본 산업 + 확장 산업 모두 표시"
+                autoresize = yes
+                align = hcenter|nobaseline
+                fontsize = 12
+                margin_bottom = 2
+            }
+            
+            # Section 1: Base Industries
+            textbox = {
+                raw_text = "--- From BASE Industries (AccessBuildingTypes) ---"
+                autoresize = yes
+                default_format = "#bold"
+                fontsize = 14
+                align = hcenter|nobaseline
+            }
+            
+            flowcontainer = {
+                direction = vertical
+                datamodel = "[AccessPlayer.GetAttainableCompanies]"
+                spacing = 3
+                
+                item = {
+                    container = {
+                        datamodel = "[CompanyType.AccessBuildingTypes(GetPlayer.Self)]"
+                        
+                        item = {
+                            flowcontainer = {
+                                visible = "[ObjectsEqual(BuildingType.Self, GetBuildingType('building_logging_camp').Self)]"
+                                direction = horizontal
+                                spacing = 8
+                                minimumsize = { 500 -1 }
+                                margin = { 5 3 }
+                                
+                                background = {
+                                    using = dark_area
+                                    alpha = 0.3
+                                }
+                                
+                                icon = {
+                                    size = { 35 35 }
+                                    texture = "[CompanyType.GetIcon]"
+                                    parentanchor = vcenter
+                                }
+                                
+                                textbox = {
+                                    raw_text = "[CompanyType.GetName]"
+                                    autoresize = yes
+                                    default_format = "#bold"
+                                    fontsize = 14
+                                    parentanchor = vcenter
+                                    max_width = 200
+                                    elide = right
+                                }
+                                
+                                textbox = {
+                                    raw_text = "(BASE)"
+                                    autoresize = yes
+                                    fontsize = 11
+                                    default_format = "#P"
+                                    parentanchor = vcenter
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            # Section 2: Extension Industries
+            textbox = {
+                raw_text = "--- From EXTENSION Industries (GetPotentialBuildingTypes) ---"
+                autoresize = yes
+                default_format = "#bold"
+                fontsize = 14
+                align = hcenter|nobaseline
+                margin_top = 2
+            }
+            
+            flowcontainer = {
+                direction = vertical
+                datamodel = "[AccessPlayer.GetAttainableCompanies]"
+                spacing = 3
+                
+                item = {
+                    container = {
+                        datamodel = "[CompanyType.GetPotentialBuildingTypes(GetPlayer.Self)]"
+                        
+                        item = {
+                            flowcontainer = {
+                                visible = "[ObjectsEqual(BuildingType.Self, GetBuildingType('building_logging_camp').Self)]"
+                                direction = horizontal
+                                spacing = 8
+                                minimumsize = { 500 -1 }
+                                margin = { 5 3 }
+                                
+                                background = {
+                                    using = dark_area
+                                    alpha = 0.3
+                                }
+                                
+                                icon = {
+                                    size = { 35 35 }
+                                    texture = "[CompanyType.GetIcon]"
+                                    parentanchor = vcenter
+                                }
+                                
+                                textbox = {
+                                    raw_text = "[CompanyType.GetName]"
+                                    autoresize = yes
+                                    default_format = "#bold"
+                                    fontsize = 14
+                                    parentanchor = vcenter
+                                    max_width = 200
+                                    elide = right
+                                }
+                                
+                                textbox = {
+                                    raw_text = "(EXT)"
+                                    autoresize = yes
+                                    fontsize = 11
+                                    default_format = "#high"
+                                    parentanchor = vcenter
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            textbox = {
+                raw_text = "NOTE: 같은 회사가 두 섹션에 모두 나타날 수 있음"
+                autoresize = yes
+                align = hcenter|nobaseline
+                margin_top = 10
+                fontsize = 12
+                default_format = "#italic"
+            }
+        }
+        
+        divider_clean = {}
     }
 }
