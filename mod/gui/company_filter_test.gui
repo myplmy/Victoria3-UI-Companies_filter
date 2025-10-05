@@ -361,5 +361,384 @@ types company_filter_test
                 }
             }
         }
+        
+        divider_clean = {}
+        
+        ### ========== STEP 4 ========== ###
+        flowcontainer = {
+            direction = vertical
+            spacing = 10
+            
+            textbox = {
+                raw_text = "========== STEP 4: Auto Filter (wheat_farm) =========="
+                autoresize = yes
+                default_format = "#bold"
+                fontsize = 18
+                align = hcenter|nobaseline
+            }
+            
+            textbox = {
+                raw_text = "Automatically filtering companies with: building_wheat_farm"
+                autoresize = yes
+                align = hcenter|nobaseline
+                default_format = "#italic"
+            }
+            
+            # wheat_farm을 가진 회사만 필터링
+            flowcontainer = {
+                direction = vertical
+                datamodel = "[AccessPlayer.GetAttainableCompanies]"
+                spacing = 5
+                
+                item = {
+                    container = {
+                        datamodel = "[CompanyType.AccessBuildingTypes(GetPlayer.Self)]"
+                        
+                        item = {
+                            flowcontainer = {
+                                visible = "[ObjectsEqual(BuildingType.Self, GetBuildingType('building_wheat_farm').Self)]"
+                                direction = vertical
+                                spacing = 5
+                                minimumsize = { 500 -1 }
+                                margin = { 10 5 }
+                                
+                                background = {
+                                    using = dark_area
+                                    alpha = 0.3
+                                }
+                                
+                                flowcontainer = {
+                                    direction = horizontal
+                                    spacing = 10
+                                    
+                                    icon = {
+                                        size = { 40 40 }
+                                        texture = "[CompanyType.GetIcon]"
+                                        parentanchor = vcenter
+                                    }
+                                    
+                                    flowcontainer = {
+                                        direction = vertical
+                                        spacing = 3
+                                        parentanchor = vcenter
+                                        
+                                        textbox = {
+                                            raw_text = "[CompanyType.GetName]"
+                                            autoresize = yes
+                                            default_format = "#bold"
+                                            fontsize = 16
+                                        }
+                                        
+                                        textbox = {
+                                            raw_text = "Buildings: [GetDataModelSize(CompanyType.AccessBuildingTypes(GetPlayer.Self))]"
+                                            autoresize = yes
+                                            fontsize = 14
+                                        }
+                                    }
+                                    
+                                    expand = {}
+                                    
+                                    icon = {
+                                        size = { 30 30 }
+                                        texture = "gfx/interface/buttons/button_icons/check.dds"
+                                        parentanchor = vcenter
+                                    }
+                                }
+                                
+                                flowcontainer = {
+                                    direction = vertical
+                                    margin = { 5 5 }
+                                    
+                                    dynamicgridbox = {
+                                        datamodel = "[CompanyType.AccessBuildingTypes(GetPlayer.Self)]"
+                                        datamodel_wrap = 8
+                                        
+                                        item = {
+                                            button = {
+                                                size = { 50 50 }
+                                                texture = "[BuildingType.GetIcon]"
+                                                
+                                                background = {
+                                                    visible = "[ObjectsEqual(BuildingType.Self, GetBuildingType('building_wheat_farm').Self)]"
+                                                    using = highlighted_square_selection
+                                                }
+                                                
+                                                tooltipwidget = {
+                                                    FancyTooltip_BuildingType = {}
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            textbox = {
+                raw_text = "If companies are shown above, wheat_farm filtering works!"
+                autoresize = yes
+                align = hcenter|nobaseline
+                margin_top = 10
+                fontsize = 12
+            }
+        }
+        
+        divider_clean = {}
+        
+        ### ========== STEP 5 ========== ###
+        flowcontainer = {
+            direction = vertical
+            spacing = 10
+            
+            textbox = {
+                raw_text = "========== STEP 5: Auto Filter (logging_camp) =========="
+                autoresize = yes
+                default_format = "#bold"
+                fontsize = 18
+                align = hcenter|nobaseline
+            }
+            
+            textbox = {
+                raw_text = "Filter: building_logging_camp (기본 산업만)"
+                autoresize = yes
+                align = hcenter|nobaseline
+                default_format = "#italic"
+            }
+            
+            textbox = {
+                raw_text = "NOTE: extension_building_types는 Company 설립 후에만 확인 가능"
+                autoresize = yes
+                align = hcenter|nobaseline
+                fontsize = 12
+                margin_bottom = 10
+            }
+            
+            # logging_camp을 기본 building_types로 가진 회사 필터링
+            flowcontainer = {
+                direction = vertical
+                datamodel = "[AccessPlayer.GetAttainableCompanies]"
+                spacing = 5
+                
+                item = {
+                    container = {
+                        datamodel = "[CompanyType.AccessBuildingTypes(GetPlayer.Self)]"
+                        
+                        item = {
+                            flowcontainer = {
+                                visible = "[ObjectsEqual(BuildingType.Self, GetBuildingType('building_logging_camp').Self)]"
+                                direction = vertical
+                                spacing = 5
+                                minimumsize = { 500 -1 }
+                                margin = { 10 5 }
+                                
+                                background = {
+                                    using = dark_area
+                                    alpha = 0.3
+                                }
+                                
+                                flowcontainer = {
+                                    direction = horizontal
+                                    spacing = 10
+                                    
+                                    icon = {
+                                        size = { 40 40 }
+                                        texture = "[CompanyType.GetIcon]"
+                                        parentanchor = vcenter
+                                    }
+                                    
+                                    flowcontainer = {
+                                        direction = vertical
+                                        spacing = 3
+                                        parentanchor = vcenter
+                                        
+                                        textbox = {
+                                            raw_text = "[CompanyType.GetName]"
+                                            autoresize = yes
+                                            default_format = "#bold"
+                                            fontsize = 16
+                                        }
+                                        
+                                        textbox = {
+                                            raw_text = "Buildings: [GetDataModelSize(CompanyType.AccessBuildingTypes(GetPlayer.Self))]"
+                                            autoresize = yes
+                                            fontsize = 14
+                                        }
+                                    }
+                                    
+                                    expand = {}
+                                    
+                                    icon = {
+                                        size = { 30 30 }
+                                        texture = "gfx/interface/buttons/button_icons/check.dds"
+                                        parentanchor = vcenter
+                                    }
+                                }
+                                
+                                flowcontainer = {
+                                    direction = vertical
+                                    margin = { 5 5 }
+                                    
+                                    dynamicgridbox = {
+                                        datamodel = "[CompanyType.AccessBuildingTypes(GetPlayer.Self)]"
+                                        datamodel_wrap = 8
+                                        
+                                        item = {
+                                            button = {
+                                                size = { 50 50 }
+                                                texture = "[BuildingType.GetIcon]"
+                                                
+                                                background = {
+                                                    visible = "[ObjectsEqual(BuildingType.Self, GetBuildingType('building_logging_camp').Self)]"
+                                                    using = highlighted_square_selection
+                                                }
+                                                
+                                                tooltipwidget = {
+                                                    FancyTooltip_BuildingType = {}
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            textbox = {
+                raw_text = "If companies are shown above, logging_camp filtering works!"
+                autoresize = yes
+                align = hcenter|nobaseline
+                margin_top = 10
+                fontsize = 12
+            }
+        }
+        
+        divider_clean = {}
+
+
+        ### ========== STEP 5B ========== ###
+        flowcontainer = {
+            direction = vertical
+            spacing = 10
+            
+            textbox = {
+                raw_text = "========== STEP 5B: Auto Filter (logging_camp, potential) =========="
+                autoresize = yes
+                default_format = "#bold"
+                fontsize = 18
+                align = hcenter|nobaseline
+            }
+            
+            textbox = {
+                raw_text = "Filter: building_logging_camp (잠재적 산업만)"
+                autoresize = yes
+                align = hcenter|nobaseline
+                default_format = "#italic"
+            }
+            
+            # logging_camp을 확장 building_types로 가진 회사 필터링
+            flowcontainer = {
+                direction = vertical
+                datamodel = "[AccessPlayer.GetAttainableCompanies]"
+                spacing = 5
+                
+                item = {
+                    container = {
+                        datamodel = "[CompanyType.AccessBuildingTypes(GetPlayer.Self)]"
+                        
+                        item = {
+                            flowcontainer = {
+                                visible = "[ObjectsEqual(BuildingType.Self, GetBuildingType('building_logging_camp').Self)]"
+                                direction = vertical
+                                spacing = 5
+                                minimumsize = { 500 -1 }
+                                margin = { 10 5 }
+                                
+                                background = {
+                                    using = dark_area
+                                    alpha = 0.3
+                                }
+                                
+                                flowcontainer = {
+                                    direction = horizontal
+                                    spacing = 10
+                                    
+                                    icon = {
+                                        size = { 40 40 }
+                                        texture = "[CompanyType.GetIcon]"
+                                        parentanchor = vcenter
+                                    }
+                                    
+                                    flowcontainer = {
+                                        direction = vertical
+                                        spacing = 3
+                                        parentanchor = vcenter
+                                        
+                                        textbox = {
+                                            raw_text = "[CompanyType.GetName]"
+                                            autoresize = yes
+                                            default_format = "#bold"
+                                            fontsize = 16
+                                        }
+                                        
+                                        textbox = {
+                                            raw_text = "Buildings: [GetDataModelSize(CompanyType.AccessBuildingTypes(GetPlayer.Self))]"
+                                            autoresize = yes
+                                            fontsize = 14
+                                        }
+                                    }
+                                    
+                                    expand = {}
+                                    
+                                    icon = {
+                                        size = { 30 30 }
+                                        texture = "gfx/interface/buttons/button_icons/check.dds"
+                                        parentanchor = vcenter
+                                    }
+                                }
+                                
+                                flowcontainer = {
+                                    direction = vertical
+                                    margin = { 5 5 }
+                                    
+                                    dynamicgridbox = {
+                                        datamodel = "[CompanyType.AccessBuildingTypes(GetPlayer.Self)]"
+                                        datamodel_wrap = 8
+                                        
+                                        item = {
+                                            button = {
+                                                size = { 50 50 }
+                                                texture = "[BuildingType.GetIcon]"
+                                                
+                                                background = {
+                                                    visible = "[ObjectsEqual(BuildingType.Self, GetBuildingType('building_logging_camp').Self)]"
+                                                    using = highlighted_square_selection
+                                                }
+                                                
+                                                tooltipwidget = {
+                                                    FancyTooltip_BuildingType = {}
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            textbox = {
+                raw_text = "If companies are shown above, logging_camp filtering works!"
+                autoresize = yes
+                align = hcenter|nobaseline
+                margin_top = 10
+                fontsize = 12
+            }
+        }
+
     }
 }

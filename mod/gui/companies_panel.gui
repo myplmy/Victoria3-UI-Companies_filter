@@ -401,7 +401,7 @@ types companies_panel
 				flowcontainer = {
 					visible = "[InformationPanel.IsTabSelected('default')]"
 					direction = vertical
-					parentanchor = hcenter
+					#parentanchor = hcenter
 					spacing = 10
 					
 					test_container = {}
