@@ -465,7 +465,7 @@ types companies_panel
                 flowcontainer = {
                     parentanchor = hcenter
                     direction = vertical
-                    visible = "[Not(GetVariableSystem.Exists('available_companies'))]"
+                    visible = "[GetVariableSystem.Exists('available_companies')]"
 
                     # 필터 버튼
                     building_filter_button = {
@@ -513,9 +513,9 @@ types companies_panel
                                         
                                         icon = { size = { 35 35 } texture = "[CompanyType.GetIcon]" parentanchor = vcenter }
                                         textbox = { raw_text = "[CompanyType.GetName]" autoresize = yes default_format = "#bold" fontsize = 14 parentanchor = vcenter max_width = 250 elide = right }
-                                        textbox = { raw_text = "(기본)" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#P" }
+                                        textbox = { raw_text = "(기본산업)" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#P" }
                                         expand = {}
-                                        button = { size = { 100 30 } using = default_button raw_text = "설립" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = vcenter }
+                                        button = { size = { 100 30 } using = default_button raw_text = "수립" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = vcenter }
                                     }
                                 }
                             }
@@ -545,9 +545,9 @@ types companies_panel
                                         
                                         icon = { size = { 35 35 } texture = "[CompanyType.GetIcon]" parentanchor = vcenter }
                                         textbox = { raw_text = "[CompanyType.GetName]" autoresize = yes default_format = "#bold" fontsize = 14 parentanchor = vcenter max_width = 250 elide = right }
-                                        textbox = { raw_text = "(확장)" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#high" }
+                                        textbox = { raw_text = "(잠재적산업)" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#high" }
                                         expand = {}
-                                        button = { size = { 100 30 } using = default_button raw_text = "설립" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = vcenter }
+                                        button = { size = { 100 30 } using = default_button raw_text = "수립" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = vcenter }
                                     }
                                 }
                             }
@@ -585,18 +585,100 @@ types companies_panel
 					direction = vertical
 					visible = "[GetVariableSystem.Exists('potential_companies')]"
 
-					flowcontainer = {
-						parentanchor = hcenter
-						visible = "[Not(IsDataModelEmpty(AccessPlayer.GetAttainableCompanies))]"
-						datamodel = "[AccessPlayer.GetAttainableCompanies]"
-						direction = vertical
-						spacing = 5
+                    flowcontainer = {
+                        parentanchor = hcenter
+                        direction = vertical
+                        #visible = "[Not(GetVariableSystem.Exists(AccessPlayer.GetAttainableCompanies))]"
 
-						item = {
-							potential_company_item = {}
-						}
-					}
-				}		
+                        # 필터 버튼
+                        building_filter_button = {
+                            parentanchor = hcenter
+                            margin_top = 10
+                            margin_bottom = 10
+                        }
+                        
+                        # 필터 그리드
+                        building_filter_grid = {}
+
+                        # 필터 미적용 시
+                        flowcontainer = {
+                            parentanchor = hcenter
+                            visible = "[And(Not(IsDataModelEmpty(AccessPlayer.GetAttainableCompanies)), Not(GetPlayer.MakeScope.Var('com_filter_building').IsSet))]"
+                            datamodel = "[AccessPlayer.GetAttainableCompanies]"
+                            direction = vertical
+                            spacing = 5
+
+                            item = {
+                                potential_company_item = {}
+                            }
+                        }
+                        
+                        # 필터 적용 - BASE 건물
+                        flowcontainer = {
+                            parentanchor = hcenter
+                            visible = "[GetPlayer.MakeScope.Var('com_filter_building').IsSet]"
+                            datamodel = "[AccessPlayer.GetAttainableCompanies]"
+                            direction = vertical
+                            spacing = 3
+                            
+                            item = {
+                                container = {
+                                    datamodel = "[CompanyType.AccessBuildingTypes(GetPlayer.Self)]"
+                                    
+                                    item = {
+                                        flowcontainer = {
+                                            visible = "[And(ObjectsEqual(BuildingType.MakeScope, GetPlayer.MakeScope.Var('com_filter_building').GetBuildingType.MakeScope), Or(Not(GetVariableSystem.Exists('filter_extension_only')), GetVariableSystem.Exists('filter_base_only')))]"
+                                            direction = horizontal
+                                            spacing = 8
+                                            minimumsize = { 520 -1 }
+                                            margin = { 5 3 }
+                                            background = { using = dark_area alpha = 0.3 }
+                                            
+                                            icon = { size = { 35 35 } texture = "[CompanyType.GetIcon]" parentanchor = vcenter }
+                                            textbox = { raw_text = "[CompanyType.GetName]" autoresize = yes default_format = "#bold" fontsize = 14 parentanchor = vcenter max_width = 250 elide = right }
+                                            textbox = { raw_text = "(기본산업)" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#P" }
+                                            expand = {}
+                                            button = { size = { 100 30 } using = default_button raw_text = "수립" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = vcenter }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        
+                        # 필터 적용 - EXTENSION 건물
+                        flowcontainer = {
+                            parentanchor = hcenter
+                            visible = "[And(GetPlayer.MakeScope.Var('com_filter_building').IsSet, Not(GetVariableSystem.Exists('filter_base_only')))]"
+                            datamodel = "[AccessPlayer.GetAttainableCompanies]"
+                            direction = vertical
+                            spacing = 3
+                            
+                            item = {
+                                container = {
+                                    datamodel = "[CompanyType.GetPotentialBuildingTypes(GetPlayer.Self)]"
+                                    
+                                    item = {
+                                        flowcontainer = {
+                                            visible = "[ObjectsEqual(BuildingType.MakeScope, GetPlayer.MakeScope.Var('com_filter_building').GetBuildingType.MakeScope)]"
+                                            direction = horizontal
+                                            spacing = 8
+                                            minimumsize = { 520 -1 }
+                                            margin = { 5 3 }
+                                            background = { using = dark_area alpha = 0.3 }
+                                            
+                                            icon = { size = { 35 35 } texture = "[CompanyType.GetIcon]" parentanchor = vcenter }
+                                            textbox = { raw_text = "[CompanyType.GetName]" autoresize = yes default_format = "#bold" fontsize = 14 parentanchor = vcenter max_width = 250 elide = right }
+                                            textbox = { raw_text = "(잠재적산업)" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#high" }
+                                            expand = {}
+                                            button = { size = { 100 30 } using = default_button raw_text = "수립" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = vcenter }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
 
 				# POTENTIAL COMPANIES
 				section_header_button = {
@@ -628,17 +710,98 @@ types companies_panel
 					direction = vertical
 					visible = "[GetVariableSystem.Exists('unavailable_companies')]"
 
-					flowcontainer = {
-						parentanchor = hcenter
-						visible = "[Not(IsDataModelEmpty(AccessPlayer.GetPotentialCompanies))]"
-						datamodel = "[AccessPlayer.GetPotentialCompanies]"
-						direction = vertical
-						spacing = 5
+                    flowcontainer = {
+                        parentanchor = hcenter
+                        direction = vertical
+                        #visible = "[Not(GetVariableSystem.Exists(AccessPlayer.GetAttainableCompanies))]"
 
-						item = {
-							potential_company_item = {}
-						}
-					}
+                        # 필터 버튼
+                        building_filter_button = {
+                            parentanchor = hcenter
+                            margin_top = 10
+                            margin_bottom = 10
+                        }
+                        
+                        # 필터 그리드
+                        building_filter_grid = {}
+
+                        # 필터 미적용 시
+                        flowcontainer = {
+                            parentanchor = hcenter
+                            visible = "[And(Not(IsDataModelEmpty(AccessPlayer.GetPotentialCompanies)), Not(GetPlayer.MakeScope.Var('com_filter_building').IsSet))]"
+                            datamodel = "[AccessPlayer.GetPotentialCompanies]"
+                            direction = vertical
+                            spacing = 5
+
+                            item = {
+                                potential_company_item = {}
+                            }
+                        }
+                        
+                        # 필터 적용 - BASE 건물
+                        flowcontainer = {
+                            parentanchor = hcenter
+                            visible = "[GetPlayer.MakeScope.Var('com_filter_building').IsSet]"
+                            datamodel = "[AccessPlayer.GetPotentialCompanies]"
+                            direction = vertical
+                            spacing = 3
+                            
+                            item = {
+                                container = {
+                                    datamodel = "[CompanyType.AccessBuildingTypes(GetPlayer.Self)]"
+                                    
+                                    item = {
+                                        flowcontainer = {
+                                            visible = "[And(ObjectsEqual(BuildingType.MakeScope, GetPlayer.MakeScope.Var('com_filter_building').GetBuildingType.MakeScope), Or(Not(GetVariableSystem.Exists('filter_extension_only')), GetVariableSystem.Exists('filter_base_only')))]"
+                                            direction = horizontal
+                                            spacing = 8
+                                            minimumsize = { 520 -1 }
+                                            margin = { 5 3 }
+                                            background = { using = dark_area alpha = 0.3 }
+                                            
+                                            icon = { size = { 35 35 } texture = "[CompanyType.GetIcon]" parentanchor = vcenter }
+                                            textbox = { raw_text = "[CompanyType.GetName]" autoresize = yes default_format = "#bold" fontsize = 14 parentanchor = vcenter max_width = 250 elide = right }
+                                            textbox = { raw_text = "(기본산업)" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#P" }
+                                            expand = {}
+                                            button = { size = { 100 30 } using = default_button raw_text = "수립" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = vcenter }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        
+                        # 필터 적용 - EXTENSION 건물
+                        flowcontainer = {
+                            parentanchor = hcenter
+                            visible = "[And(GetPlayer.MakeScope.Var('com_filter_building').IsSet, Not(GetVariableSystem.Exists('filter_base_only')))]"
+                            datamodel = "[AccessPlayer.GetPotentialCompanies]"
+                            direction = vertical
+                            spacing = 3
+                            
+                            item = {
+                                container = {
+                                    datamodel = "[CompanyType.GetPotentialBuildingTypes(GetPlayer.Self)]"
+                                    
+                                    item = {
+                                        flowcontainer = {
+                                            visible = "[ObjectsEqual(BuildingType.MakeScope, GetPlayer.MakeScope.Var('com_filter_building').GetBuildingType.MakeScope)]"
+                                            direction = horizontal
+                                            spacing = 8
+                                            minimumsize = { 520 -1 }
+                                            margin = { 5 3 }
+                                            background = { using = dark_area alpha = 0.3 }
+                                            
+                                            icon = { size = { 35 35 } texture = "[CompanyType.GetIcon]" parentanchor = vcenter }
+                                            textbox = { raw_text = "[CompanyType.GetName]" autoresize = yes default_format = "#bold" fontsize = 14 parentanchor = vcenter max_width = 250 elide = right }
+                                            textbox = { raw_text = "(잠재적산업)" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#high" }
+                                            expand = {}
+                                            button = { size = { 100 30 } using = default_button raw_text = "수립" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = vcenter }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
 				}			
 			}
 
