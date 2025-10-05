@@ -1,4 +1,7 @@
-﻿com_test_set_variable = {
+﻿# common/scripted_guis/company_filter_test_sgui.txt
+# 2단계: BuildingType Scope 저장/읽기 테스트
+
+com_test_set_variable = {
     scope = player
     
     effect = {
@@ -16,6 +19,40 @@ com_test_clear_variable = {
         if = {
             limit = { has_variable = com_test_var }
             remove_variable = com_test_var
+        }
+    }
+}
+
+# 2단계: BuildingType을 Variable에 저장
+com_save_building_type = {
+    scope = player
+    
+    saved_scopes = {
+        building_type
+    }
+    
+    effect = {
+        # 기존 저장된 BuildingType 제거
+        if = {
+            limit = { has_variable = com_saved_building }
+            remove_variable = com_saved_building
+        }
+        
+        # BuildingType Scope 저장
+        set_variable = {
+            name = com_saved_building
+            value = scope:building_type
+        }
+    }
+}
+
+com_clear_building_type = {
+    scope = player
+    
+    effect = {
+        if = {
+            limit = { has_variable = com_saved_building }
+            remove_variable = com_saved_building
         }
     }
 }

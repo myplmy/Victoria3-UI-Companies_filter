@@ -1,64 +1,364 @@
-﻿types company_filter_test
+﻿# gui/company_filter_test.gui
+# 스크롤 제거 + 필터링 수정 버전
+
+types company_filter_test
 {
     type test_container = flowcontainer {
         direction = vertical
-        spacing = 10
+        spacing = 20
         margin = { 10 10 }
         
         background = {
             using = dark_area
         }
         
-        textbox = {
-            raw_text = "STEP 1A: Variable Test"
-            autoresize = yes
-            default_format = "#bold"
-            parentanchor = hcenter
-        }
-        
-        # 상태 표시
-        textbox = {
-            visible = "[GetPlayer.MakeScope.Var('com_test_var').IsSet]"
-            raw_text = "Variable SET: [GetPlayer.MakeScope.Var('com_test_var').GetValue]"
-            autoresize = yes
-            parentanchor = hcenter
-        }
-        
-        textbox = {
-            visible = "[Not(GetPlayer.MakeScope.Var('com_test_var').IsSet)]"
-            raw_text = "Variable NOT SET"
-            autoresize = yes
-            parentanchor = hcenter
-        }
-        
-        # Set 버튼
-        button = {
-            size = { 200 40 }
-            using = default_button
-            parentanchor = hcenter
-            
-            onclick = "[GetScriptedGui('com_test_set_variable').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        ### ========== STEP 1A ========== ###
+        flowcontainer = {
+            direction = vertical
+            spacing = 5
             
             textbox = {
-                parentanchor = center
-                raw_text = "Set Variable"
+                raw_text = "========== STEP 1A: Variable Test =========="
                 autoresize = yes
+                default_format = "#bold"
+                align = hcenter|nobaseline
+            }
+            
+            textbox = {
+                visible = "[GetPlayer.MakeScope.Var('com_test_var').IsSet]"
+                raw_text = "Variable SET: [GetPlayer.MakeScope.Var('com_test_var').GetValue]"
+                autoresize = yes
+            }
+            
+            textbox = {
+                visible = "[Not(GetPlayer.MakeScope.Var('com_test_var').IsSet)]"
+                raw_text = "Variable NOT SET"
+                autoresize = yes
+            }
+            
+            button = {
+                size = { 180 35 }
+                using = default_button
+                onclick = "[GetScriptedGui('com_test_set_variable').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                
+                textbox = {
+                    parentanchor = center
+                    raw_text = "Set Variable"
+                    autoresize = yes
+                }
+            }
+            
+            button = {
+                visible = "[GetPlayer.MakeScope.Var('com_test_var').IsSet]"
+                size = { 180 35 }
+                using = default_button
+                onclick = "[GetScriptedGui('com_test_clear_variable').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                
+                textbox = {
+                    parentanchor = center
+                    raw_text = "Clear Variable"
+                    autoresize = yes
+                }
             }
         }
         
-        # Clear 버튼
-        button = {
-            visible = "[GetPlayer.MakeScope.Var('com_test_var').IsSet]"
-            size = { 200 40 }
-            using = default_button
-            parentanchor = hcenter
-            
-            onclick = "[GetScriptedGui('com_test_clear_variable').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        divider_clean = {}
+        
+        ### ========== STEP 2E ========== ###
+        flowcontainer = {
+            direction = vertical
+            spacing = 10
             
             textbox = {
-                parentanchor = center
-                raw_text = "Clear Variable"
+                raw_text = "========== STEP 2E: Company Categories =========="
                 autoresize = yes
+                default_format = "#bold"
+                align = hcenter|nobaseline
+            }
+            
+            # Attainable Companies 확인
+            flowcontainer = {
+                direction = vertical
+                spacing = 5
+                
+                textbox = {
+                    raw_text = "Attainable Companies (달성 가능)"
+                    autoresize = yes
+                    default_format = "#bold"
+                }
+                
+                textbox = {
+                    raw_text = "Count: [GetDataModelSize(AccessPlayer.GetAttainableCompanies)]"
+                    autoresize = yes
+                }
+            }
+            
+            # 첫 번째 Attainable Company의 BuildingType 아이콘
+            flowcontainer = {
+                visible = "[Not(IsDataModelEmpty(AccessPlayer.GetAttainableCompanies))]"
+                datamodel = "[AccessPlayer.GetAttainableCompanies]"
+                direction = vertical
+                spacing = 5
+                
+                item = {
+                    flowcontainer = {
+                        visible = "[EqualTo_int32(PdxGuiWidget.GetIndexInDataModel, '(int32)0')]"
+                        direction = vertical
+                        spacing = 5
+                        
+                        textbox = {
+                            raw_text = "Click a building icon: [CompanyType.GetName]"
+                            autoresize = yes
+                            align = hcenter|nobaseline
+                        }
+                        
+                        container = {
+                            dynamicgridbox = {
+                                datamodel = "[CompanyType.AccessBuildingTypes(GetPlayer.Self)]"
+                                datamodel_wrap = 5
+                                
+                                item = {
+                                    button = {
+                                        size = { 60 60 }
+                                        texture = "[BuildingType.GetIcon]"
+                                        onclick = "[GetScriptedGui('com_save_building_type').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', BuildingType.MakeScope).End)]"
+                                        tooltipwidget = { FancyTooltip_BuildingType = {} }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            # 저장된 BuildingType 표시
+            textbox = {
+                visible = "[GetPlayer.MakeScope.Var('com_saved_building').IsSet]"
+                raw_text = "Saved: [GetPlayer.MakeScope.Var('com_saved_building').GetBuildingType.GetName]"
+                autoresize = yes
+            }
+            
+            textbox = {
+                visible = "[Not(GetPlayer.MakeScope.Var('com_saved_building').IsSet)]"
+                raw_text = "No building saved"
+                autoresize = yes
+            }
+            
+            button = {
+                visible = "[GetPlayer.MakeScope.Var('com_saved_building').IsSet]"
+                size = { 180 35 }
+                using = default_button
+                onclick = "[GetScriptedGui('com_clear_building_type').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                
+                textbox = {
+                    parentanchor = center
+                    raw_text = "Clear Building"
+                    autoresize = yes
+                }
+            }
+        }
+        
+        divider_clean = {}
+        
+        ### ========== STEP 3A ========== ###
+        flowcontainer = {
+            direction = vertical
+            spacing = 10
+            
+            textbox = {
+                raw_text = "========== STEP 3A: Filter Check =========="
+                autoresize = yes
+                default_format = "#bold"
+                fontsize = 18
+                align = hcenter|nobaseline
+            }
+            
+            textbox = {
+                visible = "[GetPlayer.MakeScope.Var('com_saved_building').IsSet]"
+                raw_text = "Saved: [GetPlayer.MakeScope.Var('com_saved_building').GetBuildingType.GetName]"
+                autoresize = yes
+                default_format = "#bold"
+            }
+            
+            textbox = {
+                visible = "[Not(GetPlayer.MakeScope.Var('com_saved_building').IsSet)]"
+                raw_text = "No building saved - Click icon above"
+                autoresize = yes
+            }
+            
+            # 회사 목록 (체크마크 표시)
+            flowcontainer = {
+                visible = "[GetPlayer.MakeScope.Var('com_saved_building').IsSet]"
+                direction = vertical
+                spacing = 3
+                
+                textbox = {
+                    raw_text = "Companies with this building:"
+                    autoresize = yes
+                    default_format = "#bold"
+                    margin_top = 10
+                }
+                
+                flowcontainer = {
+                    datamodel = "[AccessPlayer.GetAttainableCompanies]"
+                    direction = vertical
+                    spacing = 2
+                    
+                    item = {
+                        flowcontainer = {
+                            direction = horizontal
+                            spacing = 5
+                            minimumsize = { 500 30 }
+                            
+                            icon = {
+                                size = { 25 25 }
+                                texture = "[CompanyType.GetIcon]"
+                                parentanchor = vcenter
+                            }
+                            
+                            textbox = {
+                                raw_text = "[CompanyType.GetName]"
+                                autoresize = yes
+                                max_width = 400
+                                align = left|nobaseline
+                                parentanchor = vcenter
+                                elide = right
+                            }
+                            
+                            expand = {}
+                            
+                            flowcontainer = {
+                                direction = horizontal
+                                parentanchor = vcenter
+                                datamodel = "[CompanyType.AccessBuildingTypes(GetPlayer.Self)]"
+                                
+                                item = {
+                                    textbox = {
+                                        visible = "[ObjectsEqual(BuildingType.MakeScope, GetPlayer.MakeScope.Var('com_saved_building').GetBuildingType.MakeScope)]"
+                                        raw_text = "✓"
+                                        autoresize = yes
+                                        fontsize = 20
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        divider_clean = {}
+        
+        ### ========== STEP 3B ========== ###
+        flowcontainer = {
+            visible = "[GetPlayer.MakeScope.Var('com_saved_building').IsSet]"
+            direction = vertical
+            spacing = 10
+            
+            textbox = {
+                raw_text = "========== STEP 3B: Filtered List =========="
+                autoresize = yes
+                default_format = "#bold"
+                align = hcenter|nobaseline
+            }
+            
+            textbox = {
+                raw_text = "Filter: [GetPlayer.MakeScope.Var('com_saved_building').GetBuildingType.GetName]"
+                autoresize = yes
+                align = hcenter|nobaseline
+                default_format = "#italic"
+            }
+            
+            # 필터링된 회사 카드 (이전 버전 로직 유지)
+            flowcontainer = {
+                direction = vertical
+                datamodel = "[AccessPlayer.GetAttainableCompanies]"
+                spacing = 5
+                
+                item = {
+                    container = {
+                        datamodel = "[CompanyType.AccessBuildingTypes(GetPlayer.Self)]"
+                        
+                        item = {
+                            flowcontainer = {
+                                visible = "[ObjectsEqual(BuildingType.MakeScope, GetPlayer.MakeScope.Var('com_saved_building').GetBuildingType.MakeScope)]"
+                                direction = vertical
+                                spacing = 5
+                                minimumsize = { 500 -1 }
+                                margin = { 10 5 }
+                                
+                                background = {
+                                    using = dark_area
+                                    alpha = 0.3
+                                }
+                                
+                                flowcontainer = {
+                                    direction = horizontal
+                                    spacing = 10
+                                    
+                                    icon = {
+                                        size = { 40 40 }
+                                        texture = "[CompanyType.GetIcon]"
+                                        parentanchor = vcenter
+                                    }
+                                    
+                                    flowcontainer = {
+                                        direction = vertical
+                                        spacing = 3
+                                        parentanchor = vcenter
+                                        
+                                        textbox = {
+                                            raw_text = "[CompanyType.GetName]"
+                                            autoresize = yes
+                                            default_format = "#bold"
+                                            fontsize = 16
+                                        }
+                                        
+                                        textbox = {
+                                            raw_text = "BuildingTypes: [GetDataModelSize(CompanyType.AccessBuildingTypes(GetPlayer.Self))]"
+                                            autoresize = yes
+                                            fontsize = 14
+                                        }
+                                    }
+                                    
+                                    expand = {}
+                                    
+                                    icon = {
+                                        size = { 30 30 }
+                                        texture = "gfx/interface/buttons/button_icons/check.dds"
+                                        parentanchor = vcenter
+                                    }
+                                }
+                                
+                                flowcontainer = {
+                                    direction = vertical
+                                    margin = { 5 5 }
+                                    
+                                    dynamicgridbox = {
+                                        datamodel = "[CompanyType.AccessBuildingTypes(GetPlayer.Self)]"
+                                        datamodel_wrap = 8
+                                        
+                                        item = {
+                                            button = {
+                                                size = { 50 50 }
+                                                texture = "[BuildingType.GetIcon]"
+                                                
+                                                background = {
+                                                    visible = "[ObjectsEqual(BuildingType.MakeScope, GetPlayer.MakeScope.Var('com_saved_building').GetBuildingType.MakeScope)]"
+                                                    using = highlighted_square_selection
+                                                }
+                                                
+                                                tooltipwidget = {
+                                                    FancyTooltip_BuildingType = {}
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
