@@ -1,0 +1,17 @@
+﻿l_english:
+ # 메인 필터 버튼
+ FILTER_BY_BUILDING_TYPE: "Filter by Building Type"
+ SELECT_BUILDING_TYPE_FILTER: "Select Building Type"
+ CLEAR_FILTER: "Clear Filter (Show All Companies)"
+ FILTER_HELP_TEXT: "Click a building type to show only companies that build or extend that type. Click 'Clear Filter' to show all companies."
+ 
+ # 개별 필터 툴팁
+ FILTER_WHEAT_FARM_TOOLTIP: "Show companies related to #bold Wheat Farms#!"
+ FILTER_COAL_MINE_TOOLTIP: "Show companies related to #bold Coal Mines#!"
+ FILTER_TEXTILE_MILLS_TOOLTIP: "Show companies related to #bold Textile Mills#!"
+ FILTER_STEEL_MILLS_TOOLTIP: "Show companies related to #bold Steel Mills#!"
+ FILTER_OIL_RIG_TOOLTIP: "Show companies related to #bold Oil Rigs#!"
+ 
+ # 상태 표시
+ FILTER_ACTIVE: "Filter Active: [GetPlayer.GetVariable('filter_building_type').GetFlagName]"
+ NO_COMPANIES_MATCH_FILTER: "No companies match the current filter"

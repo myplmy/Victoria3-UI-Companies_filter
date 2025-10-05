@@ -1,0 +1,83 @@
+﻿# gui/company_filter_test.gui
+# 최소 테스트 GUI
+
+types company_filter_test
+{
+    # 테스트용 컨테이너
+    type test_building_filter_container = flowcontainer {
+        direction = vertical
+        spacing = 10
+        parentanchor = hcenter
+        
+        # 1단계: Hidden iteration - BuildingType 수집
+        flowcontainer = {
+            datamodel = "[DataModelFirst(GetBuildingType('building_wheat_farm').AccessBuildingTypes(GetPlayer.Self), '(int32)3')]"
+            maximumsize = { 0 0 }
+            alpha = 0
+            
+            item = {
+                widget = {
+                    size = { 0 0 }
+                    state = {
+                        name = _collect
+                        on_start = "[GetScriptedGui('com_add_building_to_list').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', BuildingType.MakeScope).End)]"
+                    }
+                }
+            }
+        }
+        
+        # 2단계: 수집된 BuildingType 표시
+        textbox = {
+            raw_text = "TEST: Collected Building Types"
+            autoresize = yes
+            default_format = "#bold"
+        }
+        
+        dynamicgridbox = {
+            datamodel = "[GetGlobalList('com_available_building_types')]"
+            datamodel_wrap = 5
+            
+            item = {
+                button = {
+                    datacontext = "[Scope.GetBuildingType]"
+                    size = { 70 70 }
+                    texture = "[BuildingType.GetIcon]"
+                    
+                    onclick = "[GetScriptedGui('com_set_selected_building').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', BuildingType.MakeScope).End)]"
+                    
+                    tooltipwidget = {
+                        FancyTooltip_BuildingType = {}
+                    }
+                }
+            }
+        }
+        
+        # 3단계: 선택된 BuildingType 표시
+        textbox = {
+            visible = "[GetPlayer.HasVariable('com_selected_building')]"
+            raw_text = "Selected: [GetPlayer.GetVariable('com_selected_building').GetBuildingType.GetName]"
+            autoresize = yes
+        }
+        
+        textbox = {
+            visible = "[Not(GetPlayer.HasVariable('com_selected_building'))]"
+            raw_text = "No building selected"
+            autoresize = yes
+        }
+        
+        # Clear 버튼
+        button = {
+            visible = "[GetPlayer.HasVariable('com_selected_building')]"
+            size = { 200 40 }
+            using = default_button
+            
+            onclick = "[GetScriptedGui('com_clear_selected_building').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            
+            textbox = {
+                parentanchor = center
+                raw_text = "Clear Selection"
+                autoresize = yes
+            }
+        }
+    }
+}
