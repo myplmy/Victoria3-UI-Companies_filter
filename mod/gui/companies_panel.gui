@@ -397,18 +397,14 @@ types companies_panel
 				}
 
 
-				### TEST: ScriptedGUI 필터 ###
-				widget = {
+				### TEST 1A ###
+				flowcontainer = {
 					visible = "[InformationPanel.IsTabSelected('default')]"
-					size = { @panel_width 300 }
+					direction = vertical
 					parentanchor = hcenter
-					margin_top = 10
+					spacing = 10
 					
-					background = {
-						using = dark_area
-					}
-					
-					test_building_filter_container = {}
+					test_container = {}
 				}
 				### TEST END ###
 

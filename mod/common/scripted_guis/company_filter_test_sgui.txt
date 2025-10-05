@@ -1,58 +1,21 @@
-﻿com_add_building_to_list = {
+﻿com_test_set_variable = {
     scope = player
     
-    saved_scopes = {
-        building_type
-    }
-    
     effect = {
-        # Global list에 BuildingType 추가 (중복 방지)
-        if = {
-            limit = {
-                NOT = {
-                    is_target_in_global_variable_list = {
-                        name = com_available_building_types
-                        target = scope:building_type
-                    }
-                }
-            }
-            add_to_global_variable_list = {
-                name = com_available_building_types
-                target = scope:building_type
-            }
-        }
-    }
-}
-
-com_set_selected_building = {
-    scope = player
-    
-    saved_scopes = {
-        building_type
-    }
-    
-    effect = {
-        # 기존 선택 제거
-        if = {
-            limit = { has_variable = com_selected_building }
-            remove_variable = com_selected_building
-        }
-        
-        # 새 선택 저장
         set_variable = {
-            name = com_selected_building
-            value = scope:building_type
+            name = com_test_var
+            value = 100
         }
     }
 }
 
-com_clear_selected_building = {
+com_test_clear_variable = {
     scope = player
     
     effect = {
         if = {
-            limit = { has_variable = com_selected_building }
-            remove_variable = com_selected_building
+            limit = { has_variable = com_test_var }
+            remove_variable = com_test_var
         }
     }
 }
