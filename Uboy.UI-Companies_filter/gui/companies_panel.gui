@@ -756,7 +756,7 @@ types companies_panel
                             visible = "[GetPlayer.MakeScope.Var('com_pot_filter_building').IsSet]"
                             datamodel = "[AccessPlayer.GetPotentialCompanies]"
                             direction = vertical
-                            spacing = 3
+                            spacing = 0
                             
                             item = {
                                 container = {
@@ -790,7 +790,7 @@ types companies_panel
                             visible = "[And(GetPlayer.MakeScope.Var('com_pot_filter_building').IsSet, Not(GetVariableSystem.Exists('filter_pot_base_only')))]"
                             datamodel = "[AccessPlayer.GetPotentialCompanies]"
                             direction = vertical
-                            spacing = 3
+                            spacing = 0
                             
                             item = {
                                 container = {
