@@ -35,3 +35,125 @@ com_clear_filter = {
         }
     }
 }
+
+# 필터 설정
+com_att_set_filter = {
+    scope = player
+    
+    saved_scopes = {
+        building_type
+    }
+    
+    effect = {
+        # 기존 필터 제거
+        if = {
+            limit = { has_variable = com_att_filter_building }
+            remove_variable = com_att_filter_building
+        }
+        
+        # 새 필터 설정
+        set_variable = {
+            name = com_att_filter_building
+            value = scope:building_type
+        }
+    }
+}
+
+# 필터 해제
+com_att_clear_filter = {
+    scope = player
+    
+    effect = {
+        if = {
+            limit = { has_variable = com_att_filter_building }
+            remove_variable = com_att_filter_building
+        }
+    }
+}
+
+# 필터 설정
+com_pot_set_filter = {
+    scope = player
+    
+    saved_scopes = {
+        building_type
+    }
+    
+    effect = {
+        # 기존 필터 제거
+        if = {
+            limit = { has_variable = com_pot_filter_building }
+            remove_variable = com_pot_filter_building
+        }
+        
+        # 새 필터 설정
+        set_variable = {
+            name = com_pot_filter_building
+            value = scope:building_type
+        }
+    }
+}
+
+# 필터 해제
+com_pot_clear_filter = {
+    scope = player
+    
+    effect = {
+        if = {
+            limit = { has_variable = com_pot_filter_building }
+            remove_variable = com_pot_filter_building
+        }
+    }
+}
+
+#set_filter_base_only = {
+#    effect = {
+#        if = {
+#            limit = { has_variable = filter_base_only }
+#            remove_variable = filter_base_only
+#        }
+#        else = {
+#            set_variable = { name = filter_base_only value = 1 }
+#            remove_variable = filter_extension_only 
+#        }
+#    }
+#}
+#
+#set_filter_extension_only = {
+#    effect = {
+#        if = {
+#            limit = { has_variable = filter_extension_only }
+#            remove_variable = filter_extension_only
+#        }
+#        else = {
+#            set_variable = { name = filter_extension_only value = 1 }
+#            remove_variable = filter_base_only
+#        }
+#    }
+#}
+#
+#set_att_filter_base_only = {
+#    effect = {
+#        if = {
+#            limit = { has_variable = filter_att_base_only }
+#            remove_variable = filter_att_base_only
+#        }
+#        else = {
+#            set_variable = { name = filter_att_base_only value = 1 }
+#            remove_variable = filter_att_extension_only 
+#        }
+#    }
+#}
+#
+#set_att_filter_extension_only = {
+#    effect = {
+#        if = {
+#            limit = { has_variable = filter_att_extension_only }
+#            remove_variable = filter_att_extension_only
+#        }
+#        else = {
+#            set_variable = { name = filter_att_extension_only value = 1 }
+#            remove_variable = filter_att_base_only
+#        }
+#    }
+#}
