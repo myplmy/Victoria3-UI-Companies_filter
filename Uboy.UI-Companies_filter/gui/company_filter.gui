@@ -332,6 +332,21 @@
                             }
                         }
                     }
+
+                    button = {
+                        size = { 50 50 }
+                        texture = "gfx/interface/icons/building_icons/sugar_plantation.dds"
+                        onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_sugar_plantation').MakeScope).End)]"
+                        onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_sugar_plantation').GetName]"
+                                }
+                            }
+                        }
+                    }
+
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/tea_plantation.dds"
@@ -1215,6 +1230,21 @@ types company_attainable_building_filter_types
                             }
                         }
                     }
+
+                    button = {
+                        size = { 50 50 }
+                        texture = "gfx/interface/icons/building_icons/sugar_plantation.dds"
+                        onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_sugar_plantation').MakeScope).End)]"
+                        onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_sugar_plantation').GetName]"
+                                }
+                            }
+                        }
+                    }
+
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/tea_plantation.dds"
@@ -2097,6 +2127,21 @@ types company_potential_building_filter_types
                             }
                         }
                     }
+
+                    button = {
+                        size = { 50 50 }
+                        texture = "gfx/interface/icons/building_icons/sugar_plantation.dds"
+                        onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_sugar_plantation').MakeScope).End)]"
+                        onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_sugar_plantation').GetName]"
+                                }
+                            }
+                        }
+                    }
+
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/tea_plantation.dds"
