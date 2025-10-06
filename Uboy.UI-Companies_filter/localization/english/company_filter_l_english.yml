@@ -30,3 +30,11 @@ POTENTIAL_INDUSTRIES: "(Potential industries)"
 
 FILTER_BUTTON_BASE: "Base industries filter"
 FILTER_BUTTON_POTENTIAL: "Potential industries filter"
+
+AGRICULTURE: "Agriculture"
+PLANTATIONS: "Plantation"
+MINE_BUILDING: "Mine"
+RESOURCE_BUILDING: "Resource"
+LIGHT_INDUSTRY: "Light industry"
+HEAVY_INDUSTRY: "Heavy industry"
+INFRA_STRUCTURE_ETC: "Infrastructure and others"

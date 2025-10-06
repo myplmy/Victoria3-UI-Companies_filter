@@ -144,10 +144,10 @@
 	# 건물 선택 그리드
 	type building_filter_grid = widget {
 		visible = "[GetVariableSystem.Exists('show_building_type_filter')]"
-		size = { 540 800 }
+		size = { 540 750 }
 		
 		scrollarea = {
-			size = { 540 800 }
+			size = { 540 750 }
 			scrollbarpolicy_horizontal = always_off
 			
 			scrollbar_vertical = {
@@ -173,7 +173,7 @@
                 textbox = {
                     size = { 520 10 }
                     align = left|vcenter
-                    raw_text = "농업"
+                    text = "AGRICULTURE"
                     default_format = "#bold"
                     fontsize = 16
                 }
@@ -227,21 +227,39 @@
                         texture = "gfx/interface/icons/building_icons/maize_farm.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_maize_farm').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
-                        raw_tooltip = "옥수수 농장"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_maize_farm').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/millet_farm.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_millet_farm').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
-                        raw_tooltip = "수수 농장"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_millet_farm').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/cattle_ranch.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_livestock_ranch').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
-                        raw_tooltip = "가축 목축장"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_livestock_ranch').GetName]"
+                                }
+                            }
+                        }
                     }
                 }
                 
@@ -251,7 +269,7 @@
                 textbox = {
                     size = { 520 10 }
                     align = left|vcenter
-                    raw_text = "플랜테이션"
+                    text = "PLANTATIONS"
                     default_format = "#bold"
                     fontsize = 16
                 }
@@ -260,42 +278,111 @@
                     direction = horizontal
                     spacing = 5
                     parentanchor = left
-                    
+
+
+                    button = {
+                        size = { 50 50 }
+                        texture = "gfx/interface/icons/building_icons/banana_plantation.dds"
+                        onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_banana_plantation').MakeScope).End)]"
+                        onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_banana_plantation').GetName]"
+                                }
+                            }
+                        }
+                    }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/coffee_plantation.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_coffee_plantation').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_coffee_plantation').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/cotton_plantation.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_cotton_plantation').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_cotton_plantation').GetName]"
+                                }
+                            }
+                        }
+                    }
+                    button = {
+                        size = { 50 50 }
+                        texture = "gfx/interface/icons/building_icons/dye_plantation.dds"
+                        onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_dye_plantation').MakeScope).End)]"
+                        onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_dye_plantation').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/tea_plantation.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_tea_plantation').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_tea_plantation').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/tobacco_plantation.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_tobacco_plantation').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_tobacco_plantation').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/opium_plantation.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_opium_plantation').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_opium_plantation').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/silk_plantation.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_silk_plantation').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_silk_plantation').GetName]"
+                                }
+                            }
+                        }
                     }
                 }
                 
@@ -305,7 +392,7 @@
                 textbox = {
                     size = { 520 10 }
                     align = left|vcenter
-                    raw_text = "광업"
+                    text = "MINE_BUILDING"
                     default_format = "#bold"
                     fontsize = 16
                 }
@@ -320,45 +407,75 @@
                         texture = "gfx/interface/icons/building_icons/coal_mine.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_coal_mine').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
-                        raw_tooltip = "석탄 광산"
-                    }
-                    button = {
-                        size = { 50 50 }
-                        texture = "gfx/interface/icons/building_icons/iron_mine.dds"
-                        onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_iron_mine').MakeScope).End)]"
-                        onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
-                        raw_tooltip = "철 광산"
-                    }
-                    button = {
-                        size = { 50 50 }
-                        texture = "gfx/interface/icons/building_icons/lead_mine.dds"
-                        onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_lead_mine').MakeScope).End)]"
-                        onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
-                        raw_tooltip = "납 광산"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_coal_mine').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/gold_mine.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_gold_mine').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
-                        raw_tooltip = "금 광산"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_gold_mine').GetName]"
+                                }
+                            }
+                        }
+                    }
+                    button = {
+                        size = { 50 50 }
+                        texture = "gfx/interface/icons/building_icons/iron_mine.dds"
+                        onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_iron_mine').MakeScope).End)]"
+                        onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_iron_mine').GetName]"
+                                }
+                            }
+                        }
+                    }
+                    button = {
+                        size = { 50 50 }
+                        texture = "gfx/interface/icons/building_icons/lead_mine.dds"
+                        onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_lead_mine').MakeScope).End)]"
+                        onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_lead_mine').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/sulfur_mine.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_sulfur_mine').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
-                        raw_tooltip = "유황 광산"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_sulfur_mine').GetName]"
+                                }
+                            }
+                        }
                     }
                 }
                 
                 divider_clean = { size = { 520 2 } }
                 
-                # 자원 채취
+                # 자원
                 textbox = {
                     size = { 520 25 }
                     align = left|vcenter
-                    raw_text = "자원 채취"
+                    text = "RESOURCE_BUILDING"
                     default_format = "#bold"
                     fontsize = 16
                 }
@@ -373,35 +490,65 @@
                         texture = "gfx/interface/icons/building_icons/logging_camp.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_logging_camp').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
-                        raw_tooltip = "벌목장"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_logging_camp').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/rubber_lodge.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_rubber_plantation').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
-                        raw_tooltip = "고무 플랜테이션"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_rubber_plantation').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/fishing_wharf.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_fishing_wharf').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
-                        raw_tooltip = "어업 부두"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_fishing_wharf').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/whaling_station.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_whaling_station').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
-                        raw_tooltip = "포경 거점"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_whaling_station').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/oil_rig.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_oil_rig').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
-                        raw_tooltip = "석유 채굴지"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_oil_rig').GetName]"
+                                }
+                            }
+                        }
                     }
                 }
                 
@@ -411,7 +558,7 @@
                 textbox = {
                     size = { 520 25 }
                     align = left|vcenter
-                    raw_text = "경공업"
+                    text = "LIGHT_INDUSTRY"
                     default_format = "#bold"
                     fontsize = 16
                 }
@@ -419,43 +566,85 @@
                 flowcontainer = {
                     direction = horizontal
                     spacing = 5
-                    parentanchor = hcenter
+                    parentanchor = left
                     
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/food_industry.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_food_industry').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_food_industry').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/textile_industry.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_textile_mills').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_textile_mills').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/furniture_manufacturies.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_furniture_manufacturies').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_furniture_manufacturies').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/paper_mills.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_paper_mills').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_paper_mills').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/glassworks.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_glassworks').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_glassworks').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/tooling_workshops.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_tooling_workshops').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_tooling_workshops').GetName]"
+                                }
+                            }
+                        }
                     }
                 }
                 
@@ -465,7 +654,7 @@
                 textbox = {
                     size = { 520 25 }
                     align = left|vcenter
-                    raw_text = "중공업"
+                    text = "HEAVY_INDUSTRY"
                     default_format = "#bold"
                     fontsize = 16
                 }
@@ -473,54 +662,115 @@
                 flowcontainer = {
                     direction = horizontal
                     spacing = 5
-                    parentanchor = hcenter
+                    parentanchor = left
                     
+
                     button = {
                         size = { 50 50 }
-                        texture = "gfx/interface/icons/building_icons/steel_mills.dds"
-                        onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_steel_mills').MakeScope).End)]"
+                        texture = "gfx/interface/icons/building_icons/vehicles_industry.dds"
+                        onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_automotive_industry').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_automotive_industry').GetName]"
+                                }
+                            }
+                        }
                     }
+
+                    button = {
+                        size = { 50 50 }
+                        texture = "gfx/interface/icons/building_icons/chemicals_industry.dds"
+                        onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_chemical_plants').MakeScope).End)]"
+                        onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_chemical_plants').GetName]"
+                                }
+                            }
+                        }
+                    }
+
+                    button = {
+                        size = { 50 50 }
+                        texture = "gfx/interface/icons/building_icons/electrics_industry.dds"
+                        onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_electrics_industry').MakeScope).End)]"
+                        onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_electrics_industry').GetName]"
+                                }
+                            }
+                        }
+                    }
+
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/explosives_factory.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_explosives_factory').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_explosives_factory').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/motor_industry.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_motor_industry').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_motor_industry').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
-                        texture = "gfx/interface/icons/building_icons/chemicals_industry.dds"
-                        onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_chemical_plants').MakeScope).End)]"
+                        texture = "gfx/interface/icons/building_icons/steel_mills.dds"
+                        onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_steel_mills').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_steel_mills').GetName]"
+                                }
+                            }
+                        }
                     }
+
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/synthetics_plants.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_synthetics_plants').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_synthetics_plants').GetName]"
+                                }
+                            }
+                        }
                     }
-                    button = {
-                        size = { 50 50 }
-                        texture = "gfx/interface/icons/building_icons/electrics_industry.dds"
-                        onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_electrics_industry').MakeScope).End)]"
-                        onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
-                    }
+
                 }
                 
                 
                 divider_clean = { size = { 520 2 } }
                 
-                # 인프라 및 기타
+                # 기반시설 및 기타
                 textbox = {
                     size = { 520 25 }
                     align = left|vcenter
-                    raw_text = "인프라 및 기타"
+                    text = "INFRA_STRUCTURE_ETC"
                     default_format = "#bold"
                     fontsize = 16
                 }
@@ -528,50 +778,100 @@
                 flowcontainer = {
                     direction = horizontal
                     spacing = 5
-                    parentanchor = hcenter
+                    parentanchor = left
 
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/building_port.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_port').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_port').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/building_railway.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_railway').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_railway').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/power_plant.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_power_plant').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_power_plant').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/arms_industry.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_arms_industry').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_arms_industry').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/artillery_foundry.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_artillery_foundry').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_artillery_foundry').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/munition_plants.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_munition_plants').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_munition_plants').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/shipyards.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_shipyards').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_shipyards').GetName]"
+                                }
+                            }
+                        }
                     }
+                    
                 }
             }
 		}
@@ -687,6 +987,7 @@ types company_attainable_building_filter_types
         }
 	}
 	
+    ### ATTAINABLE COMPANY
 	# Building Type 필터 토글
 	type building_type_att_filter_toggle = flowcontainer {
 		direction = horizontal
@@ -726,10 +1027,10 @@ types company_attainable_building_filter_types
 	# 건물 선택 그리드
 	type building_filter_att_grid = widget {
 		visible = "[GetVariableSystem.Exists('show_att_building_type_filter')]"
-		size = { 540 800 }
+		size = { 540 750 }
 		
 		scrollarea = {
-			size = { 540 800 }
+			size = { 540 750 }
 			scrollbarpolicy_horizontal = always_off
 			
 			scrollbar_vertical = {
@@ -742,9 +1043,9 @@ types company_attainable_building_filter_types
                 minimumsize = { 520 -1 }
                 
                 ## Building Type Toggle
-                #building_type_att_filter_toggle = {}
+                #building_type_filter_toggle = {}
                 #textbox = {
-                #    raw_text = "Base: [GetVariableSystem.Exists('filter_att_base_only')], Ext: [GetVariableSystem.Exists('filter_att_extension_only')]"
+                #    raw_text = "Base: [GetVariableSystem.Exists('filter_base_only')], Ext: [GetVariableSystem.Exists('filter_extension_only')]"
                 #    autoresize = yes
                 #    parentanchor = hcenter
                 #}
@@ -755,11 +1056,11 @@ types company_attainable_building_filter_types
                 textbox = {
                     size = { 520 10 }
                     align = left|vcenter
-                    raw_text = "농업"
+                    text = "AGRICULTURE"
                     default_format = "#bold"
                     fontsize = 16
                 }
-                
+
                 flowcontainer = {
                     direction = horizontal
                     spacing = 5
@@ -770,42 +1071,78 @@ types company_attainable_building_filter_types
                         texture = "gfx/interface/icons/building_icons/wheat_farm.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_wheat_farm').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
-                        raw_tooltip = "밀 농장"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_wheat_farm').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/rye_farm.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_rye_farm').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
-                        raw_tooltip = "호밀 농장"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_rye_farm').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/rice_farm.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_rice_farm').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
-                        raw_tooltip = "쌀 농장"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_rice_farm').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/maize_farm.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_maize_farm').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
-                        raw_tooltip = "옥수수 농장"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_maize_farm').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/millet_farm.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_millet_farm').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
-                        raw_tooltip = "수수 농장"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_millet_farm').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/cattle_ranch.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_livestock_ranch').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
-                        raw_tooltip = "가축 목축장"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_livestock_ranch').GetName]"
+                                }
+                            }
+                        }
                     }
                 }
                 
@@ -815,7 +1152,7 @@ types company_attainable_building_filter_types
                 textbox = {
                     size = { 520 10 }
                     align = left|vcenter
-                    raw_text = "플랜테이션"
+                    text = "PLANTATIONS"
                     default_format = "#bold"
                     fontsize = 16
                 }
@@ -824,42 +1161,111 @@ types company_attainable_building_filter_types
                     direction = horizontal
                     spacing = 5
                     parentanchor = left
-                    
+
+
+                    button = {
+                        size = { 50 50 }
+                        texture = "gfx/interface/icons/building_icons/banana_plantation.dds"
+                        onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_banana_plantation').MakeScope).End)]"
+                        onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_banana_plantation').GetName]"
+                                }
+                            }
+                        }
+                    }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/coffee_plantation.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_coffee_plantation').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_coffee_plantation').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/cotton_plantation.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_cotton_plantation').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_cotton_plantation').GetName]"
+                                }
+                            }
+                        }
+                    }
+                    button = {
+                        size = { 50 50 }
+                        texture = "gfx/interface/icons/building_icons/dye_plantation.dds"
+                        onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_dye_plantation').MakeScope).End)]"
+                        onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_dye_plantation').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/tea_plantation.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_tea_plantation').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_tea_plantation').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/tobacco_plantation.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_tobacco_plantation').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_tobacco_plantation').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/opium_plantation.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_opium_plantation').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_opium_plantation').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/silk_plantation.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_silk_plantation').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_silk_plantation').GetName]"
+                                }
+                            }
+                        }
                     }
                 }
                 
@@ -869,7 +1275,7 @@ types company_attainable_building_filter_types
                 textbox = {
                     size = { 520 10 }
                     align = left|vcenter
-                    raw_text = "광업"
+                    text = "MINE_BUILDING"
                     default_format = "#bold"
                     fontsize = 16
                 }
@@ -884,45 +1290,75 @@ types company_attainable_building_filter_types
                         texture = "gfx/interface/icons/building_icons/coal_mine.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_coal_mine').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
-                        raw_tooltip = "석탄 광산"
-                    }
-                    button = {
-                        size = { 50 50 }
-                        texture = "gfx/interface/icons/building_icons/iron_mine.dds"
-                        onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_iron_mine').MakeScope).End)]"
-                        onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
-                        raw_tooltip = "철 광산"
-                    }
-                    button = {
-                        size = { 50 50 }
-                        texture = "gfx/interface/icons/building_icons/lead_mine.dds"
-                        onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_lead_mine').MakeScope).End)]"
-                        onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
-                        raw_tooltip = "납 광산"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_coal_mine').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/gold_mine.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_gold_mine').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
-                        raw_tooltip = "금 광산"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_gold_mine').GetName]"
+                                }
+                            }
+                        }
+                    }
+                    button = {
+                        size = { 50 50 }
+                        texture = "gfx/interface/icons/building_icons/iron_mine.dds"
+                        onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_iron_mine').MakeScope).End)]"
+                        onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_iron_mine').GetName]"
+                                }
+                            }
+                        }
+                    }
+                    button = {
+                        size = { 50 50 }
+                        texture = "gfx/interface/icons/building_icons/lead_mine.dds"
+                        onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_lead_mine').MakeScope).End)]"
+                        onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_lead_mine').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/sulfur_mine.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_sulfur_mine').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
-                        raw_tooltip = "유황 광산"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_sulfur_mine').GetName]"
+                                }
+                            }
+                        }
                     }
                 }
                 
                 divider_clean = { size = { 520 2 } }
                 
-                # 자원 채취
+                # 자원
                 textbox = {
                     size = { 520 25 }
                     align = left|vcenter
-                    raw_text = "자원 채취"
+                    text = "RESOURCE_BUILDING"
                     default_format = "#bold"
                     fontsize = 16
                 }
@@ -937,35 +1373,65 @@ types company_attainable_building_filter_types
                         texture = "gfx/interface/icons/building_icons/logging_camp.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_logging_camp').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
-                        raw_tooltip = "벌목장"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_logging_camp').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/rubber_lodge.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_rubber_plantation').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
-                        raw_tooltip = "고무 플랜테이션"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_rubber_plantation').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/fishing_wharf.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_fishing_wharf').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
-                        raw_tooltip = "어업 부두"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_fishing_wharf').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/whaling_station.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_whaling_station').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
-                        raw_tooltip = "포경 거점"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_whaling_station').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/oil_rig.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_oil_rig').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
-                        raw_tooltip = "석유 채굴지"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_oil_rig').GetName]"
+                                }
+                            }
+                        }
                     }
                 }
                 
@@ -975,7 +1441,7 @@ types company_attainable_building_filter_types
                 textbox = {
                     size = { 520 25 }
                     align = left|vcenter
-                    raw_text = "경공업"
+                    text = "LIGHT_INDUSTRY"
                     default_format = "#bold"
                     fontsize = 16
                 }
@@ -983,43 +1449,85 @@ types company_attainable_building_filter_types
                 flowcontainer = {
                     direction = horizontal
                     spacing = 5
-                    parentanchor = hcenter
+                    parentanchor = left
                     
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/food_industry.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_food_industry').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_food_industry').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/textile_industry.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_textile_mills').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_textile_mills').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/furniture_manufacturies.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_furniture_manufacturies').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_furniture_manufacturies').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/paper_mills.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_paper_mills').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_paper_mills').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/glassworks.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_glassworks').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_glassworks').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/tooling_workshops.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_tooling_workshops').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_tooling_workshops').GetName]"
+                                }
+                            }
+                        }
                     }
                 }
                 
@@ -1029,7 +1537,7 @@ types company_attainable_building_filter_types
                 textbox = {
                     size = { 520 25 }
                     align = left|vcenter
-                    raw_text = "중공업"
+                    text = "HEAVY_INDUSTRY"
                     default_format = "#bold"
                     fontsize = 16
                 }
@@ -1037,54 +1545,115 @@ types company_attainable_building_filter_types
                 flowcontainer = {
                     direction = horizontal
                     spacing = 5
-                    parentanchor = hcenter
+                    parentanchor = left
                     
+
                     button = {
                         size = { 50 50 }
-                        texture = "gfx/interface/icons/building_icons/steel_mills.dds"
-                        onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_steel_mills').MakeScope).End)]"
+                        texture = "gfx/interface/icons/building_icons/vehicles_industry.dds"
+                        onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_automotive_industry').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_automotive_industry').GetName]"
+                                }
+                            }
+                        }
                     }
+
+                    button = {
+                        size = { 50 50 }
+                        texture = "gfx/interface/icons/building_icons/chemicals_industry.dds"
+                        onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_chemical_plants').MakeScope).End)]"
+                        onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_chemical_plants').GetName]"
+                                }
+                            }
+                        }
+                    }
+
+                    button = {
+                        size = { 50 50 }
+                        texture = "gfx/interface/icons/building_icons/electrics_industry.dds"
+                        onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_electrics_industry').MakeScope).End)]"
+                        onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_electrics_industry').GetName]"
+                                }
+                            }
+                        }
+                    }
+
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/explosives_factory.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_explosives_factory').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_explosives_factory').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/motor_industry.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_motor_industry').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_motor_industry').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
-                        texture = "gfx/interface/icons/building_icons/chemicals_industry.dds"
-                        onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_chemical_plants').MakeScope).End)]"
+                        texture = "gfx/interface/icons/building_icons/steel_mills.dds"
+                        onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_steel_mills').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_steel_mills').GetName]"
+                                }
+                            }
+                        }
                     }
+
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/synthetics_plants.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_synthetics_plants').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_synthetics_plants').GetName]"
+                                }
+                            }
+                        }
                     }
-                    button = {
-                        size = { 50 50 }
-                        texture = "gfx/interface/icons/building_icons/electrics_industry.dds"
-                        onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_electrics_industry').MakeScope).End)]"
-                        onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
-                    }
+
                 }
                 
                 
                 divider_clean = { size = { 520 2 } }
                 
-                # 인프라 및 기타
+                # 기반시설 및 기타
                 textbox = {
                     size = { 520 25 }
                     align = left|vcenter
-                    raw_text = "인프라 및 기타"
+                    text = "INFRA_STRUCTURE_ETC"
                     default_format = "#bold"
                     fontsize = 16
                 }
@@ -1092,50 +1661,100 @@ types company_attainable_building_filter_types
                 flowcontainer = {
                     direction = horizontal
                     spacing = 5
-                    parentanchor = hcenter
+                    parentanchor = left
 
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/building_port.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_port').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_port').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/building_railway.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_railway').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_railway').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/power_plant.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_power_plant').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_power_plant').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/arms_industry.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_arms_industry').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_arms_industry').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/artillery_foundry.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_artillery_foundry').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_artillery_foundry').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/munition_plants.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_munition_plants').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_munition_plants').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/shipyards.dds"
                         onclick = "[GetScriptedGui('com_att_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_shipyards').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_att_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_shipyards').GetName]"
+                                }
+                            }
+                        }
                     }
+                    
                 }
             }
 		}
@@ -1290,10 +1909,10 @@ types company_potential_building_filter_types
 	# 건물 선택 그리드
 	type building_filter_pot_grid = widget {
 		visible = "[GetVariableSystem.Exists('show_pot_building_type_filter')]"
-		size = { 540 800 }
+		size = { 540 750 }
 		
 		scrollarea = {
-			size = { 540 800 }
+			size = { 540 750 }
 			scrollbarpolicy_horizontal = always_off
 			
 			scrollbar_vertical = {
@@ -1305,10 +1924,10 @@ types company_potential_building_filter_types
                 spacing = 10
                 minimumsize = { 520 -1 }
                 
-                # Building Type Toggle
-                #building_type_pot_filter_toggle = {}
+                ## Building Type Toggle
+                #building_type_filter_toggle = {}
                 #textbox = {
-                #    raw_text = "Base: [GetVariableSystem.Exists('filter_pot_base_only')], Ext: [GetVariableSystem.Exists('filter_pot_extension_only')]"
+                #    raw_text = "Base: [GetVariableSystem.Exists('filter_base_only')], Ext: [GetVariableSystem.Exists('filter_extension_only')]"
                 #    autoresize = yes
                 #    parentanchor = hcenter
                 #}
@@ -1319,11 +1938,11 @@ types company_potential_building_filter_types
                 textbox = {
                     size = { 520 10 }
                     align = left|vcenter
-                    raw_text = "농업"
+                    text = "AGRICULTURE"
                     default_format = "#bold"
                     fontsize = 16
                 }
-                
+
                 flowcontainer = {
                     direction = horizontal
                     spacing = 5
@@ -1334,42 +1953,78 @@ types company_potential_building_filter_types
                         texture = "gfx/interface/icons/building_icons/wheat_farm.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_wheat_farm').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
-                        raw_tooltip = "밀 농장"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_wheat_farm').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/rye_farm.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_rye_farm').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
-                        raw_tooltip = "호밀 농장"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_rye_farm').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/rice_farm.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_rice_farm').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
-                        raw_tooltip = "쌀 농장"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_rice_farm').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/maize_farm.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_maize_farm').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
-                        raw_tooltip = "옥수수 농장"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_maize_farm').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/millet_farm.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_millet_farm').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
-                        raw_tooltip = "수수 농장"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_millet_farm').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/cattle_ranch.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_livestock_ranch').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
-                        raw_tooltip = "가축 목축장"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_livestock_ranch').GetName]"
+                                }
+                            }
+                        }
                     }
                 }
                 
@@ -1379,7 +2034,7 @@ types company_potential_building_filter_types
                 textbox = {
                     size = { 520 10 }
                     align = left|vcenter
-                    raw_text = "플랜테이션"
+                    text = "PLANTATIONS"
                     default_format = "#bold"
                     fontsize = 16
                 }
@@ -1388,42 +2043,111 @@ types company_potential_building_filter_types
                     direction = horizontal
                     spacing = 5
                     parentanchor = left
-                    
+
+
+                    button = {
+                        size = { 50 50 }
+                        texture = "gfx/interface/icons/building_icons/banana_plantation.dds"
+                        onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_banana_plantation').MakeScope).End)]"
+                        onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_banana_plantation').GetName]"
+                                }
+                            }
+                        }
+                    }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/coffee_plantation.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_coffee_plantation').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_coffee_plantation').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/cotton_plantation.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_cotton_plantation').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_cotton_plantation').GetName]"
+                                }
+                            }
+                        }
+                    }
+                    button = {
+                        size = { 50 50 }
+                        texture = "gfx/interface/icons/building_icons/dye_plantation.dds"
+                        onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_dye_plantation').MakeScope).End)]"
+                        onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_dye_plantation').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/tea_plantation.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_tea_plantation').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_tea_plantation').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/tobacco_plantation.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_tobacco_plantation').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_tobacco_plantation').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/opium_plantation.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_opium_plantation').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_opium_plantation').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/silk_plantation.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_silk_plantation').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_silk_plantation').GetName]"
+                                }
+                            }
+                        }
                     }
                 }
                 
@@ -1433,7 +2157,7 @@ types company_potential_building_filter_types
                 textbox = {
                     size = { 520 10 }
                     align = left|vcenter
-                    raw_text = "광업"
+                    text = "MINE_BUILDING"
                     default_format = "#bold"
                     fontsize = 16
                 }
@@ -1448,45 +2172,75 @@ types company_potential_building_filter_types
                         texture = "gfx/interface/icons/building_icons/coal_mine.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_coal_mine').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
-                        raw_tooltip = "석탄 광산"
-                    }
-                    button = {
-                        size = { 50 50 }
-                        texture = "gfx/interface/icons/building_icons/iron_mine.dds"
-                        onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_iron_mine').MakeScope).End)]"
-                        onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
-                        raw_tooltip = "철 광산"
-                    }
-                    button = {
-                        size = { 50 50 }
-                        texture = "gfx/interface/icons/building_icons/lead_mine.dds"
-                        onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_lead_mine').MakeScope).End)]"
-                        onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
-                        raw_tooltip = "납 광산"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_coal_mine').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/gold_mine.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_gold_mine').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
-                        raw_tooltip = "금 광산"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_gold_mine').GetName]"
+                                }
+                            }
+                        }
+                    }
+                    button = {
+                        size = { 50 50 }
+                        texture = "gfx/interface/icons/building_icons/iron_mine.dds"
+                        onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_iron_mine').MakeScope).End)]"
+                        onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_iron_mine').GetName]"
+                                }
+                            }
+                        }
+                    }
+                    button = {
+                        size = { 50 50 }
+                        texture = "gfx/interface/icons/building_icons/lead_mine.dds"
+                        onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_lead_mine').MakeScope).End)]"
+                        onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_lead_mine').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/sulfur_mine.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_sulfur_mine').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
-                        raw_tooltip = "유황 광산"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_sulfur_mine').GetName]"
+                                }
+                            }
+                        }
                     }
                 }
                 
                 divider_clean = { size = { 520 2 } }
                 
-                # 자원 채취
+                # 자원
                 textbox = {
                     size = { 520 25 }
                     align = left|vcenter
-                    raw_text = "자원 채취"
+                    text = "RESOURCE_BUILDING"
                     default_format = "#bold"
                     fontsize = 16
                 }
@@ -1501,35 +2255,65 @@ types company_potential_building_filter_types
                         texture = "gfx/interface/icons/building_icons/logging_camp.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_logging_camp').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
-                        raw_tooltip = "벌목장"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_logging_camp').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/rubber_lodge.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_rubber_plantation').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
-                        raw_tooltip = "고무 플랜테이션"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_rubber_plantation').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/fishing_wharf.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_fishing_wharf').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
-                        raw_tooltip = "어업 부두"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_fishing_wharf').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/whaling_station.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_whaling_station').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
-                        raw_tooltip = "포경 거점"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_whaling_station').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/oil_rig.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_oil_rig').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
-                        raw_tooltip = "석유 채굴지"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_oil_rig').GetName]"
+                                }
+                            }
+                        }
                     }
                 }
                 
@@ -1539,7 +2323,7 @@ types company_potential_building_filter_types
                 textbox = {
                     size = { 520 25 }
                     align = left|vcenter
-                    raw_text = "경공업"
+                    text = "LIGHT_INDUSTRY"
                     default_format = "#bold"
                     fontsize = 16
                 }
@@ -1547,43 +2331,85 @@ types company_potential_building_filter_types
                 flowcontainer = {
                     direction = horizontal
                     spacing = 5
-                    parentanchor = hcenter
+                    parentanchor = left
                     
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/food_industry.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_food_industry').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_food_industry').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/textile_industry.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_textile_mills').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_textile_mills').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/furniture_manufacturies.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_furniture_manufacturies').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_furniture_manufacturies').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/paper_mills.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_paper_mills').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_paper_mills').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/glassworks.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_glassworks').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_glassworks').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/tooling_workshops.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_tooling_workshops').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_tooling_workshops').GetName]"
+                                }
+                            }
+                        }
                     }
                 }
                 
@@ -1593,7 +2419,7 @@ types company_potential_building_filter_types
                 textbox = {
                     size = { 520 25 }
                     align = left|vcenter
-                    raw_text = "중공업"
+                    text = "HEAVY_INDUSTRY"
                     default_format = "#bold"
                     fontsize = 16
                 }
@@ -1601,54 +2427,115 @@ types company_potential_building_filter_types
                 flowcontainer = {
                     direction = horizontal
                     spacing = 5
-                    parentanchor = hcenter
+                    parentanchor = left
                     
+
                     button = {
                         size = { 50 50 }
-                        texture = "gfx/interface/icons/building_icons/steel_mills.dds"
-                        onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_steel_mills').MakeScope).End)]"
+                        texture = "gfx/interface/icons/building_icons/vehicles_industry.dds"
+                        onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_automotive_industry').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_automotive_industry').GetName]"
+                                }
+                            }
+                        }
                     }
+
+                    button = {
+                        size = { 50 50 }
+                        texture = "gfx/interface/icons/building_icons/chemicals_industry.dds"
+                        onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_chemical_plants').MakeScope).End)]"
+                        onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_chemical_plants').GetName]"
+                                }
+                            }
+                        }
+                    }
+
+                    button = {
+                        size = { 50 50 }
+                        texture = "gfx/interface/icons/building_icons/electrics_industry.dds"
+                        onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_electrics_industry').MakeScope).End)]"
+                        onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_electrics_industry').GetName]"
+                                }
+                            }
+                        }
+                    }
+
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/explosives_factory.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_explosives_factory').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_explosives_factory').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/motor_industry.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_motor_industry').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_motor_industry').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
-                        texture = "gfx/interface/icons/building_icons/chemicals_industry.dds"
-                        onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_chemical_plants').MakeScope).End)]"
+                        texture = "gfx/interface/icons/building_icons/steel_mills.dds"
+                        onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_steel_mills').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_steel_mills').GetName]"
+                                }
+                            }
+                        }
                     }
+
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/synthetics_plants.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_synthetics_plants').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_synthetics_plants').GetName]"
+                                }
+                            }
+                        }
                     }
-                    button = {
-                        size = { 50 50 }
-                        texture = "gfx/interface/icons/building_icons/electrics_industry.dds"
-                        onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_electrics_industry').MakeScope).End)]"
-                        onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
-                    }
+
                 }
                 
                 
                 divider_clean = { size = { 520 2 } }
                 
-                # 인프라 및 기타
+                # 기반시설 및 기타
                 textbox = {
                     size = { 520 25 }
                     align = left|vcenter
-                    raw_text = "인프라 및 기타"
+                    text = "INFRA_STRUCTURE_ETC"
                     default_format = "#bold"
                     fontsize = 16
                 }
@@ -1656,50 +2543,100 @@ types company_potential_building_filter_types
                 flowcontainer = {
                     direction = horizontal
                     spacing = 5
-                    parentanchor = hcenter
+                    parentanchor = left
 
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/building_port.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_port').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_port').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/building_railway.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_railway').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_railway').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/power_plant.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_power_plant').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_power_plant').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/arms_industry.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_arms_industry').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_arms_industry').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/artillery_foundry.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_artillery_foundry').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_artillery_foundry').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/munition_plants.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_munition_plants').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_munition_plants').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/shipyards.dds"
                         onclick = "[GetScriptedGui('com_pot_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_shipyards').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_pot_building_type_filter')]"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_shipyards').GetName]"
+                                }
+                            }
+                        }
                     }
+                    
                 }
             }
 		}
