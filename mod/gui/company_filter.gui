@@ -16,7 +16,7 @@ types company_building_filter_types
 			margin_left = 10
 			
 			textbox = {
-				raw_text = "건물 타입으로 필터"
+				text = "FILTER_BY_BUILDING_TYPE"
 				autoresize = yes
 				parentanchor = vcenter
 			}
@@ -39,7 +39,7 @@ types company_building_filter_types
 				using = default_button
 				raw_text = "X"
 				onclick = "[GetScriptedGui('com_clear_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-				raw_tooltip = "필터 초기화"
+				tooltip = "CLEAR_FILTER"
 				parentanchor = vcenter
 			}
 		}
@@ -56,7 +56,7 @@ types company_building_filter_types
 			size = { 250 40 }
 			using = default_button
             using = back_button_sound
-			raw_text = "기본 산업만"
+			text = "FILTER_BUTTON_BASE"
 			onclick = "[GetVariableSystem.Toggle('filter_base_only')]"
 			onclick = "[GetVariableSystem.Clear('filter_extension_only')]"
 			
@@ -70,7 +70,7 @@ types company_building_filter_types
 			size = { 250 40 }
 			using = default_button
             using = back_button_sound
-			raw_text = "잠재적 산업만"
+			text = "FILTER_BUTTON_POTENTIAL"
 			onclick = "[GetVariableSystem.Toggle('filter_extension_only')]"
 			onclick = "[GetVariableSystem.Clear('filter_base_only')]"
 			
@@ -117,7 +117,7 @@ types company_building_filter_types
                     default_format = "#bold"
                     fontsize = 16
                 }
-                
+
                 flowcontainer = {
                     direction = horizontal
                     spacing = 5
@@ -128,21 +128,39 @@ types company_building_filter_types
                         texture = "gfx/interface/icons/building_icons/wheat_farm.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_wheat_farm').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
-                        raw_tooltip = "밀 농장"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_wheat_farm').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/rye_farm.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_rye_farm').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
-                        raw_tooltip = "호밀 농장"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_rye_farm').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
                         texture = "gfx/interface/icons/building_icons/rice_farm.dds"
                         onclick = "[GetScriptedGui('com_set_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('building_type', GetBuildingType('building_rice_farm').MakeScope).End)]"
                         onclick = "[GetVariableSystem.Clear('show_building_type_filter')]"
-                        raw_tooltip = "쌀 농장"
+                        tooltipwidget = {
+                            RegularTooltip = {
+                                blockoverride "text" {
+                                    text = "[GetBuildingType('building_rice_farm').GetName]"
+                                }
+                            }
+                        }
                     }
                     button = {
                         size = { 50 50 }
@@ -516,7 +534,7 @@ types company_attainable_building_filter_types
 			margin_left = 10
 			
 			textbox = {
-				raw_text = "건물 타입으로 필터"
+				text = "FILTER_BY_BUILDING_TYPE"
 				autoresize = yes
 				parentanchor = vcenter
 			}
@@ -539,7 +557,7 @@ types company_attainable_building_filter_types
 				using = default_button
 				raw_text = "X"
 				onclick = "[GetScriptedGui('com_att_clear_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-				raw_tooltip = "필터 초기화"
+				tooltip = "CLEAR_FILTER"
 				parentanchor = vcenter
 			}
 		}
@@ -556,7 +574,7 @@ types company_attainable_building_filter_types
 			size = { 250 40 }
 			using = default_button
             using = back_button_sound
-			raw_text = "기본 산업만"
+			text = "FILTER_BUTTON_BASE"
 			onclick = "[GetVariableSystem.Toggle('filter_att_base_only')]"
 			onclick = "[GetVariableSystem.Clear('filter_att_extension_only')]"
 			
@@ -570,7 +588,7 @@ types company_attainable_building_filter_types
 			size = { 250 40 }
 			using = default_button
             using = back_button_sound
-			raw_text = "잠재적 산업만"
+			text = "FILTER_BUTTON_POTENTIAL"
 			onclick = "[GetVariableSystem.Toggle('filter_att_extension_only')]"
 			onclick = "[GetVariableSystem.Clear('filter_att_base_only')]"
 			
@@ -1017,7 +1035,7 @@ types company_potential_building_filter_types
 			margin_left = 10
 			
 			textbox = {
-				raw_text = "건물 타입으로 필터"
+				text = "FILTER_BY_BUILDING_TYPE"
 				autoresize = yes
 				parentanchor = vcenter
 			}
@@ -1040,7 +1058,7 @@ types company_potential_building_filter_types
 				using = default_button
 				raw_text = "X"
 				onclick = "[GetScriptedGui('com_pot_clear_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-				raw_tooltip = "필터 초기화"
+				tooltip = "CLEAR_FILTER"
 				parentanchor = vcenter
 			}
 		}
@@ -1057,7 +1075,7 @@ types company_potential_building_filter_types
 			size = { 250 40 }
 			using = default_button
             using = back_button_sound
-			raw_text = "기본 산업만"
+			text = "FILTER_BUTTON_BASE"
 			onclick = "[GetVariableSystem.Toggle('filter_pot_base_only')]"
 			onclick = "[GetVariableSystem.Clear('filter_pot_extension_only')]"
 			
@@ -1071,7 +1089,7 @@ types company_potential_building_filter_types
 			size = { 250 40 }
 			using = default_button
             using = back_button_sound
-			raw_text = "잠재적 산업만"
+			text = "FILTER_BUTTON_POTENTIAL"
 			onclick = "[GetVariableSystem.Toggle('filter_pot_extension_only')]"
 			onclick = "[GetVariableSystem.Clear('filter_pot_base_only')]"
 			

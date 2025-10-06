@@ -515,9 +515,9 @@ types companies_panel
                                         
                                         icon = { size = { 35 35 } texture = "[CompanyType.GetIcon]" parentanchor = vcenter }
                                         textbox = { raw_text = "[CompanyType.GetName]" autoresize = yes default_format = "#bold" fontsize = 14 parentanchor = vcenter max_width = 250 elide = right }
-                                        textbox = { raw_text = "(기본산업)" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#P" }
+                                        textbox = { text = "BASE_INDUSTRIES" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#P" }
                                         expand = {}
-                                        button = { size = { 100 30 } using = default_button raw_text = "수립" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = vcenter }
+                                        button = { size = { 100 30 } using = default_button text = "ESTABLISH_COMPANY" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = vcenter }
                                     }
                                 }
                             }
@@ -533,7 +533,7 @@ types companies_panel
                         spacing = 0
                         margin_top = 5
                         margin_bottom = 5
-                        
+
                         item = {
                             container = {
                                 datamodel = "[CompanyType.GetPotentialBuildingTypes(GetPlayer.Self)]"
@@ -549,9 +549,9 @@ types companies_panel
                                         
                                         icon = { size = { 35 35 } texture = "[CompanyType.GetIcon]" parentanchor = vcenter }
                                         textbox = { raw_text = "[CompanyType.GetName]" autoresize = yes default_format = "#bold" fontsize = 14 parentanchor = vcenter max_width = 250 elide = right }
-                                        textbox = { raw_text = "(잠재적산업)" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#high" }
+                                        textbox = { text = "POTENTIAL_INDUSTRIES" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#high" }
                                         expand = {}
-                                        button = { size = { 100 30 } using = default_button raw_text = "수립" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = vcenter }
+                                        button = { size = { 100 30 } using = default_button text = "ESTABLISH_COMPANY" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = vcenter }
                                     }
                                 }
                             }
@@ -640,9 +640,9 @@ types companies_panel
                                             
                                             icon = { size = { 35 35 } texture = "[CompanyType.GetIcon]" parentanchor = vcenter }
                                             textbox = { raw_text = "[CompanyType.GetName]" autoresize = yes default_format = "#bold" fontsize = 14 parentanchor = vcenter max_width = 250 elide = right }
-                                            textbox = { raw_text = "(기본산업)" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#P" }
+                                            textbox = { text = "BASE_INDUSTRIES" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#P" }
                                             expand = {}
-                                            button = { size = { 100 30 } using = default_button raw_text = "수립" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = vcenter }
+                                            button = { size = { 100 30 } using = default_button text = "ESTABLISH_COMPANY" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = vcenter }
                                         }
                                     }
                                 }
@@ -672,9 +672,9 @@ types companies_panel
                                             
                                             icon = { size = { 35 35 } texture = "[CompanyType.GetIcon]" parentanchor = vcenter }
                                             textbox = { raw_text = "[CompanyType.GetName]" autoresize = yes default_format = "#bold" fontsize = 14 parentanchor = vcenter max_width = 250 elide = right }
-                                            textbox = { raw_text = "(잠재적산업)" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#high" }
+                                            textbox = { text = "POTENTIAL_INDUSTRIES" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#high" }
                                             expand = {}
-                                            button = { size = { 100 30 } using = default_button raw_text = "수립" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = vcenter }
+                                            button = { size = { 100 30 } using = default_button text = "ESTABLISH_COMPANY" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = vcenter }
                                         }
                                     }
                                 }
@@ -765,9 +765,9 @@ types companies_panel
                                             
                                             icon = { size = { 35 35 } texture = "[CompanyType.GetIcon]" parentanchor = vcenter }
                                             textbox = { raw_text = "[CompanyType.GetName]" autoresize = yes default_format = "#bold" fontsize = 14 parentanchor = vcenter max_width = 250 elide = right }
-                                            textbox = { raw_text = "(기본산업)" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#P" }
+                                            textbox = { text = "BASE_INDUSTRIES" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#P" }
                                             expand = {}
-                                            button = { size = { 100 30 } using = default_button raw_text = "수립" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = vcenter }
+                                            button = { size = { 100 30 } using = default_button text = "ESTABLISH_COMPANY" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = vcenter }
                                         }
                                     }
                                 }
@@ -797,9 +797,9 @@ types companies_panel
                                             
                                             icon = { size = { 35 35 } texture = "[CompanyType.GetIcon]" parentanchor = vcenter }
                                             textbox = { raw_text = "[CompanyType.GetName]" autoresize = yes default_format = "#bold" fontsize = 14 parentanchor = vcenter max_width = 250 elide = right }
-                                            textbox = { raw_text = "(잠재적산업)" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#high" }
+                                            textbox = { text = "POTENTIAL_INDUSTRIES" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#high" }
                                             expand = {}
-                                            button = { size = { 100 30 } using = default_button raw_text = "수립" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = vcenter }
+                                            button = { size = { 100 30 } using = default_button text = "ESTABLISH_COMPANY" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = vcenter }
                                         }
                                     }
                                 }
