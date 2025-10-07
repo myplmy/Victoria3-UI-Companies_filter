@@ -486,7 +486,9 @@ types companies_panel
                         spacing = 5
 
                         item = {
-                            potential_company_item = {}
+                            potential_company_item = {
+                                visible = "[And(Or(Not(GetVariableSystem.Exists('filter_flavored_only')), CompanyType.IsFlavoredCompany), Or(Not(GetVariableSystem.Exists('filter_prestige_only')), CompanyType.CanProducePrestigeGoods))]"
+                            }
                         }
                     }
                     
@@ -617,7 +619,9 @@ types companies_panel
                             spacing = 5
 
                             item = {
-                                potential_company_item = {}
+                                potential_company_item = {
+                                    visible = "[And(Or(Not(GetVariableSystem.Exists('filter_att_flavored_only')), CompanyType.IsFlavoredCompany), Or(Not(GetVariableSystem.Exists('filter_att_prestige_only')), CompanyType.CanProducePrestigeGoods))]"
+                                }
                             }
                         }
                         
@@ -746,7 +750,9 @@ types companies_panel
                             spacing = 5
 
                             item = {
-                                potential_company_item = {}
+                                potential_company_item = {
+                                    visible = "[And(Or(Not(GetVariableSystem.Exists('filter_pot_flavored_only')), CompanyType.IsFlavoredCompany), Or(Not(GetVariableSystem.Exists('filter_pot_prestige_only')), CompanyType.CanProducePrestigeGoods))]"
+                                }
                             }
                         }
                         

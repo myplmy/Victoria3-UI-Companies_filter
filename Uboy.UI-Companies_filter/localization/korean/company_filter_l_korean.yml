@@ -37,3 +37,12 @@ RESOURCE_BUILDING: "자원"
 LIGHT_INDUSTRY: "경공업"
 HEAVY_INDUSTRY: "중공업"
 INFRA_STRUCTURE_ETC: "기반시설 및 기타"
+
+
+COM_FILTER_FLAVORED: "역사적 기업만"
+COM_FILTER_FLAVORED_TOOLTIP: "역사적 기업만 표시"
+COM_FILTER_PRESTIGE: "명품 생산"
+COM_FILTER_PRESTIGE_TOOLTIP: "명품을 생산할 수 있는 기업만 표시"
+COM_FILTER_FLAVORED_DESC: "역사적인 기업만 표시 (flavored_company = yes)"
+COM_FILTER_PRESTIGE_DESC: "명품 생산 가능 기업만 표시 (possible_prestige_goods 정의됨)"
+COM_FILTER_BOTH_ACTIVE: "역사적 기업 및 명품 생산 필터가 모두 활성화됨"

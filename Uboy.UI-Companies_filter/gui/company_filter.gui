@@ -2,7 +2,7 @@
 {
 	# 필터 메인 버튼
 	type building_filter_button = button {
-		size = { 540 70 }
+		size = { 540 120 }
 		using = default_button
 		onclick = "[GetVariableSystem.Toggle('show_building_type_filter')]"
 		flowcontainer = {
@@ -62,11 +62,10 @@
                         align = center|vcenter
                         parentanchor = center
                         default_format = "#P"
-                        margin = { 10 0 }  # 좌우 여백 늘림
+                        margin = { 10 0 }
                     }
                 }
                 
-
                 container = {
                     button = {
                         size = { 100% 26 }
@@ -100,6 +99,65 @@
                     onclick = "[GetScriptedGui('com_clear_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
                     tooltip = "COM_CLEAR_FILTER"
                     parentanchor = vcenter
+                }
+            }
+            
+            ### NEW: Additional Filters Row
+            flowcontainer = {
+                direction = horizontal
+                spacing = 10
+                parentanchor = left
+                margin_left = 10
+                margin_bottom = 5
+                
+                # Flavored Company 필터
+                container = {
+                    button = {
+                        size = { 140 26 }
+                        using = default_button
+                        using = back_button_sound
+                        onclick = "[GetVariableSystem.Toggle('filter_flavored_only')]"
+                        down = "[GetVariableSystem.Exists('filter_flavored_only')]"
+                        
+                        background = {
+                            visible = "[GetVariableSystem.Exists('filter_flavored_only')]"
+                            using = entry_bg
+                        }
+                    }
+                    
+                    textbox = {
+                        text = "COM_FILTER_FLAVORED"
+                        autoresize = yes
+                        align = center|vcenter
+                        parentanchor = center
+                        default_format = "#variable"
+                        margin = { 10 0 }
+                    }
+                }
+                
+                # Prestige Goods 필터
+                container = {
+                    button = {
+                        size = { 140 26 }
+                        using = default_button
+                        using = back_button_sound
+                        onclick = "[GetVariableSystem.Toggle('filter_prestige_only')]"
+                        down = "[GetVariableSystem.Exists('filter_prestige_only')]"
+                        
+                        background = {
+                            visible = "[GetVariableSystem.Exists('filter_prestige_only')]"
+                            using = entry_bg
+                        }
+                    }
+                    
+                    textbox = {
+                        text = "COM_FILTER_PRESTIGE"
+                        autoresize = yes
+                        align = center|vcenter
+                        parentanchor = center
+                        default_format = "#variable"
+                        margin = { 10 0 }
+                    }
                 }
             }
         }
@@ -898,7 +956,7 @@ types company_attainable_building_filter_types
 {
 	# 필터 메인 버튼
 	type building_filter_att_button = button {
-		size = { 540 70 }
+		size = { 540 120 }
 		using = default_button
 		onclick = "[GetVariableSystem.Toggle('show_att_building_type_filter')]"
 		
@@ -959,11 +1017,10 @@ types company_attainable_building_filter_types
                         align = center|vcenter
                         parentanchor = center
                         default_format = "#P"
-                        margin = { 10 0 }  # 좌우 여백 늘림
+                        margin = { 10 0 }
                     }
                 }
                 
-
                 container = {
                     button = {
                         size = { 100% 26 }
@@ -997,6 +1054,63 @@ types company_attainable_building_filter_types
                     onclick = "[GetScriptedGui('com_att_clear_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
                     tooltip = "COM_CLEAR_FILTER"
                     parentanchor = vcenter
+                }
+            }
+            
+            ### NEW: Additional Filters for Attainable
+            flowcontainer = {
+                direction = horizontal
+                spacing = 10
+                parentanchor = left
+                margin_left = 10
+                margin_bottom = 5
+                
+                container = {
+                    button = {
+                        size = { 140 26 }
+                        using = default_button
+                        using = back_button_sound
+                        onclick = "[GetVariableSystem.Toggle('filter_att_flavored_only')]"
+                        down = "[GetVariableSystem.Exists('filter_att_flavored_only')]"
+                        
+                        background = {
+                            visible = "[GetVariableSystem.Exists('filter_att_flavored_only')]"
+                            using = entry_bg
+                        }
+                    }
+                    
+                    textbox = {
+                        text = "COM_FILTER_FLAVORED"
+                        autoresize = yes
+                        align = center|vcenter
+                        parentanchor = center
+                        default_format = "#variable"
+                        margin = { 10 0 }
+                    }
+                }
+                
+                container = {
+                    button = {
+                        size = { 140 26 }
+                        using = default_button
+                        using = back_button_sound
+                        onclick = "[GetVariableSystem.Toggle('filter_att_prestige_only')]"
+                        down = "[GetVariableSystem.Exists('filter_att_prestige_only')]"
+                        
+                        background = {
+                            visible = "[GetVariableSystem.Exists('filter_att_prestige_only')]"
+                            using = entry_bg
+                        }
+                    }
+                    
+                    textbox = {
+                        text = "COM_FILTER_PRESTIGE"
+                        autoresize = yes
+                        align = center|vcenter
+                        parentanchor = center
+                        default_format = "#variable"
+                        margin = { 10 0 }
+                    }
                 }
             }
         }
@@ -1796,10 +1910,10 @@ types company_potential_building_filter_types
 {
 	# 필터 메인 버튼
 	type building_filter_pot_button = button {
-		size = { 540 70 }
+		size = { 540 120 }
 		using = default_button
 		onclick = "[GetVariableSystem.Toggle('show_pot_building_type_filter')]"
-
+		
 		flowcontainer = {
             direction = vertical
             spacing = 5
@@ -1857,11 +1971,10 @@ types company_potential_building_filter_types
                         align = center|vcenter
                         parentanchor = center
                         default_format = "#P"
-                        margin = { 10 0 }  # 좌우 여백 늘림
+                        margin = { 10 0 }
                     }
                 }
                 
-
                 container = {
                     button = {
                         size = { 100% 26 }
@@ -1895,6 +2008,63 @@ types company_potential_building_filter_types
                     onclick = "[GetScriptedGui('com_pot_clear_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
                     tooltip = "COM_CLEAR_FILTER"
                     parentanchor = vcenter
+                }
+            }
+            
+            ### NEW: Additional Filters for Potential
+            flowcontainer = {
+                direction = horizontal
+                spacing = 10
+                parentanchor = left
+                margin_left = 10
+                margin_bottom = 5
+                
+                container = {
+                    button = {
+                        size = { 140 26 }
+                        using = default_button
+                        using = back_button_sound
+                        onclick = "[GetVariableSystem.Toggle('filter_pot_flavored_only')]"
+                        down = "[GetVariableSystem.Exists('filter_pot_flavored_only')]"
+                        
+                        background = {
+                            visible = "[GetVariableSystem.Exists('filter_pot_flavored_only')]"
+                            using = entry_bg
+                        }
+                    }
+                    
+                    textbox = {
+                        text = "COM_FILTER_FLAVORED"
+                        autoresize = yes
+                        align = center|vcenter
+                        parentanchor = center
+                        default_format = "#variable"
+                        margin = { 10 0 }
+                    }
+                }
+                
+                container = {
+                    button = {
+                        size = { 140 26 }
+                        using = default_button
+                        using = back_button_sound
+                        onclick = "[GetVariableSystem.Toggle('filter_pot_prestige_only')]"
+                        down = "[GetVariableSystem.Exists('filter_pot_prestige_only')]"
+                        
+                        background = {
+                            visible = "[GetVariableSystem.Exists('filter_pot_prestige_only')]"
+                            using = entry_bg
+                        }
+                    }
+                    
+                    textbox = {
+                        text = "COM_FILTER_PRESTIGE"
+                        autoresize = yes
+                        align = center|vcenter
+                        parentanchor = center
+                        default_format = "#variable"
+                        margin = { 10 0 }
+                    }
                 }
             }
         }
