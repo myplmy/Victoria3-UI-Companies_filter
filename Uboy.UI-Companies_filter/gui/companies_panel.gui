@@ -508,7 +508,7 @@ types companies_panel
                                 
                                 item = {
                                     flowcontainer = {
-                                        visible = "[And(ObjectsEqual(BuildingType.MakeScope, GetPlayer.MakeScope.Var('com_filter_building').GetBuildingType.MakeScope), Or(Not(GetVariableSystem.Exists('filter_extension_only')), GetVariableSystem.Exists('filter_base_only')))]"
+                                        visible = "[And(And(ObjectsEqual(BuildingType.MakeScope, GetPlayer.MakeScope.Var('com_filter_building').GetBuildingType.MakeScope), Or(Not(GetVariableSystem.Exists('filter_flavored_only')), CompanyType.IsFlavoredCompany)), Or(Not(GetVariableSystem.Exists('filter_prestige_only')), CompanyType.CanProducePrestigeGoods))]"
                                         direction = horizontal
                                         spacing = 8
                                         minimumsize = { 520 -1 }
@@ -544,7 +544,7 @@ types companies_panel
                                 
                                 item = {
                                     flowcontainer = {
-                                        visible = "[ObjectsEqual(BuildingType.MakeScope, GetPlayer.MakeScope.Var('com_filter_building').GetBuildingType.MakeScope)]"
+                                        visible = "[And(And(ObjectsEqual(BuildingType.MakeScope, GetPlayer.MakeScope.Var('com_filter_building').GetBuildingType.MakeScope), Or(Not(GetVariableSystem.Exists('filter_flavored_only')), CompanyType.IsFlavoredCompany)), Or(Not(GetVariableSystem.Exists('filter_prestige_only')), CompanyType.CanProducePrestigeGoods))]"
                                         direction = horizontal
                                         spacing = 8
                                         minimumsize = { 520 -1 }
@@ -639,7 +639,7 @@ types companies_panel
                                     
                                     item = {
                                         flowcontainer = {
-                                            visible = "[And(ObjectsEqual(BuildingType.MakeScope, GetPlayer.MakeScope.Var('com_att_filter_building').GetBuildingType.MakeScope), Or(Not(GetVariableSystem.Exists('filter_att_extension_only')), GetVariableSystem.Exists('filter_att_base_only')))]"
+                                            visible = "[And(And(ObjectsEqual(BuildingType.MakeScope, GetPlayer.MakeScope.Var('com_att_filter_building').GetBuildingType.MakeScope), Or(Not(GetVariableSystem.Exists('filter_att_flavored_only')), CompanyType.IsFlavoredCompany)), Or(Not(GetVariableSystem.Exists('filter_att_prestige_only')), CompanyType.CanProducePrestigeGoods))]"
                                             direction = horizontal
                                             spacing = 8
                                             minimumsize = { 520 -1 }
@@ -673,7 +673,7 @@ types companies_panel
                                     
                                     item = {
                                         flowcontainer = {
-                                            visible = "[ObjectsEqual(BuildingType.MakeScope, GetPlayer.MakeScope.Var('com_att_filter_building').GetBuildingType.MakeScope)]"
+                                            visible = "[And(And(ObjectsEqual(BuildingType.MakeScope, GetPlayer.MakeScope.Var('com_att_filter_building').GetBuildingType.MakeScope), Or(Not(GetVariableSystem.Exists('filter_att_flavored_only')), CompanyType.IsFlavoredCompany)), Or(Not(GetVariableSystem.Exists('filter_att_prestige_only')), CompanyType.CanProducePrestigeGoods))]"
                                             direction = horizontal
                                             spacing = 8
                                             minimumsize = { 520 -1 }
@@ -770,7 +770,7 @@ types companies_panel
                                     
                                     item = {
                                         flowcontainer = {
-                                            visible = "[And(ObjectsEqual(BuildingType.MakeScope, GetPlayer.MakeScope.Var('com_pot_filter_building').GetBuildingType.MakeScope), Or(Not(GetVariableSystem.Exists('filter_pot_extension_only')), GetVariableSystem.Exists('filter_pot_base_only')))]"
+                                            visible = "[And(And(ObjectsEqual(BuildingType.MakeScope, GetPlayer.MakeScope.Var('com_pot_filter_building').GetBuildingType.MakeScope), Or(Not(GetVariableSystem.Exists('filter_pot_flavored_only')), CompanyType.IsFlavoredCompany)), Or(Not(GetVariableSystem.Exists('filter_pot_prestige_only')), CompanyType.CanProducePrestigeGoods))]"
                                             direction = horizontal
                                             spacing = 8
                                             minimumsize = { 520 -1 }
@@ -804,7 +804,7 @@ types companies_panel
                                     
                                     item = {
                                         flowcontainer = {
-                                            visible = "[ObjectsEqual(BuildingType.MakeScope, GetPlayer.MakeScope.Var('com_pot_filter_building').GetBuildingType.MakeScope)]"
+                                            visible = "[And(And(ObjectsEqual(BuildingType.MakeScope, GetPlayer.MakeScope.Var('com_pot_filter_building').GetBuildingType.MakeScope), Or(Not(GetVariableSystem.Exists('filter_pot_flavored_only')), CompanyType.IsFlavoredCompany)), Or(Not(GetVariableSystem.Exists('filter_pot_prestige_only')), CompanyType.CanProducePrestigeGoods))]"
                                             direction = horizontal
                                             spacing = 8
                                             minimumsize = { 520 -1 }
