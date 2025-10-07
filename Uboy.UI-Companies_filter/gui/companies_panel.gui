@@ -515,7 +515,7 @@ types companies_panel
                                         
                                         icon = { size = { 35 35 } texture = "[CompanyType.GetIcon]" parentanchor = vcenter }
                                         textbox = { raw_text = "[CompanyType.GetName]" autoresize = yes default_format = "#bold" fontsize = 14 parentanchor = vcenter max_width = 250 elide = right }
-                                        textbox = { text = "BASE_INDUSTRIES" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#P" }
+                                        textbox = { text = "COM_BASE_INDUSTRIES" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#P" }
                                         expand = {}
                                         button = { size = { 100 30 } using = default_button text = "ESTABLISH_COMPANY" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = vcenter 
                                             tooltip = "CREATE_COMPANY_DESC"
@@ -551,7 +551,7 @@ types companies_panel
                                         
                                         icon = { size = { 35 35 } texture = "[CompanyType.GetIcon]" parentanchor = vcenter }
                                         textbox = { raw_text = "[CompanyType.GetName]" autoresize = yes default_format = "#bold" fontsize = 14 parentanchor = vcenter max_width = 250 elide = right }
-                                        textbox = { text = "POTENTIAL_INDUSTRIES" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#high" }
+                                        textbox = { text = "COM_POTENTIAL_INDUSTRIES" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#high" }
                                         expand = {}
                                         button = { size = { 100 30 } using = default_button text = "ESTABLISH_COMPANY" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = vcenter 
                                             tooltip = "CREATE_COMPANY_DESC"
@@ -644,7 +644,7 @@ types companies_panel
                                             
                                             icon = { size = { 35 35 } texture = "[CompanyType.GetIcon]" parentanchor = vcenter }
                                             textbox = { raw_text = "[CompanyType.GetName]" autoresize = yes default_format = "#bold" fontsize = 14 parentanchor = vcenter max_width = 250 elide = right }
-                                            textbox = { text = "BASE_INDUSTRIES" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#P" }
+                                            textbox = { text = "COM_BASE_INDUSTRIES" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#P" }
                                             expand = {}
                                             button = { size = { 100 30 } using = default_button text = "ESTABLISH_COMPANY" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = vcenter 
                                             tooltip = "CREATE_COMPANY_DESC"
@@ -678,7 +678,7 @@ types companies_panel
                                             
                                             icon = { size = { 35 35 } texture = "[CompanyType.GetIcon]" parentanchor = vcenter }
                                             textbox = { raw_text = "[CompanyType.GetName]" autoresize = yes default_format = "#bold" fontsize = 14 parentanchor = vcenter max_width = 250 elide = right }
-                                            textbox = { text = "POTENTIAL_INDUSTRIES" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#high" }
+                                            textbox = { text = "COM_POTENTIAL_INDUSTRIES" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#high" }
                                             expand = {}
                                             button = { size = { 100 30 } using = default_button text = "ESTABLISH_COMPANY" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = vcenter 
                                             tooltip = "CREATE_COMPANY_DESC"
@@ -773,7 +773,7 @@ types companies_panel
                                             
                                             icon = { size = { 35 35 } texture = "[CompanyType.GetIcon]" parentanchor = vcenter }
                                             textbox = { raw_text = "[CompanyType.GetName]" autoresize = yes default_format = "#bold" fontsize = 14 parentanchor = vcenter max_width = 250 elide = right }
-                                            textbox = { text = "BASE_INDUSTRIES" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#P" }
+                                            textbox = { text = "COM_BASE_INDUSTRIES" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#P" }
                                             expand = {}
                                             button = { size = { 100 30 } using = default_button text = "ESTABLISH_COMPANY" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = vcenter 
                                             tooltip = "CREATE_COMPANY_DESC"
@@ -807,7 +807,7 @@ types companies_panel
                                             
                                             icon = { size = { 35 35 } texture = "[CompanyType.GetIcon]" parentanchor = vcenter }
                                             textbox = { raw_text = "[CompanyType.GetName]" autoresize = yes default_format = "#bold" fontsize = 14 parentanchor = vcenter max_width = 250 elide = right }
-                                            textbox = { text = "POTENTIAL_INDUSTRIES" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#high" }
+                                            textbox = { text = "COM_POTENTIAL_INDUSTRIES" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#high" }
                                             expand = {}
                                             button = { size = { 100 30 } using = default_button text = "ESTABLISH_COMPANY" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = vcenter 
                                             tooltip = "CREATE_COMPANY_DESC"

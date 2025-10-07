@@ -14,7 +14,7 @@
                 parentanchor = vcenter
                 
                 textbox = {
-                    text = "FILTER_BY_BUILDING_TYPE"
+                    text = "COM_FILTER_BY_BUILDING_TYPE"
                     autoresize = yes
                     margin_top = 10
                     margin_left = 10
@@ -57,7 +57,7 @@
                     }
                     
                     textbox = {
-                        text = "BASE_INDUSTRIES"
+                        text = "COM_BASE_INDUSTRIES"
                         autoresize = yes
                         align = center|vcenter
                         parentanchor = center
@@ -82,7 +82,7 @@
                     }
                     
                     textbox = {
-                        text = "POTENTIAL_INDUSTRIES"
+                        text = "COM_POTENTIAL_INDUSTRIES"
                         autoresize = yes
                         align = center|vcenter
                         parentanchor = center
@@ -98,7 +98,7 @@
                     using = default_button
                     raw_text = "X"
                     onclick = "[GetScriptedGui('com_clear_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                    tooltip = "CLEAR_FILTER"
+                    tooltip = "COM_CLEAR_FILTER"
                     parentanchor = vcenter
                 }
             }
@@ -116,7 +116,7 @@
 			size = { 250 40 }
 			using = default_button
             using = back_button_sound
-			text = "FILTER_BUTTON_BASE"
+			text = "COM_FILTER_BUTTON_BASE"
 			onclick = "[GetVariableSystem.Toggle('filter_base_only')]"
 			onclick = "[GetVariableSystem.Clear('filter_extension_only')]"
 			
@@ -130,7 +130,7 @@
 			size = { 250 40 }
 			using = default_button
             using = back_button_sound
-			text = "FILTER_BUTTON_POTENTIAL"
+			text = "COM_FILTER_BUTTON_POTENTIAL"
 			onclick = "[GetVariableSystem.Toggle('filter_extension_only')]"
 			onclick = "[GetVariableSystem.Clear('filter_base_only')]"
 			
@@ -911,7 +911,7 @@ types company_attainable_building_filter_types
                 parentanchor = vcenter
                 
                 textbox = {
-                    text = "FILTER_BY_BUILDING_TYPE"
+                    text = "COM_FILTER_BY_BUILDING_TYPE"
                     autoresize = yes
                     margin_top = 10
                     margin_left = 10
@@ -954,7 +954,7 @@ types company_attainable_building_filter_types
                     }
                     
                     textbox = {
-                        text = "BASE_INDUSTRIES"
+                        text = "COM_BASE_INDUSTRIES"
                         autoresize = yes
                         align = center|vcenter
                         parentanchor = center
@@ -979,7 +979,7 @@ types company_attainable_building_filter_types
                     }
                     
                     textbox = {
-                        text = "POTENTIAL_INDUSTRIES"
+                        text = "COM_POTENTIAL_INDUSTRIES"
                         autoresize = yes
                         align = center|vcenter
                         parentanchor = center
@@ -995,7 +995,7 @@ types company_attainable_building_filter_types
                     using = default_button
                     raw_text = "X"
                     onclick = "[GetScriptedGui('com_att_clear_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                    tooltip = "CLEAR_FILTER"
+                    tooltip = "COM_CLEAR_FILTER"
                     parentanchor = vcenter
                 }
             }
@@ -1014,7 +1014,7 @@ types company_attainable_building_filter_types
 			size = { 250 40 }
 			using = default_button
             using = back_button_sound
-			text = "FILTER_BUTTON_BASE"
+			text = "COM_FILTER_BUTTON_BASE"
 			onclick = "[GetVariableSystem.Toggle('filter_att_base_only')]"
 			onclick = "[GetVariableSystem.Clear('filter_att_extension_only')]"
 			
@@ -1028,7 +1028,7 @@ types company_attainable_building_filter_types
 			size = { 250 40 }
 			using = default_button
             using = back_button_sound
-			text = "FILTER_BUTTON_POTENTIAL"
+			text = "COM_FILTER_BUTTON_POTENTIAL"
 			onclick = "[GetVariableSystem.Toggle('filter_att_extension_only')]"
 			onclick = "[GetVariableSystem.Clear('filter_att_base_only')]"
 			
@@ -1809,7 +1809,7 @@ types company_potential_building_filter_types
                 parentanchor = vcenter
                 
                 textbox = {
-                    text = "FILTER_BY_BUILDING_TYPE"
+                    text = "COM_FILTER_BY_BUILDING_TYPE"
                     autoresize = yes
                     margin_top = 10
                     margin_left = 10
@@ -1852,7 +1852,7 @@ types company_potential_building_filter_types
                     }
                     
                     textbox = {
-                        text = "BASE_INDUSTRIES"
+                        text = "COM_BASE_INDUSTRIES"
                         autoresize = yes
                         align = center|vcenter
                         parentanchor = center
@@ -1877,7 +1877,7 @@ types company_potential_building_filter_types
                     }
                     
                     textbox = {
-                        text = "POTENTIAL_INDUSTRIES"
+                        text = "COM_POTENTIAL_INDUSTRIES"
                         autoresize = yes
                         align = center|vcenter
                         parentanchor = center
@@ -1893,7 +1893,7 @@ types company_potential_building_filter_types
                     using = default_button
                     raw_text = "X"
                     onclick = "[GetScriptedGui('com_pot_clear_filter').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                    tooltip = "CLEAR_FILTER"
+                    tooltip = "COM_CLEAR_FILTER"
                     parentanchor = vcenter
                 }
             }
@@ -1911,7 +1911,7 @@ types company_potential_building_filter_types
 			size = { 250 40 }
 			using = default_button
             using = back_button_sound
-			text = "FILTER_BUTTON_BASE"
+			text = "COM_FILTER_BUTTON_BASE"
 			onclick = "[GetVariableSystem.Toggle('filter_pot_base_only')]"
 			onclick = "[GetVariableSystem.Clear('filter_pot_extension_only')]"
 			
@@ -1925,7 +1925,7 @@ types company_potential_building_filter_types
 			size = { 250 40 }
 			using = default_button
             using = back_button_sound
-			text = "FILTER_BUTTON_POTENTIAL"
+			text = "COM_FILTER_BUTTON_POTENTIAL"
 			onclick = "[GetVariableSystem.Toggle('filter_pot_extension_only')]"
 			onclick = "[GetVariableSystem.Clear('filter_pot_base_only')]"
 			
