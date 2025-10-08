@@ -480,7 +480,12 @@ types companies_panel
                     # 필터 미적용 시
                     flowcontainer = {
                         parentanchor = hcenter
-                        visible = "[And(Not(IsDataModelEmpty(AccessPlayer.GetAvailableCompanies)), Not(GetPlayer.MakeScope.Var('com_filter_building').IsSet))]"
+                        visible = "[And4(
+                            Not(IsDataModelEmpty(AccessPlayer.GetAvailableCompanies)),
+                            Not(GetPlayer.MakeScope.Var('com_filter_building').IsSet),
+                            Not(GetVariableSystem.Exists('filter_flavored_only')),
+                            Not(GetVariableSystem.Exists('filter_prestige_only'))
+                            )]"
                         datamodel = "[AccessPlayer.GetAvailableCompanies]"
                         direction = vertical
                         spacing = 5
@@ -563,6 +568,48 @@ types companies_panel
                             }
                         }
                     }
+
+                    # 필터 적용 - Flavored, Prestige
+                    flowcontainer = {
+                        parentanchor = hcenter
+                        visible = "[And(Not(GetPlayer.MakeScope.Var('com_filter_building').IsSet), 
+                            Or(Not(GetVariableSystem.Exists('filter_base_only')),
+                                Not(GetVariableSystem.Exists('filter_flavored_only'))
+                                )
+                            )]"
+                        datamodel = "[AccessPlayer.GetAvailableCompanies]"
+                        direction = vertical
+                        spacing = 0
+                        
+                        item = {
+                            container = {
+                                datamodel = "[CompanyType.AccessBuildingTypes(GetPlayer.Self)]"
+                                
+                                item = {
+                                    flowcontainer = {
+                                        visible = "[And(
+                                                Or(Not(GetVariableSystem.Exists('filter_flavored_only')), CompanyType.IsFlavoredCompany),
+                                                Or(Not(GetVariableSystem.Exists('filter_prestige_only')), CompanyType.CanProducePrestigeGoods)
+                                            )]"
+                                        direction = horizontal
+                                        spacing = 8
+                                        minimumsize = { 520 -1 }
+                                        margin = { 5 3 }
+                                        background = { using = dark_area alpha = 0.3 }
+                                        
+                                        icon = { size = { 35 35 } texture = "[CompanyType.GetIcon]" parentanchor = vcenter }
+                                        textbox = { raw_text = "[CompanyType.GetName]" autoresize = yes default_format = "#bold" fontsize = 14 parentanchor = vcenter max_width = 250 elide = right }
+                                        textbox = { text = "COM_BASE_INDUSTRIES" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#P" }
+                                        expand = {}
+                                        button = { size = { 100 30 } using = default_button text = "ESTABLISH_COMPANY" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = vcenter 
+                                        tooltip = "CREATE_COMPANY_DESC"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
                 }
 
 				# ATTAINABLE COMPANIES
@@ -613,7 +660,12 @@ types companies_panel
                         # 필터 미적용 시
                         flowcontainer = {
                             parentanchor = hcenter
-                            visible = "[And(Not(IsDataModelEmpty(AccessPlayer.GetAttainableCompanies)), Not(GetPlayer.MakeScope.Var('com_att_filter_building').IsSet))]"
+                            visible = "[And4(
+                                Not(IsDataModelEmpty(AccessPlayer.GetAttainableCompanies)),
+                                Not(GetPlayer.MakeScope.Var('com_att_filter_building').IsSet),
+                                Not(GetVariableSystem.Exists('filter_att_flavored_only')),
+                                Not(GetVariableSystem.Exists('filter_att_prestige_only'))
+                                )]"
                             datamodel = "[AccessPlayer.GetAttainableCompanies]"
                             direction = vertical
                             spacing = 5
@@ -692,6 +744,48 @@ types companies_panel
                                 }
                             }
                         }
+
+                        # 필터 적용 - Flavored, Prestige
+                        flowcontainer = {
+                            parentanchor = hcenter
+                            visible = "[And(Not(GetPlayer.MakeScope.Var('com_att_filter_building').IsSet), 
+                                Or(Not(GetVariableSystem.Exists('filter_att_base_only')),
+                                    Not(GetVariableSystem.Exists('filter_att_flavored_only'))
+                                    )
+                                )]"
+                            datamodel = "[AccessPlayer.GetAttainableCompanies]"
+                            direction = vertical
+                            spacing = 0
+                            
+                            item = {
+                                container = {
+                                    datamodel = "[CompanyType.AccessBuildingTypes(GetPlayer.Self)]"
+                                    
+                                    item = {
+                                        flowcontainer = {
+                                            visible = "[And(
+                                                    Or(Not(GetVariableSystem.Exists('filter_att_flavored_only')), CompanyType.IsFlavoredCompany),
+                                                    Or(Not(GetVariableSystem.Exists('filter_att_prestige_only')), CompanyType.CanProducePrestigeGoods)
+                                                )]"
+                                            direction = horizontal
+                                            spacing = 8
+                                            minimumsize = { 520 -1 }
+                                            margin = { 5 3 }
+                                            background = { using = dark_area alpha = 0.3 }
+                                            
+                                            icon = { size = { 35 35 } texture = "[CompanyType.GetIcon]" parentanchor = vcenter }
+                                            textbox = { raw_text = "[CompanyType.GetName]" autoresize = yes default_format = "#bold" fontsize = 14 parentanchor = vcenter max_width = 250 elide = right }
+                                            textbox = { text = "COM_BASE_INDUSTRIES" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#P" }
+                                            expand = {}
+                                            button = { size = { 100 30 } using = default_button text = "ESTABLISH_COMPANY" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = vcenter 
+                                            tooltip = "CREATE_COMPANY_DESC"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
                     }
                 }
 
@@ -744,7 +838,12 @@ types companies_panel
                         # 필터 미적용 시
                         flowcontainer = {
                             parentanchor = hcenter
-                            visible = "[And(Not(IsDataModelEmpty(AccessPlayer.GetPotentialCompanies)), Not(GetPlayer.MakeScope.Var('com_pot_filter_building').IsSet))]"
+                            visible = "[And4(
+                                Not(IsDataModelEmpty(AccessPlayer.GetPotentialCompanies)),
+                                Not(GetPlayer.MakeScope.Var('com_pot_filter_building').IsSet),
+                                Not(GetVariableSystem.Exists('filter_pot_flavored_only')),
+                                Not(GetVariableSystem.Exists('filter_pot_prestige_only'))
+                            )]"
                             datamodel = "[AccessPlayer.GetPotentialCompanies]"
                             direction = vertical
                             spacing = 5
@@ -823,6 +922,48 @@ types companies_panel
                                 }
                             }
                         }
+
+                        # 필터 적용 - Flavored, Prestige
+                        flowcontainer = {
+                            parentanchor = hcenter
+                            visible = "[And(Not(GetPlayer.MakeScope.Var('com_pot_filter_building').IsSet), 
+                                Or(Not(GetVariableSystem.Exists('filter_pot_base_only')),
+                                    Not(GetVariableSystem.Exists('filter_pot_flavored_only'))
+                                    )
+                                )]"
+                            datamodel = "[AccessPlayer.GetPotentialCompanies]"
+                            direction = vertical
+                            spacing = 0
+                            
+                            item = {
+                                container = {
+                                    datamodel = "[CompanyType.AccessBuildingTypes(GetPlayer.Self)]"
+                                    
+                                    item = {
+                                        flowcontainer = {
+                                            visible = "[And(
+                                                    Or(Not(GetVariableSystem.Exists('filter_pot_flavored_only')), CompanyType.IsFlavoredCompany),
+                                                    Or(Not(GetVariableSystem.Exists('filter_pot_prestige_only')), CompanyType.CanProducePrestigeGoods)
+                                                )]"
+                                            direction = horizontal
+                                            spacing = 8
+                                            minimumsize = { 520 -1 }
+                                            margin = { 5 3 }
+                                            background = { using = dark_area alpha = 0.3 }
+                                            
+                                            icon = { size = { 35 35 } texture = "[CompanyType.GetIcon]" parentanchor = vcenter }
+                                            textbox = { raw_text = "[CompanyType.GetName]" autoresize = yes default_format = "#bold" fontsize = 14 parentanchor = vcenter max_width = 250 elide = right }
+                                            textbox = { text = "COM_BASE_INDUSTRIES" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#P" }
+                                            expand = {}
+                                            button = { size = { 100 30 } using = default_button text = "ESTABLISH_COMPANY" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = vcenter 
+                                            tooltip = "CREATE_COMPANY_DESC"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
                     }
 				}			
 			}

@@ -12,12 +12,7 @@ COM_COMPANY_CANNOT_OWN_THIS_BUILDING_TYPE: "This company's charter does not allo
 
 # 필터 상태 메시지
 COM_NO_COMPANIES_FOR_BUILDING_TYPE: "No companies can own this building type"
-COM_ALL_COMPANIES_SHOWN: "Showing all companies"
 COM_FILTERED_COMPANIES_COUNT: "Showing [GetDataModelSize(AccessPlayer.GetCompanies)] companies"
-
-# 기업 정관 설명
-COM_CHARTER_INCLUDES_BUILDING: "Charter includes: [BuildingType.GetName]"
-COM_CHARTER_EXTENSION_INCLUDES_BUILDING: "Charter extension includes: [BuildingType.GetName]"
 
 # 추가 툴팁
 COM_CLICK_TO_FILTER_BY_BUILDING: "Click to filter companies by this building type"
@@ -28,8 +23,8 @@ COM_BUILDING_TYPE_FILTER_ACTIVE: "Filter active: [BuildingType.GetName]"
 COM_BASE_INDUSTRIES: "(Base industries)"
 COM_POTENTIAL_INDUSTRIES: "(Potential industries)"
 
-COM_FILTER_BUTTON_BASE: "Base industries filter"
-COM_FILTER_BUTTON_POTENTIAL: "Potential industries filter"
+COM_FILTER_BUTTON_BASE: "Base industries"
+COM_FILTER_BUTTON_POTENTIAL: "Potential industries"
 
 
 PLANTATIONS: "Plantation"
