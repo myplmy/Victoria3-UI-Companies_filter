@@ -453,11 +453,11 @@ types companies_panel
 					}
 					
 					blockoverride "onclick_showmore" {
-						visible = "[GetVariableSystem.Exists('available_companies')]"
+						visible = "[Not(GetVariableSystem.Exists('available_companies'))]"
 					}
 
 					blockoverride "onclick_showless" {
-						visible = "[Not(GetVariableSystem.Exists('available_companies'))]"
+						visible = "[GetVariableSystem.Exists('available_companies')]"
 					}
 				}
 
@@ -500,7 +500,7 @@ types companies_panel
                     # 필터 적용 - BASE 건물
                     flowcontainer = {
                         parentanchor = hcenter
-                        visible = "[GetPlayer.MakeScope.Var('com_filter_building').IsSet]"
+                        visible = "[And(GetPlayer.MakeScope.Var('com_filter_building').IsSet, Not(GetVariableSystem.Exists('filter_extension_only')))]"
                         datamodel = "[AccessPlayer.GetAvailableCompanies]"
                         direction = vertical
                         margin_top = 5
@@ -680,7 +680,7 @@ types companies_panel
                         # 필터 적용 - BASE 건물
                         flowcontainer = {
                             parentanchor = hcenter
-                            visible = "[GetPlayer.MakeScope.Var('com_att_filter_building').IsSet]"
+                            visible = "[And(GetPlayer.MakeScope.Var('com_att_filter_building').IsSet, Not(GetVariableSystem.Exists('filter_att_extension_only')))]"
                             datamodel = "[AccessPlayer.GetAttainableCompanies]"
                             direction = vertical
                             spacing = 0
@@ -858,7 +858,7 @@ types companies_panel
                         # 필터 적용 - BASE 건물
                         flowcontainer = {
                             parentanchor = hcenter
-                            visible = "[GetPlayer.MakeScope.Var('com_pot_filter_building').IsSet]"
+                            visible = "[And(GetPlayer.MakeScope.Var('com_pot_filter_building').IsSet, Not(GetVariableSystem.Exists('filter_pot_extension_only')))]"
                             datamodel = "[AccessPlayer.GetPotentialCompanies]"
                             direction = vertical
                             spacing = 0
