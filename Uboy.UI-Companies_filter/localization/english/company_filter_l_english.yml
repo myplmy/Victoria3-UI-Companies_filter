@@ -26,6 +26,9 @@ COM_POTENTIAL_INDUSTRIES: "(Potential industries)"
 COM_FILTER_BUTTON_BASE: "Base industries"
 COM_FILTER_BUTTON_POTENTIAL: "Potential industries"
 
+COM_FILTER_BUTTON_BASE_TOOLTIP: "Base industries"
+COM_FILTER_BUTTON_POTENTIAL_TOOLTIP: "Potential industries"
+
 
 PLANTATIONS: "Plantation"
 MINE_BUILDING: "Mine"
