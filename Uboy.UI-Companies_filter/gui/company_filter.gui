@@ -54,6 +54,7 @@
                             visible = "[GetVariableSystem.Exists('filter_base_only')]"
                             using = entry_bg
                         }
+                        tooltip = "COM_FILTER_BUTTON_BASE_TOOLTIP"
                     }
                     
                     textbox = {
@@ -78,6 +79,7 @@
                             visible = "[GetVariableSystem.Exists('filter_extension_only')]"
                             using = entry_bg
                         }
+                        tooltip = "COM_FILTER_BUTTON_POTENTIAL_TOOLTIP"
                     }
                     
                     textbox = {
@@ -971,6 +973,7 @@ types company_attainable_building_filter_types
                             visible = "[GetVariableSystem.Exists('filter_att_base_only')]"
                             using = entry_bg
                         }
+                        tooltip = "COM_FILTER_BUTTON_BASE_TOOLTIP"
                     }
                     
                     textbox = {
@@ -995,6 +998,7 @@ types company_attainable_building_filter_types
                             visible = "[GetVariableSystem.Exists('filter_att_extension_only')]"
                             using = entry_bg
                         }
+                        tooltip = "COM_FILTER_BUTTON_POTENTIAL_TOOLTIP"
                     }
                     
                     textbox = {
@@ -1890,6 +1894,7 @@ types company_potential_building_filter_types
                             visible = "[GetVariableSystem.Exists('filter_pot_base_only')]"
                             using = entry_bg
                         }
+                        tooltip = "COM_FILTER_BUTTON_BASE_TOOLTIP"
                     }
                     
                     textbox = {
@@ -1914,6 +1919,7 @@ types company_potential_building_filter_types
                             visible = "[GetVariableSystem.Exists('filter_pot_extension_only')]"
                             using = entry_bg
                         }
+                        tooltip = "COM_FILTER_BUTTON_POTENTIAL_TOOLTIP"
                     }
                     
                     textbox = {
