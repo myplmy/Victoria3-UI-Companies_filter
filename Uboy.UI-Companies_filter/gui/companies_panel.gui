@@ -472,6 +472,7 @@ types companies_panel
                         parentanchor = hcenter
                         margin_top = 10
                         margin_bottom = 10
+                        visible = "[Not(IsDataModelEmpty(AccessPlayer.GetAvailableCompanies))]"
                     }
                     
                     # 필터 그리드
@@ -512,23 +513,9 @@ types companies_panel
                                 datamodel = "[CompanyType.AccessBuildingTypes(GetPlayer.Self)]"
                                 
                                 item = {
-                                    flowcontainer = {
-                                        visible = "[And(And(ObjectsEqual(BuildingType.MakeScope, GetPlayer.MakeScope.Var('com_filter_building').GetBuildingType.MakeScope), Or(Not(GetVariableSystem.Exists('filter_flavored_only')), CompanyType.IsFlavoredCompany)), Or(Not(GetVariableSystem.Exists('filter_prestige_only')), CompanyType.CanProducePrestigeGoods))]"
-                                        direction = horizontal
-                                        spacing = 8
-                                        minimumsize = { 520 -1 }
-                                        maximumsize = { 520 -1 }
-                                        margin = { 5 3 }
-                                        background = { using = dark_area alpha = 0.3 }
-                                        
-                                        # without icon # icon = { size = { 35 35 } texture = "[CompanyType.GetIcon]" parentanchor = vcenter }
-                                        textbox = { raw_text = "[CompanyType.GetName]" autoresize = yes default_format = "#bold" fontsize = 18 parentanchor = vcenter min_width = 300 max_width = 300 elide = right }
-                                        textbox = { text = "COM_BASE_INDUSTRIES" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#P" min_width = 80 max_width = 80 elide = right}
-                                        expand = {}
-                                        button = { size = { 100 30 } using = default_button text = "ESTABLISH_COMPANY" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = right|vcenter
-                                            tooltip = "CREATE_COMPANY_DESC"
-                                        }
-                                    }
+                                    #flowcontainer={
+                                        com_base_filter_item = {}
+                                    #}
                                 }
                             }
                         }
@@ -549,23 +536,9 @@ types companies_panel
                                 datamodel = "[CompanyType.GetPotentialBuildingTypes(GetPlayer.Self)]"
                                 
                                 item = {
-                                    flowcontainer = {
-                                        visible = "[And(And(ObjectsEqual(BuildingType.MakeScope, GetPlayer.MakeScope.Var('com_filter_building').GetBuildingType.MakeScope), Or(Not(GetVariableSystem.Exists('filter_flavored_only')), CompanyType.IsFlavoredCompany)), Or(Not(GetVariableSystem.Exists('filter_prestige_only')), CompanyType.CanProducePrestigeGoods))]"
-                                        direction = horizontal
-                                        spacing = 8
-                                        minimumsize = { 520 -1 }
-                                        maximumsize = { 520 -1 }
-                                        margin = { 5 3 }
-                                        background = { using = dark_area alpha = 0.3 }
-                                        
-                                        # without icon # icon = { size = { 35 35 } texture = "[CompanyType.GetIcon]" parentanchor = vcenter }
-                                        textbox = { raw_text = "[CompanyType.GetName]" autoresize = yes default_format = "#bold" fontsize = 18 parentanchor = vcenter min_width = 300 max_width = 300 elide = right }
-                                        textbox = { text = "COM_POTENTIAL_INDUSTRIES" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#high" min_width = 80 max_width = 80 elide = right}
-                                        expand = {}
-                                        button = { size = { 100 30 } using = default_button text = "ESTABLISH_COMPANY" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = right|vcenter 
-                                            tooltip = "CREATE_COMPANY_DESC"
-                                        }
-                                    }
+                                    #flowcontainer ={
+                                        com_extension_filter_item = {}
+                                    #}
                                 }
                             }
                         }
@@ -693,23 +666,7 @@ types companies_panel
                                     datamodel = "[CompanyType.AccessBuildingTypes(GetPlayer.Self)]"
                                     
                                     item = {
-                                        flowcontainer = {
-                                            visible = "[And(And(ObjectsEqual(BuildingType.MakeScope, GetPlayer.MakeScope.Var('com_att_filter_building').GetBuildingType.MakeScope), Or(Not(GetVariableSystem.Exists('filter_att_flavored_only')), CompanyType.IsFlavoredCompany)), Or(Not(GetVariableSystem.Exists('filter_att_prestige_only')), CompanyType.CanProducePrestigeGoods))]"
-                                            direction = horizontal
-                                            spacing = 8
-                                            minimumsize = { 520 -1 }
-                                            maximumsize = { 520 -1 }
-                                            margin = { 5 3 }
-                                            background = { using = dark_area alpha = 0.3 }
-                                            
-                                            # without icon # icon = { size = { 35 35 } texture = "[CompanyType.GetIcon]" parentanchor = vcenter }
-                                            textbox = { raw_text = "[CompanyType.GetName]" autoresize = yes default_format = "#bold" fontsize = 18 parentanchor = vcenter min_width = 300 max_width = 300 elide = right }
-                                            textbox = { text = "COM_BASE_INDUSTRIES" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#P" min_width = 80 max_width = 80 elide = right }
-                                            expand = {}
-                                            button = { size = { 100 30 } using = default_button text = "ESTABLISH_COMPANY" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = right|vcenter
-                                            tooltip = "CREATE_COMPANY_DESC"
-                                            }
-                                        }
+                                        com_att_base_filter_item = {}
                                     }
                                 }
                             }
@@ -728,24 +685,7 @@ types companies_panel
                                     datamodel = "[CompanyType.GetPotentialBuildingTypes(GetPlayer.Self)]"
                                     
                                     item = {
-                                        flowcontainer = {
-                                            visible = "[And(And(ObjectsEqual(BuildingType.MakeScope, GetPlayer.MakeScope.Var('com_att_filter_building').GetBuildingType.MakeScope), Or(Not(GetVariableSystem.Exists('filter_att_flavored_only')), CompanyType.IsFlavoredCompany)), Or(Not(GetVariableSystem.Exists('filter_att_prestige_only')), CompanyType.CanProducePrestigeGoods))]"
-                                            direction = horizontal
-                                            spacing = 8
-                                            minimumsize = { 520 -1 }
-                                            maximumsize = { 520 -1 }
-                                            margin = { 5 3 }
-                                            background = { using = dark_area alpha = 0.3 }
-
-                                            
-                                            # without icon # icon = { size = { 35 35 } texture = "[CompanyType.GetIcon]" parentanchor = vcenter }
-                                            textbox = { raw_text = "[CompanyType.GetName]" autoresize = yes default_format = "#bold" fontsize = 18 parentanchor = vcenter min_width = 300 max_width = 300 elide = right }
-                                            textbox = { text = "COM_POTENTIAL_INDUSTRIES" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#high" min_width = 80 max_width = 80 elide = right }
-                                            expand = {}
-                                            button = { size = { 100 30 } using = default_button text = "ESTABLISH_COMPANY" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = right|vcenter 
-                                            tooltip = "CREATE_COMPANY_DESC"
-                                            }
-                                        }
+                                        com_att_extension_filter_item = {}
                                     }
                                 }
                             }
@@ -785,7 +725,7 @@ types companies_panel
                                             textbox = { raw_text = "[CompanyType.GetName]" autoresize = yes default_format = "#bold" fontsize = 18 parentanchor = vcenter min_width = 300 max_width = 300 elide = right }
                                             textbox = { raw_text = "" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#P" min_width = 80 max_width = 80 elide = right }
                                             expand = {}
-                                            button = { size = { 100 30 } using = default_button text = "ESTABLISH_COMPANY" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = right|vcenter 
+                                            button = { size = { 100 30 } using = default_button text = "ESTABLISH_COMPANY" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = center|vcenter 
                                             tooltip = "CREATE_COMPANY_DESC"
                                             }
                                         }
@@ -876,23 +816,7 @@ types companies_panel
                                     datamodel = "[CompanyType.AccessBuildingTypes(GetPlayer.Self)]"
                                     
                                     item = {
-                                        flowcontainer = {
-                                            visible = "[And(And(ObjectsEqual(BuildingType.MakeScope, GetPlayer.MakeScope.Var('com_pot_filter_building').GetBuildingType.MakeScope), Or(Not(GetVariableSystem.Exists('filter_pot_flavored_only')), CompanyType.IsFlavoredCompany)), Or(Not(GetVariableSystem.Exists('filter_pot_prestige_only')), CompanyType.CanProducePrestigeGoods))]"
-                                            direction = horizontal
-                                            spacing = 8
-                                            minimumsize = { 520 -1 }
-                                            maximumsize = { 520 -1 }
-                                            margin = { 5 3 }
-                                            background = { using = dark_area alpha = 0.3 }
-                                            
-                                            # without icon # icon = { size = { 35 35 } texture = "[CompanyType.GetIcon]" parentanchor = vcenter }
-                                            textbox = { raw_text = "[CompanyType.GetName]" autoresize = yes default_format = "#bold" fontsize = 18 parentanchor = vcenter min_width = 300 max_width = 300 elide = right }
-                                            textbox = { text = "COM_BASE_INDUSTRIES" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#P" min_width = 80 max_width = 80 elide = right }
-                                            expand = {}
-                                            button = { size = { 100 30 } using = default_button text = "ESTABLISH_COMPANY" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = right|vcenter
-                                            tooltip = "CREATE_COMPANY_DESC"
-                                            }
-                                        }
+                                        com_pot_base_filter_item = {}
                                     }
                                 }
                             }
@@ -911,23 +835,7 @@ types companies_panel
                                     datamodel = "[CompanyType.GetPotentialBuildingTypes(GetPlayer.Self)]"
                                     
                                     item = {
-                                        flowcontainer = {
-                                            visible = "[And(And(ObjectsEqual(BuildingType.MakeScope, GetPlayer.MakeScope.Var('com_pot_filter_building').GetBuildingType.MakeScope), Or(Not(GetVariableSystem.Exists('filter_pot_flavored_only')), CompanyType.IsFlavoredCompany)), Or(Not(GetVariableSystem.Exists('filter_pot_prestige_only')), CompanyType.CanProducePrestigeGoods))]"
-                                            direction = horizontal
-                                            spacing = 8
-                                            minimumsize = { 520 -1 }
-                                            maximumsize = { 520 -1 }
-                                            margin = { 5 3 }
-                                            background = { using = dark_area alpha = 0.3 }
-                                            
-                                            # without icon # icon = { size = { 35 35 } texture = "[CompanyType.GetIcon]" parentanchor = vcenter }
-                                            textbox = { raw_text = "[CompanyType.GetName]" autoresize = yes default_format = "#bold" fontsize = 18 parentanchor = vcenter min_width = 300 max_width = 300 elide = right }
-                                            textbox = { text = "COM_POTENTIAL_INDUSTRIES" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#high" min_width = 80 max_width = 80 elide = right }
-                                            expand = {}
-                                            button = { size = { 100 30 } using = default_button text = "ESTABLISH_COMPANY" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = right|vcenter
-                                            tooltip = "CREATE_COMPANY_DESC"
-                                            }
-                                        }
+                                        com_pot_extension_filter_item = {}
                                     }
                                 }
                             }
@@ -966,7 +874,7 @@ types companies_panel
                                             textbox = { raw_text = "[CompanyType.GetName]" autoresize = yes default_format = "#bold" fontsize = 18 parentanchor = vcenter min_width = 300 max_width = 300 elide = right }
                                             textbox = { raw_text = "" autoresize = yes fontsize = 11 parentanchor = vcenter default_format = "#P" min_width = 80 max_width = 80 elide = right }
                                             expand = {}
-                                            button = { size = { 100 30 } using = default_button text = "ESTABLISH_COMPANY" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = right|vcenter 
+                                            button = { size = { 100 30 } using = default_button text = "ESTABLISH_COMPANY" onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" parentanchor = center|vcenter 
                                             tooltip = "CREATE_COMPANY_DESC"
                                             }
                                         }
@@ -1798,3 +1706,260 @@ template alternating_dark_bg {
 		alpha = 0.15
 	}
 }
+
+### UBOY.UI-Companies_filter
+types com_filter_itmes{
+    # BASE 건물 필터용 아이템
+    type com_base_filter_item = flowcontainer {
+        visible = "[And(And(ObjectsEqual(BuildingType.MakeScope, GetPlayer.MakeScope.Var('com_filter_building').GetBuildingType.MakeScope), Or(Not(GetVariableSystem.Exists('filter_flavored_only')), CompanyType.IsFlavoredCompany)), Or(Not(GetVariableSystem.Exists('filter_prestige_only')), CompanyType.CanProducePrestigeGoods))]"
+        direction = horizontal
+        spacing = 8
+        minimumsize = { 520 -1 }
+        maximumsize = { 520 -1 }
+        margin = { 5 3 }
+        background = { using = dark_area alpha = 0.3 }
+        
+        textbox = { 
+            raw_text = "[CompanyType.GetName]" 
+            autoresize = yes 
+            default_format = "#bold" 
+            fontsize = 18 
+            parentanchor = vcenter 
+            min_width = 300 
+            max_width = 300 
+            elide = right 
+        }
+        textbox = { 
+            text = "COM_BASE_INDUSTRIES" 
+            autoresize = yes 
+            fontsize = 11 
+            parentanchor = vcenter 
+            default_format = "#P" 
+            min_width = 80 
+            max_width = 80 
+            elide = right
+        }
+        expand = {}
+        button = { 
+            size = { 100 30 } 
+            using = default_button 
+            text = "ESTABLISH_COMPANY" 
+            onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" 
+            enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" 
+            parentanchor = center|vcenter
+            tooltip = "CREATE_COMPANY_DESC"
+        }
+    }
+
+    # EXTENSION 건물 필터용 아이템
+    type com_extension_filter_item = flowcontainer {
+        visible = "[And(And(ObjectsEqual(BuildingType.MakeScope, GetPlayer.MakeScope.Var('com_filter_building').GetBuildingType.MakeScope), Or(Not(GetVariableSystem.Exists('filter_flavored_only')), CompanyType.IsFlavoredCompany)), Or(Not(GetVariableSystem.Exists('filter_prestige_only')), CompanyType.CanProducePrestigeGoods))]"
+        direction = horizontal
+        spacing = 8
+        minimumsize = { 520 -1 }
+        maximumsize = { 520 -1 }
+        margin = { 5 3 }
+        background = { using = dark_area alpha = 0.3 }
+        
+        textbox = { 
+            raw_text = "[CompanyType.GetName]" 
+            autoresize = yes 
+            default_format = "#bold" 
+            fontsize = 18 
+            parentanchor = vcenter 
+            min_width = 300 
+            max_width = 300 
+            elide = right 
+        }
+        textbox = { 
+            text = "COM_POTENTIAL_INDUSTRIES" 
+            autoresize = yes 
+            fontsize = 11 
+            parentanchor = vcenter 
+            default_format = "#high" 
+            min_width = 80 
+            max_width = 80 
+            elide = right
+        }
+        expand = {}
+        button = { 
+            size = { 100 30 } 
+            using = default_button 
+            text = "ESTABLISH_COMPANY" 
+            onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" 
+            enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" 
+            parentanchor = center|vcenter
+            tooltip = "CREATE_COMPANY_DESC"
+        }
+    }
+
+    # ATT_BASE 건물 필터용 아이템
+    type com_att_base_filter_item = flowcontainer {
+        visible = "[And(And(ObjectsEqual(BuildingType.MakeScope, GetPlayer.MakeScope.Var('com_att_filter_building').GetBuildingType.MakeScope), Or(Not(GetVariableSystem.Exists('filter_att_flavored_only')), CompanyType.IsFlavoredCompany)), Or(Not(GetVariableSystem.Exists('filter_att_prestige_only')), CompanyType.CanProducePrestigeGoods))]"
+        direction = horizontal
+        spacing = 8
+        minimumsize = { 520 -1 }
+        maximumsize = { 520 -1 }
+        margin = { 5 3 }
+        background = { using = dark_area alpha = 0.3 }
+        
+        textbox = { 
+            raw_text = "[CompanyType.GetName]" 
+            autoresize = yes 
+            default_format = "#bold" 
+            fontsize = 18 
+            parentanchor = vcenter 
+            min_width = 300 
+            max_width = 300 
+            elide = right 
+        }
+        textbox = { 
+            text = "COM_BASE_INDUSTRIES" 
+            autoresize = yes 
+            fontsize = 11 
+            parentanchor = vcenter 
+            default_format = "#P" 
+            min_width = 80 
+            max_width = 80 
+            elide = right
+        }
+        expand = {}
+        button = { 
+            size = { 100 30 } 
+            using = default_button 
+            text = "ESTABLISH_COMPANY" 
+            onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" 
+            enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" 
+            parentanchor = center|vcenter
+            tooltip = "CREATE_COMPANY_DESC"
+        }
+    }
+
+    # ATT_EXTENSION 건물 필터용 아이템
+    type com_att_extension_filter_item = flowcontainer {
+        visible = "[And(And(ObjectsEqual(BuildingType.MakeScope, GetPlayer.MakeScope.Var('com_att_filter_building').GetBuildingType.MakeScope), Or(Not(GetVariableSystem.Exists('filter_att_flavored_only')), CompanyType.IsFlavoredCompany)), Or(Not(GetVariableSystem.Exists('filter_att_prestige_only')), CompanyType.CanProducePrestigeGoods))]"
+        direction = horizontal
+        spacing = 8
+        minimumsize = { 520 -1 }
+        maximumsize = { 520 -1 }
+        margin = { 5 3 }
+        background = { using = dark_area alpha = 0.3 }
+        
+        textbox = { 
+            raw_text = "[CompanyType.GetName]" 
+            autoresize = yes 
+            default_format = "#bold" 
+            fontsize = 18 
+            parentanchor = vcenter 
+            min_width = 300 
+            max_width = 300 
+            elide = right 
+        }
+        textbox = { 
+            text = "COM_POTENTIAL_INDUSTRIES" 
+            autoresize = yes 
+            fontsize = 11 
+            parentanchor = vcenter 
+            default_format = "#high" 
+            min_width = 80 
+            max_width = 80 
+            elide = right
+        }
+        expand = {}
+        button = { 
+            size = { 100 30 } 
+            using = default_button 
+            text = "ESTABLISH_COMPANY" 
+            onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" 
+            enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" 
+            parentanchor = center|vcenter
+            tooltip = "CREATE_COMPANY_DESC"
+        }
+    }
+
+    # POT_BASE 건물 필터용 아이템
+    type com_pot_base_filter_item = flowcontainer {
+        visible = "[And(And(ObjectsEqual(BuildingType.MakeScope, GetPlayer.MakeScope.Var('com_pot_filter_building').GetBuildingType.MakeScope), Or(Not(GetVariableSystem.Exists('filter_pot_flavored_only')), CompanyType.IsFlavoredCompany)), Or(Not(GetVariableSystem.Exists('filter_pot_prestige_only')), CompanyType.CanProducePrestigeGoods))]"
+        direction = horizontal
+        spacing = 8
+        minimumsize = { 520 -1 }
+        maximumsize = { 520 -1 }
+        margin = { 5 3 }
+        background = { using = dark_area alpha = 0.3 }
+        
+        textbox = { 
+            raw_text = "[CompanyType.GetName]" 
+            autoresize = yes 
+            default_format = "#bold" 
+            fontsize = 18 
+            parentanchor = vcenter 
+            min_width = 300 
+            max_width = 300 
+            elide = right 
+        }
+        textbox = { 
+            text = "COM_BASE_INDUSTRIES" 
+            autoresize = yes 
+            fontsize = 11 
+            parentanchor = vcenter 
+            default_format = "#P" 
+            min_width = 80 
+            max_width = 80 
+            elide = right
+        }
+        expand = {}
+        button = { 
+            size = { 100 30 } 
+            using = default_button 
+            text = "ESTABLISH_COMPANY" 
+            onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" 
+            enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" 
+            parentanchor = center|vcenter
+            tooltip = "CREATE_COMPANY_DESC"
+        }
+    }
+
+    # POT_EXTENSION 건물 필터용 아이템
+    type com_pot_extension_filter_item = flowcontainer {
+        visible = "[And(And(ObjectsEqual(BuildingType.MakeScope, GetPlayer.MakeScope.Var('com_pot_filter_building').GetBuildingType.MakeScope), Or(Not(GetVariableSystem.Exists('filter_pot_flavored_only')), CompanyType.IsFlavoredCompany)), Or(Not(GetVariableSystem.Exists('filter_pot_prestige_only')), CompanyType.CanProducePrestigeGoods))]"
+        direction = horizontal
+        spacing = 8
+        minimumsize = { 520 -1 }
+        maximumsize = { 520 -1 }
+        margin = { 5 3 }
+        background = { using = dark_area alpha = 0.3 }
+        
+        textbox = { 
+            raw_text = "[CompanyType.GetName]" 
+            autoresize = yes 
+            default_format = "#bold" 
+            fontsize = 18 
+            parentanchor = vcenter 
+            min_width = 300 
+            max_width = 300 
+            elide = right 
+        }
+        textbox = { 
+            text = "COM_POTENTIAL_INDUSTRIES" 
+            autoresize = yes 
+            fontsize = 11 
+            parentanchor = vcenter 
+            default_format = "#high" 
+            min_width = 80 
+            max_width = 80 
+            elide = right
+        }
+        expand = {}
+        button = { 
+            size = { 100 30 } 
+            using = default_button 
+            text = "ESTABLISH_COMPANY" 
+            onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" 
+            enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" 
+            parentanchor = center|vcenter
+            tooltip = "CREATE_COMPANY_DESC"
+        }
+    }
+}
+
+### UBOY.UI-Companies_filter END

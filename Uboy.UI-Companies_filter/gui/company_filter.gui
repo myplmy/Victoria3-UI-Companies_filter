@@ -164,7 +164,7 @@
             }
         }
 	}
-	
+
 	# 건물 선택 그리드
 	type building_filter_grid = widget {
 		visible = "[GetVariableSystem.Exists('show_building_type_filter')]"
@@ -1082,7 +1082,141 @@ types company_attainable_building_filter_types
         }
 	}
 	
-    ### ATTAINABLE COMPANY
+    # BASE 건물 필터용 아이템
+    type com_att_base_filter_item = flowcontainer {
+        visible = "[And3(
+            ObjectsEqual(BuildingType.MakeScope, GetPlayer.MakeScope.Var('com_att_filter_building').GetBuildingType.MakeScope),
+            Or(Not(GetVariableSystem.Exists('filter_att_flavored_only')), CompanyType.IsFlavoredCompany),
+            Or(Not(GetVariableSystem.Exists('filter_att_prestige_only')), CompanyType.CanProducePrestigeGoods)
+        )]"
+        direction = horizontal
+        spacing = 8
+        minimumsize = { 520 -1 }
+        maximumsize = { 520 -1 }
+        margin = { 5 3 }
+        background = { using = dark_area alpha = 0.3 }
+        
+        textbox = { 
+            raw_text = "[CompanyType.GetName]" 
+            autoresize = yes 
+            default_format = "#bold" 
+            fontsize = 18 
+            parentanchor = vcenter 
+            min_width = 300 
+            max_width = 300 
+            elide = right 
+        }
+        textbox = { 
+            text = "COM_BASE_INDUSTRIES" 
+            autoresize = yes 
+            fontsize = 11 
+            parentanchor = vcenter 
+            default_format = "#P" 
+            min_width = 80 
+            max_width = 80 
+            elide = right
+        }
+        expand = {}
+        button = { 
+            size = { 100 30 } 
+            using = default_button 
+            text = "ESTABLISH_COMPANY" 
+            onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" 
+            enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" 
+            parentanchor = center|vcenter
+            tooltip = "CREATE_COMPANY_DESC"
+        }
+    }
+
+    # EXTENSION 건물 필터용 아이템
+    type com_extension_filter_item = flowcontainer {
+        visible = "[And3(
+            ObjectsEqual(BuildingType.MakeScope, GetPlayer.MakeScope.Var('com_att_filter_building').GetBuildingType.MakeScope),
+            Or(Not(GetVariableSystem.Exists('filter_att_flavored_only')), CompanyType.IsFlavoredCompany),
+            Or(Not(GetVariableSystem.Exists('filter_att_prestige_only')), CompanyType.CanProducePrestigeGoods)
+        )]"
+        direction = horizontal
+        spacing = 8
+        minimumsize = { 520 -1 }
+        maximumsize = { 520 -1 }
+        margin = { 5 3 }
+        background = { using = dark_area alpha = 0.3 }
+        
+        textbox = { 
+            raw_text = "[CompanyType.GetName]" 
+            autoresize = yes 
+            default_format = "#bold" 
+            fontsize = 18 
+            parentanchor = vcenter 
+            min_width = 300 
+            max_width = 300 
+            elide = right 
+        }
+        textbox = { 
+            text = "COM_POTENTIAL_INDUSTRIES" 
+            autoresize = yes 
+            fontsize = 11 
+            parentanchor = vcenter 
+            default_format = "#high" 
+            min_width = 80 
+            max_width = 80 
+            elide = right
+        }
+        expand = {}
+        button = { 
+            size = { 100 30 } 
+            using = default_button 
+            text = "ESTABLISH_COMPANY" 
+            onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" 
+            enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" 
+            parentanchor = center|vcenter
+            tooltip = "CREATE_COMPANY_DESC"
+        }
+    }
+
+    # Flavored/Prestige 필터용 아이템
+    type com_flavored_prestige_filter_item = flowcontainer {
+        visible = "[And(
+            Or(Not(GetVariableSystem.Exists('filter_att_flavored_only')), CompanyType.IsFlavoredCompany),
+            Or(Not(GetVariableSystem.Exists('filter_att_prestige_only')), CompanyType.CanProducePrestigeGoods)
+        )]"
+        direction = horizontal
+        spacing = 8
+        minimumsize = { 520 -1 }
+        maximumsize = { 520 -1 }
+        margin = { 5 3 }
+        background = { using = dark_area alpha = 0.3 }
+        
+        textbox = { 
+            raw_text = "[CompanyType.GetName]" 
+            autoresize = yes 
+            default_format = "#bold" 
+            fontsize = 18 
+            parentanchor = vcenter 
+            min_width = 300 
+            max_width = 300 
+            elide = right 
+        }
+        textbox = { 
+            raw_text = "" 
+            autoresize = yes 
+            fontsize = 11 
+            parentanchor = vcenter 
+            min_width = 80 
+            max_width = 80 
+            elide = right
+        }
+        expand = {}
+        button = { 
+            size = { 100 30 } 
+            using = default_button 
+            text = "ESTABLISH_COMPANY" 
+            onclick = "[PopupManager.AskConfirmationCustom(GetPlayer.CreateCompany(CompanyType.Self), 'company_confirmation_window')]" 
+            enabled = "[IsValid(GetPlayer.CreateCompany(CompanyType.Self))]" 
+            parentanchor = center|vcenter
+            tooltip = "CREATE_COMPANY_DESC"
+        }
+    }
 	
 	# 건물 선택 그리드
 	type building_filter_att_grid = widget {
@@ -2754,3 +2888,4 @@ types company_potential_building_filter_types
 		}
 	}
 }
+
