@@ -319,6 +319,7 @@ types company_building_filter_types
                     building_filter_option = { datacontext = "[GetBuildingType('building_artillery_foundries')]" }
                     building_filter_option = { datacontext = "[GetBuildingType('building_munition_plants')]" }
                     building_filter_option = { datacontext = "[GetBuildingType('building_shipyards')]" }
+                    building_filter_option = { datacontext = "[GetBuildingType('building_military_shipyards')]" }
                     building_filter_option = { datacontext = "[GetBuildingType('building_arts_academy')]"}
                 }
             }
@@ -688,6 +689,7 @@ types company_attainable_building_filter_types
                     building_filter_att_option = { datacontext = "[GetBuildingType('building_artillery_foundries')]" }
                     building_filter_att_option = { datacontext = "[GetBuildingType('building_munition_plants')]" }
                     building_filter_att_option = { datacontext = "[GetBuildingType('building_shipyards')]" }
+                    building_filter_att_option = { datacontext = "[GetBuildingType('building_military_shipyards')]" }
                     building_filter_att_option = { datacontext = "[GetBuildingType('building_arts_academy')]"}
                 }
             }
@@ -1006,6 +1008,7 @@ types company_potential_building_filter_types
                     building_filter_pot_option = { datacontext = "[GetBuildingType('building_artillery_foundries')]" }
                     building_filter_pot_option = { datacontext = "[GetBuildingType('building_munition_plants')]" }
                     building_filter_pot_option = { datacontext = "[GetBuildingType('building_shipyards')]" }
+                    building_filter_pot_option = { datacontext = "[GetBuildingType('building_military_shipyards')]" }
                     building_filter_pot_option = { datacontext = "[GetBuildingType('building_arts_academy')]"}
                 }
             }
