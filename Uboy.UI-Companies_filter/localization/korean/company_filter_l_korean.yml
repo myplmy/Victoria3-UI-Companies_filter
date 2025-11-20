@@ -45,7 +45,7 @@ COM_FILTER_BOTH_ACTIVE: "역사적 기업 및 고품격 상품 필터가 모두 
 
 COM_UNIQUE_FILTER_HEADER: "중복 필터"
 COM_FILTER_BASE_OVERLAP: "기본 산업"
-COM_FILTER_EXT_OVERLAP: "확장 산업"
+COM_FILTER_EXT_OVERLAP: "잠재적 산업"
 COM_FILTER_BASE_OVERLAP_TOOLTIP: "기본 산업이 중복되는 기업 숨기기"
-COM_FILTER_EXT_OVERLAP_TOOLTIP: "확장 산업이 중복되는 기업 숨기기"
+COM_FILTER_EXT_OVERLAP_TOOLTIP: "잠재적 산업이 중복되는 기업 숨기기"
 COM_REFRESH_UNIQUE_FILTER: "중복 체크 새로고침"
