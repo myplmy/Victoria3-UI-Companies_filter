@@ -28,7 +28,7 @@ types company_building_filter_types
     # 필터 메인 버튼
     ###########################################
     type building_filter_button = button {
-        size = { 540 120 }
+        size = { 540 180 }
         using = default_button
         onclick = "[GetVariableSystem.Toggle('show_building_type_filter')]"
         
@@ -178,6 +178,11 @@ types company_building_filter_types
                     }
                 }
             }
+
+            com_unique_filter_checkboxes = {
+                parentanchor = left
+            }
+
         }
     }
 
@@ -347,7 +352,7 @@ types company_attainable_building_filter_types
     # 필터 메인 버튼
     ###########################################
     type building_filter_att_button = button {
-        size = { 540 120 }
+        size = { 540 180 }
         using = default_button
         onclick = "[GetVariableSystem.Toggle('show_att_building_type_filter')]"
         
@@ -496,6 +501,10 @@ types company_attainable_building_filter_types
                         margin = { 10 0 }
                     }
                 }
+            }
+
+            com_att_unique_filter_checkboxes = {
+                parentanchor = left
             }
         }
     }
@@ -717,7 +726,7 @@ types company_potential_building_filter_types
     # 필터 메인 버튼
     ###########################################
     type building_filter_pot_button = button {
-        size = { 540 120 }
+        size = { 540 180 }
         using = default_button
         onclick = "[GetVariableSystem.Toggle('show_pot_building_type_filter')]"
         
@@ -867,6 +876,11 @@ types company_potential_building_filter_types
                     }
                 }
             }
+
+            com_pot_unique_filter_checkboxes = {
+                parentanchor = left
+            }
+
         }
     }
 
@@ -1010,6 +1024,292 @@ types company_potential_building_filter_types
                     building_filter_pot_option = { datacontext = "[GetBuildingType('building_shipyards')]" }
                     building_filter_pot_option = { datacontext = "[GetBuildingType('building_military_shipyards')]" }
                     building_filter_pot_option = { datacontext = "[GetBuildingType('building_arts_academy')]"}
+                }
+            }
+        }
+    }
+}
+
+types com_unique_filter_types
+{
+    ###########################################
+    # Available - 고유 필터 체크박스
+    ###########################################
+    type com_unique_filter_checkboxes = flowcontainer {
+        direction = vertical
+        spacing = 5
+        margin_bottom = 10
+
+        textbox = {
+            autoresize = yes
+            text = "COM_UNIQUE_FILTER_HEADER"
+            default_format = "#bold"
+            margin_left = 10
+        }
+        
+        flowcontainer = {
+            direction = horizontal
+            spacing = 15
+            margin_left = 10
+
+            # 기본 산업 겹침 필터
+            flowcontainer = {
+                spacing = 5
+                
+                button_checkbox = {
+                    size = { 25 25 }
+                    checked = "[GetVariableSystem.Exists('com_filter_base_overlap')]"
+                    onclick = "[GetVariableSystem.Toggle('com_filter_base_overlap')]"
+                    tooltip = "COM_FILTER_BASE_OVERLAP_TOOLTIP"
+                }
+                
+                textbox = {
+                    parentanchor = vcenter
+                    autoresize = yes
+                    text = "COM_FILTER_BASE_OVERLAP"
+                }
+                
+                textbox = {
+                    parentanchor = vcenter
+                    autoresize = yes
+                    raw_text = "([GetPlayer.MakeScope.Var('com_overlap_base_count').GetValue|0])"
+                    default_format = "#weak"
+                }
+            }
+            
+            # 확장 산업 겹침 필터
+            flowcontainer = {
+                spacing = 5
+                
+                button_checkbox = {
+                    size = { 25 25 }
+                    checked = "[GetVariableSystem.Exists('com_filter_ext_overlap')]"
+                    onclick = "[GetVariableSystem.Toggle('com_filter_ext_overlap')]"
+                    tooltip = "COM_FILTER_EXT_OVERLAP_TOOLTIP"
+                }
+                
+                textbox = {
+                    parentanchor = vcenter
+                    autoresize = yes
+                    text = "COM_FILTER_EXT_OVERLAP"
+                }
+                
+                textbox = {
+                    parentanchor = vcenter
+                    autoresize = yes
+                    raw_text = "([GetPlayer.MakeScope.Var('com_overlap_ext_count').GetValue|0])"
+                    default_format = "#weak"
+                }
+            }
+
+            button = {
+                size = { 30 30 }
+                using = default_button
+                tooltip = "COM_REFRESH_UNIQUE_FILTER"
+                
+                onclick = "[GetScriptedGui('com_unique_filter_init').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                onclick = "[GetVariableSystem.Clear('com_collect_all_trigger')]"
+                onclick = "[PdxGuiWidget.TriggerAnimation('delayed_refresh')]"
+                
+                state = {
+                    name = delayed_refresh
+                    delay = 0.05
+                    on_finish = "[GetVariableSystem.Set('com_collect_all_trigger', 'yes')]"
+                }
+                
+                icon = {
+                    size = { 20 20 }
+                    parentanchor = center
+                    texture = "gfx/interface/buttons/button_icons/back.dds"
+                }
+            }
+        }
+    }
+    
+    ###########################################
+    # Attainable - 고유 필터 체크박스
+    ###########################################
+    type com_att_unique_filter_checkboxes = flowcontainer {
+        direction = vertical
+        spacing = 5
+        margin_bottom = 10
+
+        textbox = {
+            autoresize = yes
+            text = "COM_UNIQUE_FILTER_HEADER"
+            default_format = "#bold"
+            margin_left = 10
+        }
+        
+        flowcontainer = {
+            direction = horizontal
+            spacing = 15
+            margin_left = 10
+            
+            # 기본 산업 겹침 필터
+            flowcontainer = {
+                spacing = 5
+                
+                button_checkbox = {
+                    size = { 25 25 }
+                    checked = "[GetVariableSystem.Exists('com_att_filter_base_overlap')]"
+                    onclick = "[GetVariableSystem.Toggle('com_att_filter_base_overlap')]"
+                    tooltip = "COM_FILTER_BASE_OVERLAP_TOOLTIP"
+                }
+                
+                textbox = {
+                    parentanchor = vcenter
+                    autoresize = yes
+                    text = "COM_FILTER_BASE_OVERLAP"
+                }
+                
+                textbox = {
+                    parentanchor = vcenter
+                    autoresize = yes
+                    raw_text = "([GetPlayer.MakeScope.Var('com_att_overlap_base_count').GetValue|0])"
+                    default_format = "#weak"
+                }
+            }
+            
+            # 확장 산업 겹침 필터
+            flowcontainer = {
+                spacing = 5
+                
+                button_checkbox = {
+                    size = { 25 25 }
+                    checked = "[GetVariableSystem.Exists('com_att_filter_ext_overlap')]"
+                    onclick = "[GetVariableSystem.Toggle('com_att_filter_ext_overlap')]"
+                    tooltip = "COM_FILTER_EXT_OVERLAP_TOOLTIP"
+                }
+                
+                textbox = {
+                    parentanchor = vcenter
+                    autoresize = yes
+                    text = "COM_FILTER_EXT_OVERLAP"
+                }
+                
+                textbox = {
+                    parentanchor = vcenter
+                    autoresize = yes
+                    raw_text = "([GetPlayer.MakeScope.Var('com_att_overlap_ext_count').GetValue|0])"
+                    default_format = "#weak"
+                }
+            }
+
+            button = {
+                size = { 30 30 }
+                using = default_button
+                tooltip = "COM_REFRESH_UNIQUE_FILTER"
+                
+                onclick = "[GetScriptedGui('com_unique_filter_init').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                onclick = "[GetVariableSystem.Clear('com_collect_all_trigger')]"
+                onclick = "[PdxGuiWidget.TriggerAnimation('delayed_refresh')]"
+                
+                state = {
+                    name = delayed_refresh
+                    delay = 0.05
+                    on_finish = "[GetVariableSystem.Set('com_collect_all_trigger', 'yes')]"
+                }
+                
+                icon = {
+                    size = { 20 20 }
+                    parentanchor = center
+                    texture = "gfx/interface/buttons/button_icons/back.dds"
+                }
+            }
+        }
+    }
+    
+    ###########################################
+    # Potential - 고유 필터 체크박스
+    ###########################################
+    type com_pot_unique_filter_checkboxes = flowcontainer {
+        direction = vertical
+        spacing = 5
+        margin_bottom = 10
+
+        textbox = {
+            autoresize = yes
+            text = "COM_UNIQUE_FILTER_HEADER"
+            default_format = "#bold"
+            margin_left = 10
+        }
+
+
+        
+        flowcontainer = {
+            direction = horizontal
+            spacing = 15
+            margin_left = 10
+            
+            # 기본 산업 겹침 필터
+            flowcontainer = {
+                spacing = 5
+                
+                button_checkbox = {
+                    size = { 25 25 }
+                    checked = "[GetVariableSystem.Exists('com_pot_filter_base_overlap')]"
+                    onclick = "[GetVariableSystem.Toggle('com_pot_filter_base_overlap')]"
+                    tooltip = "COM_FILTER_BASE_OVERLAP_TOOLTIP"
+                }
+                
+                textbox = {
+                    parentanchor = vcenter
+                    autoresize = yes
+                    text = "COM_FILTER_BASE_OVERLAP"
+                }
+                
+                textbox = {
+                    parentanchor = vcenter
+                    autoresize = yes
+                    raw_text = "([GetPlayer.MakeScope.Var('com_pot_overlap_base_count').GetValue|0])"
+                    default_format = "#weak"
+                }
+            }
+            
+            # 확장 산업 겹침 필터
+            flowcontainer = {
+                spacing = 5
+                
+                button_checkbox = {
+                    size = { 25 25 }
+                    checked = "[GetVariableSystem.Exists('com_pot_filter_ext_overlap')]"
+                    onclick = "[GetVariableSystem.Toggle('com_pot_filter_ext_overlap')]"
+                    tooltip = "COM_FILTER_EXT_OVERLAP_TOOLTIP"
+                }
+                
+                textbox = {
+                    parentanchor = vcenter
+                    autoresize = yes
+                    text = "COM_FILTER_EXT_OVERLAP"
+                }
+                
+                textbox = {
+                    parentanchor = vcenter
+                    autoresize = yes
+                    raw_text = "([GetPlayer.MakeScope.Var('com_pot_overlap_ext_count').GetValue|0])"
+                    default_format = "#weak"
+                }
+            }
+            button = {
+                size = { 30 30 }
+                using = default_button
+                tooltip = "COM_REFRESH_UNIQUE_FILTER"
+                
+                onclick = "[GetScriptedGui('com_unique_filter_init').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                onclick = "[GetVariableSystem.Clear('com_collect_all_trigger')]"
+                onclick = "[PdxGuiWidget.TriggerAnimation('delayed_refresh')]"
+                
+                state = {
+                    name = delayed_refresh
+                    delay = 0.05
+                    on_finish = "[GetVariableSystem.Set('com_collect_all_trigger', 'yes')]"
+                }
+                
+                icon = {
+                    size = { 20 20 }
+                    parentanchor = center
+                    texture = "gfx/interface/buttons/button_icons/back.dds"
                 }
             }
         }

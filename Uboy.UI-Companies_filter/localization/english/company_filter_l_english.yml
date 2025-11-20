@@ -18,7 +18,6 @@ COM_FILTERED_COMPANIES_COUNT: "Showing [GetDataModelSize(AccessPlayer.GetCompani
 COM_CLICK_TO_FILTER_BY_BUILDING: "Click to filter companies by this building type"
 COM_BUILDING_TYPE_FILTER_ACTIVE: "Filter active: [BuildingType.GetName]"
 
-
 #ESTABLISH_COMPANY: "Establish"
 COM_BASE_INDUSTRIES: "(Base industries)"
 COM_POTENTIAL_INDUSTRIES: "(Potential industries)"
@@ -28,7 +27,6 @@ COM_FILTER_BUTTON_POTENTIAL: "Potential industries"
 
 COM_FILTER_BUTTON_BASE_TOOLTIP: "Base industries"
 COM_FILTER_BUTTON_POTENTIAL_TOOLTIP: "Potential industries"
-
 
 PLANTATIONS: "Plantation"
 MINE_BUILDING: "Mine"
@@ -44,3 +42,10 @@ COM_FILTER_PRESTIGE_TOOLTIP: "Show only companies that can produce prestige good
 COM_FILTER_FLAVORED_DESC: "Filter to show only companies with historical flavor (flavored_company = yes)"
 COM_FILTER_PRESTIGE_DESC: "Filter to show only companies that have possible_prestige_goods defined"
 COM_FILTER_BOTH_ACTIVE: "Both flavored and prestige goods filters are active"
+
+COM_UNIQUE_FILTER_HEADER: "Overlap Filter"
+COM_FILTER_BASE_OVERLAP: "Base Industry"
+COM_FILTER_EXT_OVERLAP: "Extension Industry"
+COM_FILTER_BASE_OVERLAP_TOOLTIP: "Hide companies with overlapping base industries"
+COM_FILTER_EXT_OVERLAP_TOOLTIP: "Hide companies with overlapping extension industries"
+COM_REFRESH_UNIQUE_FILTER: "Refresh overlap check"

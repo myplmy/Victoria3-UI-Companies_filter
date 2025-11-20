@@ -122,6 +122,10 @@ types companies_panel
 			state = {
 				name = _show
 				on_start = "[GetVariableSystem.Clear('hide_current_companies')]"
+                ### Uboy.UI-Companiesfilter
+                on_start = "[GetScriptedGui('com_unique_filter_init').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                on_start = "[GetVariableSystem.Set('com_collect_all_trigger', 'yes')]"
+                ### Uboy.UI-Companiesfilter END
 				start_sound = {
 					soundeffect = "event:/SFX/UI/SideBar/companies"
 				}
@@ -249,6 +253,228 @@ types companies_panel
 		
 		blockoverride "scrollarea_content"
 		{
+            ### Uboy.UI-Companies_filter
+            ### 자동 수집 컨테이너 (숨김) - Phase 1
+            widget = {
+                size = { 1 1 }
+                
+                flowcontainer = {
+                    datamodel = "[AccessPlayer.GetCompanies]"
+                    
+                    item = {
+                        flowcontainer = {
+                            datamodel = "[Company.GetBuildingTypes]"
+                            
+                            item = {
+                                widget = {
+                                    size = { 0 0 }
+                                    
+                                    state = {
+                                        name = auto_collect
+                                        trigger_when = "[GetVariableSystem.Exists('com_collect_all_trigger')]"
+                                        
+                                        on_start = "[GetScriptedGui('com_collect_established_btype').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('btype', BuildingType.MakeScope).End)]"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                # Phase 1 완료 후 Phase 2 트리거
+                state = {
+                    name = phase1_done
+                    trigger_when = "[GetVariableSystem.Exists('com_collect_all_trigger')]"
+                    delay = 0.1
+                    
+                    on_finish = "[GetVariableSystem.Clear('com_collect_all_trigger')]"
+                    on_finish = "[GetVariableSystem.Set('com_check_overlap_trigger', 'yes')]"
+                }
+            }
+
+            ### Phase 2 - Available 겹침 체크 컨테이너
+            widget = {
+                size = { 1 1 }
+                
+                flowcontainer = {
+                    datamodel = "[AccessPlayer.GetAvailableCompanies]"
+                    
+                    item = {
+                        container = {
+                            widget = {
+                                size = { 0 0 }
+                                
+                                state = {
+                                    name = select_company
+                                    trigger_when = "[GetVariableSystem.Exists('com_check_overlap_trigger')]"
+                                    
+                                    on_start = "[GetScriptedGui('com_select_company_for_check').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('ctype', CompanyType.MakeScope).End)]"
+                                }
+                            }
+                            
+                            flowcontainer = {
+                                datamodel = "[CompanyType.AccessBuildingTypes(GetPlayer.Self)]"
+                                
+                                item = {
+                                    widget = {
+                                        size = { 0 0 }
+                                        
+                                        state = {
+                                            name = check_base
+                                            trigger_when = "[GetVariableSystem.Exists('com_check_overlap_trigger')]"
+                                            
+                                            on_start = "[GetScriptedGui('com_check_base_overlap').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('btype', BuildingType.MakeScope).End)]"
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            flowcontainer = {
+                                datamodel = "[CompanyType.GetPotentialBuildingTypes(GetPlayer.Self)]"
+                                
+                                item = {
+                                    widget = {
+                                        size = { 0 0 }
+                                        
+                                        state = {
+                                            name = check_extension
+                                            trigger_when = "[GetVariableSystem.Exists('com_check_overlap_trigger')]"
+                                            
+                                            on_start = "[GetScriptedGui('com_check_extension_overlap').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('btype', BuildingType.MakeScope).End)]"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            ### Phase 2 - Attainable 겹침 체크 컨테이너
+            widget = {
+                size = { 1 1 }
+                
+                flowcontainer = {
+                    datamodel = "[AccessPlayer.GetAttainableCompanies]"
+                    
+                    item = {
+                        container = {
+                            widget = {
+                                size = { 0 0 }
+                                
+                                state = {
+                                    name = select_company
+                                    trigger_when = "[GetVariableSystem.Exists('com_check_overlap_trigger')]"
+                                    
+                                    on_start = "[GetScriptedGui('com_att_select_company_for_check').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('ctype', CompanyType.MakeScope).End)]"
+                                }
+                            }
+                            
+                            flowcontainer = {
+                                datamodel = "[CompanyType.AccessBuildingTypes(GetPlayer.Self)]"
+                                
+                                item = {
+                                    widget = {
+                                        size = { 0 0 }
+                                        
+                                        state = {
+                                            name = check_base
+                                            trigger_when = "[GetVariableSystem.Exists('com_check_overlap_trigger')]"
+                                            
+                                            on_start = "[GetScriptedGui('com_att_check_base_overlap').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('btype', BuildingType.MakeScope).End)]"
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            flowcontainer = {
+                                datamodel = "[CompanyType.GetPotentialBuildingTypes(GetPlayer.Self)]"
+                                
+                                item = {
+                                    widget = {
+                                        size = { 0 0 }
+                                        
+                                        state = {
+                                            name = check_extension
+                                            trigger_when = "[GetVariableSystem.Exists('com_check_overlap_trigger')]"
+                                            
+                                            on_start = "[GetScriptedGui('com_att_check_extension_overlap').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('btype', BuildingType.MakeScope).End)]"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            ### Phase 2 - Potential 겹침 체크 컨테이너
+            widget = {
+                size = { 1 1 }
+                
+                flowcontainer = {
+                    datamodel = "[AccessPlayer.GetPotentialCompanies]"
+                    
+                    item = {
+                        container = {
+                            widget = {
+                                size = { 0 0 }
+                                
+                                state = {
+                                    name = select_company
+                                    trigger_when = "[GetVariableSystem.Exists('com_check_overlap_trigger')]"
+                                    
+                                    on_start = "[GetScriptedGui('com_pot_select_company_for_check').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('ctype', CompanyType.MakeScope).End)]"
+                                }
+                            }
+                            
+                            flowcontainer = {
+                                datamodel = "[CompanyType.AccessBuildingTypes(GetPlayer.Self)]"
+                                
+                                item = {
+                                    widget = {
+                                        size = { 0 0 }
+                                        
+                                        state = {
+                                            name = check_base
+                                            trigger_when = "[GetVariableSystem.Exists('com_check_overlap_trigger')]"
+                                            
+                                            on_start = "[GetScriptedGui('com_pot_check_base_overlap').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('btype', BuildingType.MakeScope).End)]"
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            flowcontainer = {
+                                datamodel = "[CompanyType.GetPotentialBuildingTypes(GetPlayer.Self)]"
+                                
+                                item = {
+                                    widget = {
+                                        size = { 0 0 }
+                                        
+                                        state = {
+                                            name = check_extension
+                                            trigger_when = "[GetVariableSystem.Exists('com_check_overlap_trigger')]"
+                                            
+                                            on_start = "[GetScriptedGui('com_pot_check_extension_overlap').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('btype', BuildingType.MakeScope).End)]"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                # Phase 2 완료 후 트리거 제거
+                state = {
+                    name = phase2_done
+                    trigger_when = "[GetVariableSystem.Exists('com_check_overlap_trigger')]"
+                    delay = 0.2
+                    
+                    on_finish = "[GetVariableSystem.Clear('com_check_overlap_trigger')]"
+                }
+            }
+            ### Uboy.UI-Companies_filter END
 			flowcontainer = {
 				visible = "[InformationPanel.IsTabSelected('default')]"
 				using = default_list_position
@@ -392,6 +618,9 @@ types companies_panel
 								}
 							}
 						}
+                        ### Uboy.UI-Companies_filter TEST
+                        #com_unique_filter_test_widget = {}
+                        ### Uboy.UI-Companies_filter TEST END
 					}
 				}
 
@@ -492,8 +721,16 @@ types companies_panel
                         spacing = 5
 
                         item = {
+                            #potential_company_item = {
+                            #    visible = "[And(Or(Not(GetVariableSystem.Exists('filter_flavored_only')), CompanyType.IsFlavoredCompany), Or(Not(GetVariableSystem.Exists('filter_prestige_only')), CompanyType.CanProducePrestigeGoods))]"
+                            #}
                             potential_company_item = {
-                                visible = "[And(Or(Not(GetVariableSystem.Exists('filter_flavored_only')), CompanyType.IsFlavoredCompany), Or(Not(GetVariableSystem.Exists('filter_prestige_only')), CompanyType.CanProducePrestigeGoods))]"
+                                visible = "[And4(
+                                    Or(Not(GetVariableSystem.Exists('filter_flavored_only')), CompanyType.IsFlavoredCompany),
+                                    Or(Not(GetVariableSystem.Exists('filter_prestige_only')), CompanyType.CanProducePrestigeGoods),
+                                    Or(Not(GetVariableSystem.Exists('com_filter_base_overlap')), Not(GetScriptedGui('com_has_base_overlap').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('ctype_to_check', CompanyType.MakeScope).End))),
+                                    Or(Not(GetVariableSystem.Exists('com_filter_ext_overlap')), Not(GetScriptedGui('com_has_extension_overlap').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('ctype_to_check', CompanyType.MakeScope).End)))
+                                )]"
                             }
                         }
                     }
@@ -562,10 +799,12 @@ types companies_panel
                                 
                                 item = {
                                     flowcontainer = {
-                                        visible = "[And(
-                                                Or(Not(GetVariableSystem.Exists('filter_flavored_only')), CompanyType.IsFlavoredCompany),
-                                                Or(Not(GetVariableSystem.Exists('filter_prestige_only')), CompanyType.CanProducePrestigeGoods)
-                                            )]"
+                                        visible = "[And4(
+                                            Or(Not(GetVariableSystem.Exists('filter_flavored_only')), CompanyType.IsFlavoredCompany),
+                                            Or(Not(GetVariableSystem.Exists('filter_prestige_only')), CompanyType.CanProducePrestigeGoods),
+                                            Or(Not(GetVariableSystem.Exists('com_filter_base_overlap')), Not(GetScriptedGui('com_has_base_overlap').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('ctype_to_check', CompanyType.MakeScope).End))),
+                                            Or(Not(GetVariableSystem.Exists('com_filter_ext_overlap')), Not(GetScriptedGui('com_has_extension_overlap').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('ctype_to_check', CompanyType.MakeScope).End)))
+                                        )]"
                                         direction = horizontal
                                         spacing = 8
                                         minimumsize = { 520 -1 }
@@ -647,8 +886,16 @@ types companies_panel
                             spacing = 5
 
                             item = {
+                                #potential_company_item = {
+                                #    visible = "[And(Or(Not(GetVariableSystem.Exists('filter_att_flavored_only')), CompanyType.IsFlavoredCompany), Or(Not(GetVariableSystem.Exists('filter_att_prestige_only')), CompanyType.CanProducePrestigeGoods))]"
+                                #}
                                 potential_company_item = {
-                                    visible = "[And(Or(Not(GetVariableSystem.Exists('filter_att_flavored_only')), CompanyType.IsFlavoredCompany), Or(Not(GetVariableSystem.Exists('filter_att_prestige_only')), CompanyType.CanProducePrestigeGoods))]"
+                                    visible = "[And4(
+                                        Or(Not(GetVariableSystem.Exists('filter_att_flavored_only')), CompanyType.IsFlavoredCompany),
+                                        Or(Not(GetVariableSystem.Exists('filter_att_prestige_only')), CompanyType.CanProducePrestigeGoods),
+                                        Or(Not(GetVariableSystem.Exists('com_att_filter_base_overlap')), Not(GetScriptedGui('com_att_has_base_overlap').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('ctype_to_check', CompanyType.MakeScope).End))),
+                                        Or(Not(GetVariableSystem.Exists('com_att_filter_ext_overlap')), Not(GetScriptedGui('com_att_has_extension_overlap').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('ctype_to_check', CompanyType.MakeScope).End)))
+                                    )]"
                                 }
                             }
                         }
@@ -709,10 +956,12 @@ types companies_panel
                                     
                                     item = {
                                         flowcontainer = {
-                                            visible = "[And(
-                                                    Or(Not(GetVariableSystem.Exists('filter_att_flavored_only')), CompanyType.IsFlavoredCompany),
-                                                    Or(Not(GetVariableSystem.Exists('filter_att_prestige_only')), CompanyType.CanProducePrestigeGoods)
-                                                )]"
+                                            visible = "[And4(
+                                                Or(Not(GetVariableSystem.Exists('filter_att_flavored_only')), CompanyType.IsFlavoredCompany),
+                                                Or(Not(GetVariableSystem.Exists('filter_att_prestige_only')), CompanyType.CanProducePrestigeGoods),
+                                                Or(Not(GetVariableSystem.Exists('com_att_filter_base_overlap')), Not(GetScriptedGui('com_att_has_base_overlap').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('ctype_to_check', CompanyType.MakeScope).End))),
+                                                Or(Not(GetVariableSystem.Exists('com_att_filter_ext_overlap')), Not(GetScriptedGui('com_att_has_extension_overlap').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('ctype_to_check', CompanyType.MakeScope).End)))
+                                            )]"
                                             direction = horizontal
                                             spacing = 8
                                             minimumsize = { 520 -1 }
@@ -797,8 +1046,16 @@ types companies_panel
                             spacing = 5
 
                             item = {
+                                #potential_company_item = {
+                                #    visible = "[And(Or(Not(GetVariableSystem.Exists('filter_pot_flavored_only')), CompanyType.IsFlavoredCompany), Or(Not(GetVariableSystem.Exists('filter_pot_prestige_only')), CompanyType.CanProducePrestigeGoods))]"
+                                #}
                                 potential_company_item = {
-                                    visible = "[And(Or(Not(GetVariableSystem.Exists('filter_pot_flavored_only')), CompanyType.IsFlavoredCompany), Or(Not(GetVariableSystem.Exists('filter_pot_prestige_only')), CompanyType.CanProducePrestigeGoods))]"
+                                    visible = "[And4(
+                                        Or(Not(GetVariableSystem.Exists('filter_pot_flavored_only')), CompanyType.IsFlavoredCompany),
+                                        Or(Not(GetVariableSystem.Exists('filter_pot_prestige_only')), CompanyType.CanProducePrestigeGoods),
+                                        Or(Not(GetVariableSystem.Exists('com_pot_filter_base_overlap')), Not(GetScriptedGui('com_pot_has_base_overlap').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('ctype_to_check', CompanyType.MakeScope).End))),
+                                        Or(Not(GetVariableSystem.Exists('com_pot_filter_ext_overlap')), Not(GetScriptedGui('com_pot_has_extension_overlap').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('ctype_to_check', CompanyType.MakeScope).End)))
+                                    )]"
                                 }
                             }
                         }
@@ -859,10 +1116,12 @@ types companies_panel
                                     
                                     item = {
                                         flowcontainer = {
-                                            visible = "[And(
-                                                    Or(Not(GetVariableSystem.Exists('filter_pot_flavored_only')), CompanyType.IsFlavoredCompany),
-                                                    Or(Not(GetVariableSystem.Exists('filter_pot_prestige_only')), CompanyType.CanProducePrestigeGoods)
-                                                )]"
+                                            visible = "[And4(
+                                                Or(Not(GetVariableSystem.Exists('filter_pot_flavored_only')), CompanyType.IsFlavoredCompany),
+                                                Or(Not(GetVariableSystem.Exists('filter_pot_prestige_only')), CompanyType.CanProducePrestigeGoods),
+                                                Or(Not(GetVariableSystem.Exists('com_pot_filter_base_overlap')), Not(GetScriptedGui('com_pot_has_base_overlap').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('ctype_to_check', CompanyType.MakeScope).End))),
+                                                Or(Not(GetVariableSystem.Exists('com_pot_filter_ext_overlap')), Not(GetScriptedGui('com_pot_has_extension_overlap').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('ctype_to_check', CompanyType.MakeScope).End)))
+                                            )]"
                                             direction = horizontal
                                             spacing = 8
                                             minimumsize = { 520 -1 }
@@ -1962,4 +2221,380 @@ types com_filter_itmes{
     }
 }
 
+# gui/com_unique_filter_test.gui
+
+types com_unique_filter_test_types {
+    
+    type com_unique_filter_test_widget = flowcontainer {
+        direction = vertical
+        spacing = 10
+        margin = { 10 10 }
+        
+        ### Phase 1: BuildingType 수집
+        textbox = {
+            autoresize = yes
+            raw_text = "=== Phase 1: BuildingType 수집 ==="
+            default_format = "#bold"
+        }
+        
+        button = {
+            size = { 250 40 }
+            using = default_button
+            
+            onclick = "[GetScriptedGui('com_unique_filter_init').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetVariableSystem.Clear('com_collect_all_trigger')]"
+            onclick = "[PdxGuiWidget.TriggerAnimation('delayed_set')]"
+            
+            state = {
+                name = delayed_set
+                delay = 0.05
+                on_finish = "[GetVariableSystem.Set('com_collect_all_trigger', 'yes')]"
+            }
+            
+            textbox = {
+                size = { 100% 100% }
+                align = center|nobaseline
+                raw_text = "1. BuildingType 수집"
+            }
+        }
+        
+        ### Phase 1 수집 컨테이너 (숨김)
+        widget = {
+            size = { 1 1 }
+            
+            flowcontainer = {
+                datamodel = "[AccessPlayer.GetCompanies]"
+                
+                item = {
+                    flowcontainer = {
+                        datamodel = "[Company.GetBuildingTypes]"
+                        
+                        item = {
+                            widget = {
+                                size = { 0 0 }
+                                
+                                state = {
+                                    name = auto_collect
+                                    trigger_when = "[GetVariableSystem.Exists('com_collect_all_trigger')]"
+                                    
+                                    on_start = "[GetScriptedGui('com_collect_established_btype').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('btype', BuildingType.MakeScope).End)]"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        ### Phase 1 결과
+        textbox = {
+            autoresize = yes
+            raw_text = "수집된 BuildingType 수: [GetPlayer.MakeScope.Var('com_collected_count').GetValue|0]"
+        }
+        
+        divider_clean = {
+            size = { 250 2 }
+        }
+        
+        ### Phase 2: 겹침 체크
+        textbox = {
+            autoresize = yes
+            raw_text = "=== Phase 2: 겹침 체크 ==="
+            default_format = "#bold"
+        }
+        
+        button = {
+            size = { 250 40 }
+            using = default_button
+            
+            onclick = "[GetScriptedGui('com_phase2_init').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetVariableSystem.Clear('com_check_overlap_trigger')]"
+            onclick = "[PdxGuiWidget.TriggerAnimation('delayed_check')]"
+            
+            state = {
+                name = delayed_check
+                delay = 0.05
+                on_finish = "[GetVariableSystem.Set('com_check_overlap_trigger', 'yes')]"
+            }
+            
+            textbox = {
+                size = { 100% 100% }
+                align = center|nobaseline
+                raw_text = "2. 겹침 체크"
+            }
+        }
+        
+        ### Phase 2 겹침 체크 컨테이너 (숨김)
+        widget = {
+            size = { 1 1 }
+            
+            flowcontainer = {
+                datamodel = "[AccessPlayer.GetAvailableCompanies]"
+                
+                item = {
+                    container = {
+                        # Step 1: CompanyType 선택
+                        widget = {
+                            size = { 0 0 }
+                            
+                            state = {
+                                name = select_company
+                                trigger_when = "[GetVariableSystem.Exists('com_check_overlap_trigger')]"
+                                
+                                on_start = "[GetScriptedGui('com_select_company_for_check').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('ctype', CompanyType.MakeScope).End)]"
+                            }
+                        }
+                        
+                        # Step 2a: 기본 산업 체크
+                        flowcontainer = {
+                            datamodel = "[CompanyType.AccessBuildingTypes(GetPlayer.Self)]"
+                            
+                            item = {
+                                widget = {
+                                    size = { 0 0 }
+                                    
+                                    state = {
+                                        name = check_base
+                                        trigger_when = "[GetVariableSystem.Exists('com_check_overlap_trigger')]"
+                                        
+                                        on_start = "[GetScriptedGui('com_check_base_overlap').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('btype', BuildingType.MakeScope).End)]"
+                                    }
+                                }
+                            }
+                        }
+                        
+                        # Step 2b: 확장 산업 체크
+                        flowcontainer = {
+                            datamodel = "[CompanyType.GetPotentialBuildingTypes(GetPlayer.Self)]"
+                            
+                            item = {
+                                widget = {
+                                    size = { 0 0 }
+                                    
+                                    state = {
+                                        name = check_extension
+                                        trigger_when = "[GetVariableSystem.Exists('com_check_overlap_trigger')]"
+                                        
+                                        on_start = "[GetScriptedGui('com_check_extension_overlap').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('btype', BuildingType.MakeScope).End)]"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        ### Phase 2 결과
+        flowcontainer = {
+            direction = vertical
+            spacing = 3
+            
+            textbox = {
+                autoresize = yes
+                raw_text = "기본 산업 겹침: [GetPlayer.MakeScope.Var('com_overlap_base_count').GetValue|0]"
+            }
+            textbox = {
+                autoresize = yes
+                raw_text = "확장 산업 겹침: [GetPlayer.MakeScope.Var('com_overlap_ext_count').GetValue|0]"
+            }
+        }
+        
+        divider_clean = {
+            size = { 250 2 }
+        }
+        
+        ### Phase 3: 필터 적용
+        textbox = {
+            autoresize = yes
+            raw_text = "=== Phase 3: 필터 옵션 ==="
+            default_format = "#bold"
+        }
+        
+        flowcontainer = {
+            direction = vertical
+            spacing = 5
+            
+            # 기본 산업 겹침 필터
+            flowcontainer = {
+                spacing = 10
+                
+                button_checkbox = {
+                    size = { 25 25 }
+                    checked = "[GetVariableSystem.Exists('com_filter_base')]"
+                    onclick = "[GetVariableSystem.Toggle('com_filter_base')]"
+                }
+                
+                textbox = {
+                    parentanchor = vcenter
+                    autoresize = yes
+                    raw_text = "기본 산업 겹침 숨기기"
+                }
+            }
+            
+            # 확장 산업 겹침 필터
+            flowcontainer = {
+                spacing = 10
+                
+                button_checkbox = {
+                    size = { 25 25 }
+                    checked = "[GetVariableSystem.Exists('com_filter_extension')]"
+                    onclick = "[GetVariableSystem.Toggle('com_filter_extension')]"
+                }
+                
+                textbox = {
+                    parentanchor = vcenter
+                    autoresize = yes
+                    raw_text = "확장 산업 겹침 숨기기"
+                }
+            }
+        }
+        
+        divider_clean = {
+            size = { 250 2 }
+        }
+        
+        ### 결과: Available Companies 목록
+        textbox = {
+            autoresize = yes
+            raw_text = "=== Available Companies ==="
+            default_format = "#bold"
+        }
+        
+        flowcontainer = {
+            direction = vertical
+            spacing = 3
+            
+            datamodel = "[AccessPlayer.GetAvailableCompanies]"
+            
+            item = {
+                # 필터 적용된 visibility
+                flowcontainer = {
+                    visible = "[And(
+                        Or(
+                            Not(GetVariableSystem.Exists('com_filter_base')),
+                            Not(GetScriptedGui('com_has_base_overlap').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('ctype_to_check', CompanyType.MakeScope).End))
+                        ),
+                        Or(
+                            Not(GetVariableSystem.Exists('com_filter_extension')),
+                            Not(GetScriptedGui('com_has_extension_overlap').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('ctype_to_check', CompanyType.MakeScope).End))
+                        )
+                    )]"
+                    spacing = 5
+                    
+                    icon = {
+                        size = { 30 30 }
+                        texture = "[CompanyType.GetIcon]"
+                    }
+                    
+                    textbox = {
+                        parentanchor = vcenter
+                        autoresize = yes
+                        raw_text = "[CompanyType.GetName]"
+                        minimumsize = { 120 -1 }
+                        maximumsize = { 120 -1 }
+                        elide = right
+                    }
+                    
+                    # 기본 산업 겹침 체크박스 표시
+                    widget = {
+                        size = { 20 20 }
+                        parentanchor = vcenter
+                        
+                        icon = {
+                            visible = "[GetScriptedGui('com_has_base_overlap').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('ctype_to_check', CompanyType.MakeScope).End)]"
+                            size = { 100% 100% }
+                            texture = "gfx/interface/icons/generic_icons/red_cross.dds"
+                            raw_tooltip = "기본 산업 겹침"
+                        }
+                        
+                        icon = {
+                            visible = "[Not(GetScriptedGui('com_has_base_overlap').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('ctype_to_check', CompanyType.MakeScope).End))]"
+                            size = { 100% 100% }
+                            texture = "gfx/interface/icons/generic_icons/checkbox_greencheck.dds"
+                            raw_tooltip = "기본 산업 고유"
+                        }
+                    }
+                    
+                    # 확장 산업 겹침 체크박스 표시
+                    widget = {
+                        size = { 20 20 }
+                        parentanchor = vcenter
+                        
+                        icon = {
+                            visible = "[GetScriptedGui('com_has_extension_overlap').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('ctype_to_check', CompanyType.MakeScope).End)]"
+                            size = { 100% 100% }
+                            texture = "gfx/interface/icons/generic_icons/red_cross.dds"
+                            raw_tooltip = "확장 산업 겹침"
+                        }
+                        
+                        icon = {
+                            visible = "[Not(GetScriptedGui('com_has_extension_overlap').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('ctype_to_check', CompanyType.MakeScope).End))]"
+                            size = { 100% 100% }
+                            texture = "gfx/interface/icons/generic_icons/checkbox_greencheck.dds"
+                            raw_tooltip = "확장 산업 고유"
+                        }
+                    }
+                }
+            }
+        }
+        
+        divider_clean = {
+            size = { 250 2 }
+        }
+        
+        ### 수집된 BuildingType 목록 (디버그)
+        textbox = {
+            autoresize = yes
+            raw_text = "--- 수집된 BuildingTypes ---"
+            default_format = "#bold"
+        }
+        
+        flowcontainer = {
+            direction = vertical
+            spacing = 3
+            
+            com_btype_check_item = {
+                datacontext = "[GetBuildingType('building_textile_mills')]"
+            }
+            com_btype_check_item = {
+                datacontext = "[GetBuildingType('building_coal_mine')]"
+            }
+            com_btype_check_item = {
+                datacontext = "[GetBuildingType('building_steel_mills')]"
+            }
+            com_btype_check_item = {
+                datacontext = "[GetBuildingType('building_food_industry')]"
+            }
+            com_btype_check_item = {
+                datacontext = "[GetBuildingType('building_cotton_plantation')]"
+            }
+            com_btype_check_item = {
+                datacontext = "[GetBuildingType('building_dye_plantation')]"
+            }
+        }
+    }
+    
+    type com_btype_check_item = flowcontainer {
+        spacing = 5
+        
+        icon = {
+            size = { 25 25 }
+            texture = "[BuildingType.GetIcon]"
+        }
+        
+        textbox = {
+            parentanchor = vcenter
+            autoresize = yes
+            raw_text = "[BuildingType.GetName]"
+            minimumsize = { 120 -1 }
+        }
+        
+        textbox = {
+            parentanchor = vcenter
+            autoresize = yes
+            raw_text = "[Select_CString(GetScriptedGui('com_btype_is_collected').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('check_btype', BuildingType.MakeScope).End), '✓', '✗')]"
+        }
+    }
+}
 ### UBOY.UI-Companies_filter END

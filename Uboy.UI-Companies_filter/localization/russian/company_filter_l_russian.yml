@@ -42,3 +42,10 @@ COM_FILTER_PRESTIGE_TOOLTIP: "Показывать только компании
 COM_FILTER_FLAVORED_DESC: "Показывать только исторические компании (flavored_company = yes)"
 COM_FILTER_PRESTIGE_DESC: "Показывать только компании, способные производить люксовые товары (определено possible_prestige_goods)"
 COM_FILTER_BOTH_ACTIVE: "Активированы оба фильтра: исторические компании и люксовые товары"
+
+COM_UNIQUE_FILTER_HEADER: "Фильтр дублирования"
+COM_FILTER_BASE_OVERLAP: "Базовая"
+COM_FILTER_EXT_OVERLAP: "Расширенная"
+COM_FILTER_BASE_OVERLAP_TOOLTIP: "Скрыть компании с дублирующейся базовой промышленностью"
+COM_FILTER_EXT_OVERLAP_TOOLTIP: "Скрыть компании с дублирующейся расширенной промышленностью"
+COM_REFRESH_UNIQUE_FILTER: "Обновить проверку дублирования"

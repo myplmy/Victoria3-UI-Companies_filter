@@ -105,3 +105,538 @@ com_pot_clear_filter = {
         }
     }
 }
+
+
+# 리스트 초기화
+com_unique_filter_init = {
+    scope = country
+    
+    effect = {
+        clear_variable_list = com_established_btypes
+        
+        # 디버그용 카운터 초기화
+        set_variable = {
+            name = com_collected_count
+            value = 0
+        }
+    }
+}
+
+###################################
+# 고유 기업 필터 - ScriptedGui
+###################################
+
+###################################
+# Phase 1: BuildingType 수집
+###################################
+
+# 전체 초기화 (패널 열 때)
+com_unique_filter_init = {
+    scope = country
+    
+    effect = {
+        # Phase 1 변수
+        clear_variable_list = com_established_btypes
+        set_variable = {
+            name = com_collected_count
+            value = 0
+        }
+        
+        # Phase 2 - Available
+        clear_variable_list = com_overlapping_base
+        clear_variable_list = com_overlapping_extension
+        set_variable = {
+            name = com_overlap_base_count
+            value = 0
+        }
+        set_variable = {
+            name = com_overlap_ext_count
+            value = 0
+        }
+        
+        # Phase 2 - Attainable
+        clear_variable_list = com_att_overlapping_base
+        clear_variable_list = com_att_overlapping_extension
+        set_variable = {
+            name = com_att_overlap_base_count
+            value = 0
+        }
+        set_variable = {
+            name = com_att_overlap_ext_count
+            value = 0
+        }
+        
+        # Phase 2 - Potential
+        clear_variable_list = com_pot_overlapping_base
+        clear_variable_list = com_pot_overlapping_extension
+        set_variable = {
+            name = com_pot_overlap_base_count
+            value = 0
+        }
+        set_variable = {
+            name = com_pot_overlap_ext_count
+            value = 0
+        }
+    }
+}
+
+# BuildingType 수집
+com_collect_established_btype = {
+    scope = country
+    
+    saved_scopes = {
+        btype
+    }
+    
+    effect = {
+        if = {
+            limit = {
+                # building_trade_center 제외
+                NOT = {
+                    scope:btype = bt:building_trade_center
+                }
+                NOT = {
+                    is_target_in_variable_list = {
+                        name = com_established_btypes
+                        target = scope:btype
+                    }
+                }
+            }
+            add_to_variable_list = {
+                name = com_established_btypes
+                target = scope:btype
+            }
+            
+            change_variable = {
+                name = com_collected_count
+                add = 1
+            }
+        }
+    }
+}
+
+# BuildingType이 수집 리스트에 있는지 확인
+com_btype_is_collected = {
+    scope = country
+    
+    saved_scopes = {
+        check_btype
+    }
+    
+    is_shown = {
+        is_target_in_variable_list = {
+            name = com_established_btypes
+            target = scope:check_btype
+        }
+    }
+}
+
+###################################
+# Phase 2: Available 겹침 체크
+###################################
+
+# CompanyType 선택
+com_select_company_for_check = {
+    scope = country
+    
+    saved_scopes = {
+        ctype
+    }
+    
+    effect = {
+        set_variable = {
+            name = com_checking_company
+            value = scope:ctype
+        }
+    }
+}
+
+# 기본 산업 겹침 체크
+com_check_base_overlap = {
+    scope = country
+    
+    saved_scopes = {
+        btype
+    }
+    
+    effect = {
+        if = {
+            limit = {
+                # building_trade_center 제외
+                NOT = {
+                    scope:btype = bt:building_trade_center
+                }
+                is_target_in_variable_list = {
+                    name = com_established_btypes
+                    target = scope:btype
+                }
+            }
+            if = {
+                limit = {
+                    has_variable = com_checking_company
+                    NOT = {
+                        is_target_in_variable_list = {
+                            name = com_overlapping_base
+                            target = var:com_checking_company
+                        }
+                    }
+                }
+                add_to_variable_list = {
+                    name = com_overlapping_base
+                    target = var:com_checking_company
+                }
+                change_variable = {
+                    name = com_overlap_base_count
+                    add = 1
+                }
+            }
+        }
+    }
+}
+
+# 확장 산업 겹침 체크
+com_check_extension_overlap = {
+    scope = country
+    
+    saved_scopes = {
+        btype
+    }
+    
+    effect = {
+        if = {
+            limit = {
+                # building_trade_center 제외
+                NOT = {
+                    scope:btype = bt:building_trade_center
+                }
+                is_target_in_variable_list = {
+                    name = com_established_btypes
+                    target = scope:btype
+                }
+            }
+            if = {
+                limit = {
+                    has_variable = com_checking_company
+                    NOT = {
+                        is_target_in_variable_list = {
+                            name = com_overlapping_extension
+                            target = var:com_checking_company
+                        }
+                    }
+                }
+                add_to_variable_list = {
+                    name = com_overlapping_extension
+                    target = var:com_checking_company
+                }
+                change_variable = {
+                    name = com_overlap_ext_count
+                    add = 1
+                }
+            }
+        }
+    }
+}
+
+# 기본 산업 겹침 여부 확인
+com_has_base_overlap = {
+    scope = country
+    
+    saved_scopes = {
+        ctype_to_check
+    }
+    
+    is_shown = {
+        is_target_in_variable_list = {
+            name = com_overlapping_base
+            target = scope:ctype_to_check
+        }
+    }
+}
+
+# 확장 산업 겹침 여부 확인
+com_has_extension_overlap = {
+    scope = country
+    
+    saved_scopes = {
+        ctype_to_check
+    }
+    
+    is_shown = {
+        is_target_in_variable_list = {
+            name = com_overlapping_extension
+            target = scope:ctype_to_check
+        }
+    }
+}
+
+###################################
+# Phase 2: Attainable 겹침 체크
+###################################
+
+# CompanyType 선택
+com_att_select_company_for_check = {
+    scope = country
+    
+    saved_scopes = {
+        ctype
+    }
+    
+    effect = {
+        set_variable = {
+            name = com_att_checking_company
+            value = scope:ctype
+        }
+    }
+}
+
+# 기본 산업 겹침 체크
+com_att_check_base_overlap = {
+    scope = country
+    
+    saved_scopes = {
+        btype
+    }
+    
+    effect = {
+        if = {
+            limit = {
+                NOT = {
+                    scope:btype = bt:building_trade_center
+                }
+                is_target_in_variable_list = {
+                    name = com_established_btypes
+                    target = scope:btype
+                }
+            }
+            if = {
+                limit = {
+                    has_variable = com_att_checking_company
+                    NOT = {
+                        is_target_in_variable_list = {
+                            name = com_att_overlapping_base
+                            target = var:com_att_checking_company
+                        }
+                    }
+                }
+                add_to_variable_list = {
+                    name = com_att_overlapping_base
+                    target = var:com_att_checking_company
+                }
+                change_variable = {
+                    name = com_att_overlap_base_count
+                    add = 1
+                }
+            }
+        }
+    }
+}
+
+# 확장 산업 겹침 체크
+com_att_check_extension_overlap = {
+    scope = country
+    
+    saved_scopes = {
+        btype
+    }
+    
+    effect = {
+        if = {
+            limit = {
+                NOT = {
+                    scope:btype = bt:building_trade_center
+                }
+                is_target_in_variable_list = {
+                    name = com_established_btypes
+                    target = scope:btype
+                }
+            }
+            if = {
+                limit = {
+                    has_variable = com_att_checking_company
+                    NOT = {
+                        is_target_in_variable_list = {
+                            name = com_att_overlapping_extension
+                            target = var:com_att_checking_company
+                        }
+                    }
+                }
+                add_to_variable_list = {
+                    name = com_att_overlapping_extension
+                    target = var:com_att_checking_company
+                }
+                change_variable = {
+                    name = com_att_overlap_ext_count
+                    add = 1
+                }
+            }
+        }
+    }
+}
+
+# 기본 산업 겹침 여부 확인
+com_att_has_base_overlap = {
+    scope = country
+    
+    saved_scopes = {
+        ctype_to_check
+    }
+    
+    is_shown = {
+        is_target_in_variable_list = {
+            name = com_att_overlapping_base
+            target = scope:ctype_to_check
+        }
+    }
+}
+
+# 확장 산업 겹침 여부 확인
+com_att_has_extension_overlap = {
+    scope = country
+    
+    saved_scopes = {
+        ctype_to_check
+    }
+    
+    is_shown = {
+        is_target_in_variable_list = {
+            name = com_att_overlapping_extension
+            target = scope:ctype_to_check
+        }
+    }
+}
+
+###################################
+# Phase 2: Potential 겹침 체크
+###################################
+
+# CompanyType 선택
+com_pot_select_company_for_check = {
+    scope = country
+    
+    saved_scopes = {
+        ctype
+    }
+    
+    effect = {
+        set_variable = {
+            name = com_pot_checking_company
+            value = scope:ctype
+        }
+    }
+}
+
+# 기본 산업 겹침 체크
+com_pot_check_base_overlap = {
+    scope = country
+    
+    saved_scopes = {
+        btype
+    }
+    
+    effect = {
+        if = {
+            limit = {
+                NOT = {
+                    scope:btype = bt:building_trade_center
+                }
+                is_target_in_variable_list = {
+                    name = com_established_btypes
+                    target = scope:btype
+                }
+            }
+            if = {
+                limit = {
+                    has_variable = com_pot_checking_company
+                    NOT = {
+                        is_target_in_variable_list = {
+                            name = com_pot_overlapping_base
+                            target = var:com_pot_checking_company
+                        }
+                    }
+                }
+                add_to_variable_list = {
+                    name = com_pot_overlapping_base
+                    target = var:com_pot_checking_company
+                }
+                change_variable = {
+                    name = com_pot_overlap_base_count
+                    add = 1
+                }
+            }
+        }
+    }
+}
+
+# 확장 산업 겹침 체크
+com_pot_check_extension_overlap = {
+    scope = country
+    
+    saved_scopes = {
+        btype
+    }
+    
+    effect = {
+        if = {
+            limit = {
+                NOT = {
+                    scope:btype = bt:building_trade_center
+                }
+                is_target_in_variable_list = {
+                    name = com_established_btypes
+                    target = scope:btype
+                }
+            }
+            if = {
+                limit = {
+                    has_variable = com_pot_checking_company
+                    NOT = {
+                        is_target_in_variable_list = {
+                            name = com_pot_overlapping_extension
+                            target = var:com_pot_checking_company
+                        }
+                    }
+                }
+                add_to_variable_list = {
+                    name = com_pot_overlapping_extension
+                    target = var:com_pot_checking_company
+                }
+                change_variable = {
+                    name = com_pot_overlap_ext_count
+                    add = 1
+                }
+            }
+        }
+    }
+}
+
+# 기본 산업 겹침 여부 확인
+com_pot_has_base_overlap = {
+    scope = country
+    
+    saved_scopes = {
+        ctype_to_check
+    }
+    
+    is_shown = {
+        is_target_in_variable_list = {
+            name = com_pot_overlapping_base
+            target = scope:ctype_to_check
+        }
+    }
+}
+
+# 확장 산업 겹침 여부 확인
+com_pot_has_extension_overlap = {
+    scope = country
+    
+    saved_scopes = {
+        ctype_to_check
+    }
+    
+    is_shown = {
+        is_target_in_variable_list = {
+            name = com_pot_overlapping_extension
+            target = scope:ctype_to_check
+        }
+    }
+}
