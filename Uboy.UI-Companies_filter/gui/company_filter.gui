@@ -1055,12 +1055,18 @@ types com_unique_filter_types
             # 기본 산업 겹침 필터
             flowcontainer = {
                 spacing = 5
+
+                # 비활성화 시 투명도 조정
+                alpha = "[Select_float(GetPlayer.MakeScope.Var('com_filter_building').IsSet, '(float)0.5', '(float)1.0')]"
                 
                 button_checkbox = {
                     size = { 25 25 }
                     checked = "[GetVariableSystem.Exists('com_filter_base_overlap')]"
                     onclick = "[GetVariableSystem.Toggle('com_filter_base_overlap')]"
                     tooltip = "COM_FILTER_BASE_OVERLAP_TOOLTIP"
+
+                    # BuildingType 필터 활성화 시 비활성화
+                    enabled = "[Not(GetPlayer.MakeScope.Var('com_filter_building').IsSet)]"
                 }
                 
                 textbox = {
@@ -1080,12 +1086,16 @@ types com_unique_filter_types
             # 확장 산업 겹침 필터
             flowcontainer = {
                 spacing = 5
+
+                alpha = "[Select_float(GetPlayer.MakeScope.Var('com_filter_building').IsSet, '(float)0.5', '(float)1.0')]"
                 
                 button_checkbox = {
                     size = { 25 25 }
                     checked = "[GetVariableSystem.Exists('com_filter_ext_overlap')]"
                     onclick = "[GetVariableSystem.Toggle('com_filter_ext_overlap')]"
                     tooltip = "COM_FILTER_EXT_OVERLAP_TOOLTIP"
+
+                    enabled = "[Not(GetPlayer.MakeScope.Var('com_filter_building').IsSet)]"
                 }
                 
                 textbox = {
@@ -1149,12 +1159,15 @@ types com_unique_filter_types
             # 기본 산업 겹침 필터
             flowcontainer = {
                 spacing = 5
+                alpha = "[Select_float(GetPlayer.MakeScope.Var('com_att_filter_building').IsSet, '(float)0.5', '(float)1.0')]"
                 
                 button_checkbox = {
                     size = { 25 25 }
                     checked = "[GetVariableSystem.Exists('com_att_filter_base_overlap')]"
                     onclick = "[GetVariableSystem.Toggle('com_att_filter_base_overlap')]"
                     tooltip = "COM_FILTER_BASE_OVERLAP_TOOLTIP"
+
+                    enabled = "[Not(GetPlayer.MakeScope.Var('com_att_filter_building').IsSet)]"
                 }
                 
                 textbox = {
@@ -1174,12 +1187,15 @@ types com_unique_filter_types
             # 확장 산업 겹침 필터
             flowcontainer = {
                 spacing = 5
+                alpha = "[Select_float(GetPlayer.MakeScope.Var('com_att_filter_building').IsSet, '(float)0.5', '(float)1.0')]"
                 
                 button_checkbox = {
                     size = { 25 25 }
                     checked = "[GetVariableSystem.Exists('com_att_filter_ext_overlap')]"
                     onclick = "[GetVariableSystem.Toggle('com_att_filter_ext_overlap')]"
                     tooltip = "COM_FILTER_EXT_OVERLAP_TOOLTIP"
+
+                    enabled = "[Not(GetPlayer.MakeScope.Var('com_att_filter_building').IsSet)]"
                 }
                 
                 textbox = {
@@ -1245,12 +1261,14 @@ types com_unique_filter_types
             # 기본 산업 겹침 필터
             flowcontainer = {
                 spacing = 5
+                alpha = "[Select_float(GetPlayer.MakeScope.Var('com_pot_filter_building').IsSet, '(float)0.5', '(float)1.0')]"
                 
                 button_checkbox = {
                     size = { 25 25 }
                     checked = "[GetVariableSystem.Exists('com_pot_filter_base_overlap')]"
                     onclick = "[GetVariableSystem.Toggle('com_pot_filter_base_overlap')]"
                     tooltip = "COM_FILTER_BASE_OVERLAP_TOOLTIP"
+                    enabled = "[Not(GetPlayer.MakeScope.Var('com_pot_filter_building').IsSet)]"
                 }
                 
                 textbox = {
@@ -1270,12 +1288,15 @@ types com_unique_filter_types
             # 확장 산업 겹침 필터
             flowcontainer = {
                 spacing = 5
+                alpha = "[Select_float(GetPlayer.MakeScope.Var('com_pot_filter_building').IsSet, '(float)0.5', '(float)1.0')]"
                 
                 button_checkbox = {
                     size = { 25 25 }
                     checked = "[GetVariableSystem.Exists('com_pot_filter_ext_overlap')]"
                     onclick = "[GetVariableSystem.Toggle('com_pot_filter_ext_overlap')]"
                     tooltip = "COM_FILTER_EXT_OVERLAP_TOOLTIP"
+
+                    enabled = "[Not(GetPlayer.MakeScope.Var('com_pot_filter_building').IsSet)]"
                 }
                 
                 textbox = {
